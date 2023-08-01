@@ -43,6 +43,7 @@
             this.buttonLikedPages = new System.Windows.Forms.Button();
             this.buttonPosts = new System.Windows.Forms.Button();
             this.listBoxContent = new System.Windows.Forms.ListBox();
+            this.labelViewTitle = new System.Windows.Forms.Label();
             this.tabControlApp.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
@@ -86,6 +87,7 @@
             // 
             // tabPageProfile
             // 
+            this.tabPageProfile.Controls.Add(this.labelViewTitle);
             this.tabPageProfile.Controls.Add(this.pictureBoxProfile);
             this.tabPageProfile.Controls.Add(this.listBoxContent);
             this.tabPageProfile.Controls.Add(this.flowLayoutPanel1);
@@ -196,6 +198,7 @@
             this.buttonPosts.TabIndex = 5;
             this.buttonPosts.Text = "Posts";
             this.buttonPosts.UseVisualStyleBackColor = true;
+            this.buttonPosts.Click += new System.EventHandler(this.buttonPosts_Click);
             // 
             // listBoxContent
             // 
@@ -205,6 +208,15 @@
             this.listBoxContent.Name = "listBoxContent";
             this.listBoxContent.Size = new System.Drawing.Size(590, 316);
             this.listBoxContent.TabIndex = 59;
+            // 
+            // labelViewTitle
+            // 
+            this.labelViewTitle.AutoSize = true;
+            this.labelViewTitle.Location = new System.Drawing.Point(331, 193);
+            this.labelViewTitle.Name = "labelViewTitle";
+            this.labelViewTitle.Size = new System.Drawing.Size(64, 26);
+            this.labelViewTitle.TabIndex = 60;
+            this.labelViewTitle.Text = "posts";
             // 
             // FormMain
             // 
@@ -243,6 +255,7 @@
         private System.Windows.Forms.Button buttonLikedPages;
         private System.Windows.Forms.Button buttonPosts;
         private System.Windows.Forms.ListBox listBoxContent;
+        private System.Windows.Forms.Label labelViewTitle;
     }
 }
 

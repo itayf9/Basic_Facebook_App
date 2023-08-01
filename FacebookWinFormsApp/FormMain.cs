@@ -14,6 +14,7 @@ namespace BasicFacebookFeatures
     public partial class FormMain : Form
     {
         private const string k_AppID = "832742648143866";
+        private User m_LoggedInUser;
 
         public FormMain()
         {
@@ -21,13 +22,13 @@ namespace BasicFacebookFeatures
             FacebookWrapper.FacebookService.s_CollectionLimit = 25;
         }
 
-        FacebookWrapper.LoginResult m_LoginResult;
+        //FacebookWrapper.LoginResult m_LoginResult;
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             Clipboard.SetText("design.patterns");
 
-            if (m_LoginResult == null)
+            if (m_LoggedInUser == null)
             {
                 login();
             }
@@ -35,7 +36,7 @@ namespace BasicFacebookFeatures
 
         private void login()
         {
-            m_LoginResult = FacebookService.Login(
+            FacebookWrapper.LoginResult m_LoginResult = FacebookService.Login(
                 k_AppID,
                 /// requested permissions:
                 "email",
@@ -45,10 +46,11 @@ namespace BasicFacebookFeatures
 
             if (string.IsNullOrEmpty(m_LoginResult.ErrorMessage))
             {
-                buttonLogin.Text = $"Logged in as {m_LoginResult.LoggedInUser.Name}";
-                labelName.Text = m_LoginResult.LoggedInUser.Name;
+                m_LoggedInUser = m_LoginResult.LoggedInUser;
+                buttonLogin.Text = $"Logged in as {m_LoggedInUser.Name}";
+                labelName.Text = m_LoggedInUser.Name;
                 buttonLogin.BackColor = Color.LightGreen;
-                pictureBoxProfile.ImageLocation = m_LoginResult.LoggedInUser.PictureNormalURL;
+                pictureBoxProfile.ImageLocation = m_LoggedInUser.PictureNormalURL;
                 buttonLogin.Enabled = false;
                 buttonLogout.Enabled = true;
             }
@@ -63,9 +65,39 @@ namespace BasicFacebookFeatures
             FacebookService.LogoutWithUI();
             buttonLogin.Text = "Login";
             buttonLogin.BackColor = buttonLogout.BackColor;
-            m_LoginResult = null;
+            m_LoggedInUser = null;
             buttonLogin.Enabled = true;
             buttonLogout.Enabled = false;
+        }
+
+        private void buttonPosts_Click(object sender, EventArgs e)
+        {
+            listBoxContent.Items.Clear();
+
+            foreach (Post post in m_LoggedInUser.Posts)
+            {
+                if (post.Message != null)
+                {
+                    listBoxContent.Items.Add(post.Message);
+                }
+                else if (post.Caption != null)
+                {
+                    listBoxContent.Items.Add(post.Caption);
+                }
+                else
+                {
+                    listBoxContent.Items.Add(string.Format("[{0}]", post.Type));
+                }
+            }
+
+            if (listBoxContent.Items.Count == 0)
+            {
+                MessageBox.Show("No Posts to retrieve :(");
+            }
+            else
+            {
+                labelViewTitle.Text = (sender as Button).Text;
+            }
         }
     }
 }
