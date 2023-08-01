@@ -29,6 +29,7 @@ namespace BasicFacebookFeatures
         {
             FacebookService.LogoutWithUI();
             m_LoggedInUser = null;
+            this.Close();
         }
 
         private void buttonPosts_Click(object sender, EventArgs e)

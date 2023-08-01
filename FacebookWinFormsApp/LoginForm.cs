@@ -56,10 +56,9 @@ namespace BasicFacebookFeatures
             if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {
                 m_LoggedInUser = m_LoginResult.LoggedInUser;
-                buttonLogin.BackColor = Color.LightGreen;
                 this.Hide();
                 new FormMain(m_LoggedInUser).ShowDialog();
-                this.Close();
+                this.Show();
             }
             else if (m_LoginResult.ErrorMessage.Equals(""))
             {
