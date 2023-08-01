@@ -28,43 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.tabControlApp = new System.Windows.Forms.TabControl();
             this.tabPageProfile = new System.Windows.Forms.TabPage();
-            this.labelName = new System.Windows.Forms.Label();
+            this.labelViewTitle = new System.Windows.Forms.Label();
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
-            this.tabPageFeatures = new System.Windows.Forms.TabPage();
+            this.listBoxContent = new System.Windows.Forms.ListBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonPosts = new System.Windows.Forms.Button();
             this.buttonAlbums = new System.Windows.Forms.Button();
             this.buttonGroups = new System.Windows.Forms.Button();
             this.buttonEvents = new System.Windows.Forms.Button();
             this.buttonFavoriteTeams = new System.Windows.Forms.Button();
             this.buttonLikedPages = new System.Windows.Forms.Button();
-            this.buttonPosts = new System.Windows.Forms.Button();
-            this.listBoxContent = new System.Windows.Forms.ListBox();
-            this.labelViewTitle = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.tabPageFeatures = new System.Windows.Forms.TabPage();
             this.tabControlApp.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // buttonLogin
-            // 
-            this.buttonLogin.Location = new System.Drawing.Point(18, 9);
-            this.buttonLogin.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(117, 54);
-            this.buttonLogin.TabIndex = 36;
-            this.buttonLogin.Text = "Login";
-            this.buttonLogin.UseVisualStyleBackColor = true;
-            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
-            // 
             // buttonLogout
             // 
             this.buttonLogout.Enabled = false;
-            this.buttonLogout.Location = new System.Drawing.Point(18, 71);
+            this.buttonLogout.Location = new System.Drawing.Point(9, 9);
             this.buttonLogout.Margin = new System.Windows.Forms.Padding(4);
             this.buttonLogout.Name = "buttonLogout";
             this.buttonLogout.Size = new System.Drawing.Size(117, 54);
@@ -93,23 +81,22 @@
             this.tabPageProfile.Controls.Add(this.flowLayoutPanel1);
             this.tabPageProfile.Controls.Add(this.labelName);
             this.tabPageProfile.Controls.Add(this.buttonLogout);
-            this.tabPageProfile.Controls.Add(this.buttonLogin);
-            this.tabPageProfile.Location = new System.Drawing.Point(4, 35);
+            this.tabPageProfile.Location = new System.Drawing.Point(4, 27);
             this.tabPageProfile.Name = "tabPageProfile";
             this.tabPageProfile.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProfile.Size = new System.Drawing.Size(1138, 555);
+            this.tabPageProfile.Size = new System.Drawing.Size(1138, 563);
             this.tabPageProfile.TabIndex = 0;
             this.tabPageProfile.Text = "Profile";
             this.tabPageProfile.UseVisualStyleBackColor = true;
             // 
-            // labelName
+            // labelViewTitle
             // 
-            this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(421, 9);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(219, 26);
-            this.labelName.TabIndex = 57;
-            this.labelName.Text = "FirstName LastName";
+            this.labelViewTitle.AutoSize = true;
+            this.labelViewTitle.Location = new System.Drawing.Point(331, 193);
+            this.labelViewTitle.Name = "labelViewTitle";
+            this.labelViewTitle.Size = new System.Drawing.Size(45, 18);
+            this.labelViewTitle.TabIndex = 60;
+            this.labelViewTitle.Text = "posts";
             // 
             // pictureBoxProfile
             // 
@@ -120,15 +107,14 @@
             this.pictureBoxProfile.TabIndex = 55;
             this.pictureBoxProfile.TabStop = false;
             // 
-            // tabPageFeatures
+            // listBoxContent
             // 
-            this.tabPageFeatures.Location = new System.Drawing.Point(4, 35);
-            this.tabPageFeatures.Name = "tabPageFeatures";
-            this.tabPageFeatures.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFeatures.Size = new System.Drawing.Size(1201, 555);
-            this.tabPageFeatures.TabIndex = 1;
-            this.tabPageFeatures.Text = "Extra Features";
-            this.tabPageFeatures.UseVisualStyleBackColor = true;
+            this.listBoxContent.FormattingEnabled = true;
+            this.listBoxContent.ItemHeight = 18;
+            this.listBoxContent.Location = new System.Drawing.Point(336, 225);
+            this.listBoxContent.Name = "listBoxContent";
+            this.listBoxContent.Size = new System.Drawing.Size(590, 310);
+            this.listBoxContent.TabIndex = 59;
             // 
             // flowLayoutPanel1
             // 
@@ -144,6 +130,16 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 549);
             this.flowLayoutPanel1.TabIndex = 58;
+            // 
+            // buttonPosts
+            // 
+            this.buttonPosts.Location = new System.Drawing.Point(3, 3);
+            this.buttonPosts.Name = "buttonPosts";
+            this.buttonPosts.Size = new System.Drawing.Size(197, 48);
+            this.buttonPosts.TabIndex = 5;
+            this.buttonPosts.Text = "Posts";
+            this.buttonPosts.UseVisualStyleBackColor = true;
+            this.buttonPosts.Click += new System.EventHandler(this.buttonPosts_Click);
             // 
             // buttonAlbums
             // 
@@ -190,37 +186,28 @@
             this.buttonLikedPages.Text = "Liked Pages";
             this.buttonLikedPages.UseVisualStyleBackColor = true;
             // 
-            // buttonPosts
+            // labelName
             // 
-            this.buttonPosts.Location = new System.Drawing.Point(3, 3);
-            this.buttonPosts.Name = "buttonPosts";
-            this.buttonPosts.Size = new System.Drawing.Size(197, 48);
-            this.buttonPosts.TabIndex = 5;
-            this.buttonPosts.Text = "Posts";
-            this.buttonPosts.UseVisualStyleBackColor = true;
-            this.buttonPosts.Click += new System.EventHandler(this.buttonPosts_Click);
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(421, 9);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(149, 18);
+            this.labelName.TabIndex = 57;
+            this.labelName.Text = "FirstName LastName";
             // 
-            // listBoxContent
+            // tabPageFeatures
             // 
-            this.listBoxContent.FormattingEnabled = true;
-            this.listBoxContent.ItemHeight = 26;
-            this.listBoxContent.Location = new System.Drawing.Point(336, 225);
-            this.listBoxContent.Name = "listBoxContent";
-            this.listBoxContent.Size = new System.Drawing.Size(590, 316);
-            this.listBoxContent.TabIndex = 59;
-            // 
-            // labelViewTitle
-            // 
-            this.labelViewTitle.AutoSize = true;
-            this.labelViewTitle.Location = new System.Drawing.Point(331, 193);
-            this.labelViewTitle.Name = "labelViewTitle";
-            this.labelViewTitle.Size = new System.Drawing.Size(64, 26);
-            this.labelViewTitle.TabIndex = 60;
-            this.labelViewTitle.Text = "posts";
+            this.tabPageFeatures.Location = new System.Drawing.Point(4, 27);
+            this.tabPageFeatures.Name = "tabPageFeatures";
+            this.tabPageFeatures.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageFeatures.Size = new System.Drawing.Size(1138, 563);
+            this.tabPageFeatures.TabIndex = 1;
+            this.tabPageFeatures.Text = "Extra Features";
+            this.tabPageFeatures.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1146, 594);
             this.Controls.Add(this.tabControlApp);
@@ -239,8 +226,6 @@
         }
 
 		#endregion
-
-		private System.Windows.Forms.Button buttonLogin;
 		private System.Windows.Forms.Button buttonLogout;
 		private System.Windows.Forms.TabControl tabControlApp;
 		private System.Windows.Forms.TabPage tabPageProfile;
