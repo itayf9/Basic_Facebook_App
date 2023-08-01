@@ -149,6 +149,7 @@
             this.buttonAlbums.TabIndex = 0;
             this.buttonAlbums.Text = "Albums";
             this.buttonAlbums.UseVisualStyleBackColor = true;
+            this.buttonAlbums.Click += new System.EventHandler(this.buttonAlbums_Click);
             // 
             // buttonGroups
             // 
@@ -158,6 +159,7 @@
             this.buttonGroups.TabIndex = 1;
             this.buttonGroups.Text = "Groups";
             this.buttonGroups.UseVisualStyleBackColor = true;
+            this.buttonGroups.Click += new System.EventHandler(this.buttonGroups_Click);
             // 
             // buttonEvents
             // 
@@ -167,6 +169,7 @@
             this.buttonEvents.TabIndex = 2;
             this.buttonEvents.Text = "Events";
             this.buttonEvents.UseVisualStyleBackColor = true;
+            this.buttonEvents.Click += new System.EventHandler(this.buttonEvents_Click);
             // 
             // buttonFavoriteTeams
             // 
@@ -176,6 +179,7 @@
             this.buttonFavoriteTeams.TabIndex = 3;
             this.buttonFavoriteTeams.Text = "Favorite Teams";
             this.buttonFavoriteTeams.UseVisualStyleBackColor = true;
+            this.buttonFavoriteTeams.Click += new System.EventHandler(this.buttonFavoriteTeams_Click);
             // 
             // buttonLikedPages
             // 
@@ -185,6 +189,7 @@
             this.buttonLikedPages.TabIndex = 4;
             this.buttonLikedPages.Text = "Liked Pages";
             this.buttonLikedPages.UseVisualStyleBackColor = true;
+            this.buttonLikedPages.Click += new System.EventHandler(this.buttonLikedPages_Click);
             // 
             // labelName
             // 

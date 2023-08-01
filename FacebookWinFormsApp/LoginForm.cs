@@ -38,11 +38,20 @@ namespace BasicFacebookFeatures
         {
             FacebookWrapper.LoginResult m_LoginResult = FacebookService.Login(
                 k_AppID,
-                /// requested permissions:
                 "email",
-                "public_profile"
-                /// add any relevant permissions
-                );
+                "public_profile",
+                "user_age_range",
+                "user_birthday",
+                "user_events",
+                "user_friends",
+                "user_gender",
+                "user_hometown",
+                "user_likes",
+                "user_link",
+                "user_location",
+                "user_photos",
+                "user_posts",
+                "user_videos");
 
             if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {
