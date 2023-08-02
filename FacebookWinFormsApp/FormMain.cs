@@ -37,20 +37,27 @@ namespace BasicFacebookFeatures
             labelViewTitle.Text = "Posts:";
             listBoxContent.Items.Clear();
 
-            foreach (Post post in m_LoggedInUser.Posts)
+            try
             {
-                if (post.Message != null)
+                foreach (Post post in m_LoggedInUser.Posts)
                 {
-                    listBoxContent.Items.Add(post.Message);
+                    if (post.Message != null)
+                    {
+                        listBoxContent.Items.Add(post.Message);
+                    }
+                    else if (post.Caption != null)
+                    {
+                        listBoxContent.Items.Add(post.Caption);
+                    }
+                    else
+                    {
+                        listBoxContent.Items.Add(string.Format("[{0}]", post.Type));
+                    }
                 }
-                else if (post.Caption != null)
-                {
-                    listBoxContent.Items.Add(post.Caption);
-                }
-                else
-                {
-                    listBoxContent.Items.Add(string.Format("[{0}]", post.Type));
-                }
+            } 
+            catch (Exception exception)
+            { 
+
             }
 
             if (listBoxContent.Items.Count == 0)
@@ -125,9 +132,17 @@ namespace BasicFacebookFeatures
             labelViewTitle.Text = "Favofrite Teams:";
             listBoxContent.Items.Clear();
             listBoxContent.DisplayMember = "Name";
-            foreach (Page team in m_LoggedInUser.FavofriteTeams)
+
+            try
             {
-                listBoxContent.Items.Add(team.Name);
+                foreach (Page team in m_LoggedInUser.FavofriteTeams)
+                {
+                    listBoxContent.Items.Add(team.Name);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
             if (listBoxContent.Items.Count == 0)
@@ -156,7 +171,19 @@ namespace BasicFacebookFeatures
 
             if (listBoxContent.Items.Count == 0)
             {
-                MessageBox.Show("No liked pages to retrieve :(");
+                                MessageBox.Show("No liked pages to retrieve :(");
+            }
+        }
+
+        private void listBoxContent_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            object selectedItem = listBoxContent.SelectedItem;
+            if (selectedItem is Post) {
+                pictureBoxSelectedContent.ImageLocation = ((selectedItem as Post).PictureURL);
+            } else if (selectedItem is Group) {
+                pictureBoxSelectedContent.ImageLocation = ((selectedItem as Group).PictureNormalURL);
+            } else if (listBoxContent.SelectedItem is Page) {
+                pictureBoxSelectedContent.ImageLocation = ((listBoxContent.SelectedItem as Page).PictureNormalURL);
             }
         }
     }
