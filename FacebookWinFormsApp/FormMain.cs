@@ -15,11 +15,11 @@ namespace BasicFacebookFeatures
     {
         private User m_LoggedInUser;
 
-        public FormMain(User i_m_LoggedInUser)
+        public FormMain(User i_LoggedInUser)
         {
-            m_LoggedInUser = i_m_LoggedInUser;
+            m_LoggedInUser = i_LoggedInUser;
             InitializeComponent();
-            FacebookWrapper.FacebookService.s_CollectionLimit = 25;
+            FacebookService.s_CollectionLimit = 25;
             labelName.Text = m_LoggedInUser.Name;
             pictureBoxProfile.ImageLocation = m_LoggedInUser.PictureNormalURL;
             buttonLogout.Enabled = true;

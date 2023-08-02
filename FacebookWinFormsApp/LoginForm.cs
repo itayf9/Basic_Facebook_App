@@ -21,7 +21,7 @@ namespace BasicFacebookFeatures
         public LoginForm()
         {
             InitializeComponent();
-            FacebookWrapper.FacebookService.s_CollectionLimit = 25;
+            FacebookService.s_CollectionLimit = 25;
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -36,7 +36,7 @@ namespace BasicFacebookFeatures
 
         private void login()
         {
-            FacebookWrapper.LoginResult m_LoginResult = FacebookService.Login(
+            LoginResult loginResult = FacebookService.Login(
                 k_AppID,
                 "email",
                 "public_profile",
@@ -53,22 +53,24 @@ namespace BasicFacebookFeatures
                 "user_posts",
                 "user_videos");
 
-            if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
+            if (!string.IsNullOrEmpty(loginResult.AccessToken))
             {
-                m_LoggedInUser = m_LoginResult.LoggedInUser;
+                labelError.Visible = false;
+                m_LoggedInUser = loginResult.LoggedInUser;
                 this.Hide();
                 new FormMain(m_LoggedInUser).ShowDialog();
                 this.Show();
+                m_LoggedInUser = null;
             }
-            else if (m_LoginResult.ErrorMessage.Equals(""))
+            else if (loginResult.ErrorMessage.Equals(""))
             {
-                ErrorLabel.Visible = true;
-                ErrorLabel.Text = "Login Error !! Please Try Again.";
+                labelError.Visible = true;
+                labelError.Text = "Login Error !! Please Try Again.";
             }
             else 
             {
-                ErrorLabel.Enabled = true;
-                ErrorLabel.Text = m_LoginResult.ErrorMessage;
+                labelError.Enabled = true;
+                labelError.Text = loginResult.ErrorMessage;
             }
         }
     }

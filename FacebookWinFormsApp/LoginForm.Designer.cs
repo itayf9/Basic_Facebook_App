@@ -29,39 +29,44 @@
         private void InitializeComponent()
         {
             this.buttonLogin = new System.Windows.Forms.Button();
-            this.ErrorLabel = new System.Windows.Forms.Label();
+            this.labelError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(34, 92);
+            this.buttonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.buttonLogin.Location = new System.Drawing.Point(55, 187);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(213, 70);
+            this.buttonLogin.Size = new System.Drawing.Size(320, 63);
             this.buttonLogin.TabIndex = 0;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
-            // ErrorLabel
+            // labelError
             // 
-            this.ErrorLabel.AutoSize = true;
-            this.ErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.ErrorLabel.Location = new System.Drawing.Point(34, 186);
-            this.ErrorLabel.Name = "ErrorLabel";
-            this.ErrorLabel.Size = new System.Drawing.Size(29, 13);
-            this.ErrorLabel.TabIndex = 1;
-            this.ErrorLabel.Text = "Error";
-            this.ErrorLabel.Visible = false;
+            this.labelError.AutoSize = true;
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(51, 286);
+            this.labelError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(44, 20);
+            this.labelError.TabIndex = 1;
+            this.labelError.Text = "Error";
+            this.labelError.Visible = false;
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.ErrorLabel);
+            this.ClientSize = new System.Drawing.Size(426, 402);
+            this.Controls.Add(this.labelError);
             this.Controls.Add(this.buttonLogin);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "LoginForm";
-            this.Text = "LoginForm";
+            this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -70,6 +75,6 @@
         #endregion
 
         private System.Windows.Forms.Button buttonLogin;
-        private System.Windows.Forms.Label ErrorLabel;
+        private System.Windows.Forms.Label labelError;
     }
 }
