@@ -34,8 +34,7 @@ namespace BasicFacebookFeatures
 
         private void buttonPosts_Click(object sender, EventArgs e)
         {
-            labelViewTitle.Text = "Posts:";
-            listBoxContent.Items.Clear();
+            switchShownContent("Posts");
 
             try
             {
@@ -72,25 +71,31 @@ namespace BasicFacebookFeatures
 
         private void buttonAlbums_Click(object sender, EventArgs e)
         {
-            labelViewTitle.Text = "Albums:";
-
-            listBoxContent.Items.Clear();
+            switchShownContent("Albums");
             listBoxContent.DisplayMember = "Name";
-            foreach (Album album in m_LoggedInUser.Albums)
+
+            try
             {
-                listBoxContent.Items.Add(album);
+                foreach (Album album in m_LoggedInUser.Albums)
+                {
+                    listBoxContent.Items.Add(album);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
 
-            if (listBoxContent.Items.Count == 0)
-            {
-                MessageBox.Show("No Albums to retrieve :(");
-            }
+             if (listBoxContent.Items.Count == 0)
+             {
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Albums"));
+             }
+
         }
 
         private void buttonGroups_Click(object sender, EventArgs e)
         {
-            labelViewTitle.Text = "Groups:";
-            listBoxContent.Items.Clear();
+            switchShownContent("Groups");
             listBoxContent.DisplayMember = "Name";
 
             try
@@ -107,14 +112,13 @@ namespace BasicFacebookFeatures
 
             if (listBoxContent.Items.Count == 0)
             {
-                MessageBox.Show("No groups to retrieve :(");
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "groups"));
             }
         }
 
         private void buttonEvents_Click(object sender, EventArgs e)
         {
-            labelViewTitle.Text = "Events:";
-            listBoxContent.Items.Clear();
+            switchShownContent("Events");
             listBoxContent.DisplayMember = "Name";
             foreach (Event fbEvent in m_LoggedInUser.Events)
             {
@@ -123,14 +127,13 @@ namespace BasicFacebookFeatures
 
             if (listBoxContent.Items.Count == 0)
             {
-                MessageBox.Show("No Events to retrieve :(");
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Events"));
             }
         }
 
         private void buttonFavoriteTeams_Click(object sender, EventArgs e)
         {
-            labelViewTitle.Text = "Favofrite Teams:";
-            listBoxContent.Items.Clear();
+            switchShownContent("Favofrite Teams");
             listBoxContent.DisplayMember = "Name";
 
             try
@@ -140,28 +143,27 @@ namespace BasicFacebookFeatures
                     listBoxContent.Items.Add(team.Name);
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Favorite Teams"));
             }
 
             if (listBoxContent.Items.Count == 0)
             {
-                MessageBox.Show("No Favorite Teams to retrieve :(");
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Favorite Teams"));
             }
         }
 
         private void buttonLikedPages_Click(object sender, EventArgs e)
         {
-            labelViewTitle.Text = "Liked Pages:";
-            listBoxContent.Items.Clear();
+            switchShownContent("Liked Pages");
             listBoxContent.DisplayMember = "Name";
 
             try
             {
                 foreach (Page page in m_LoggedInUser.LikedPages)
                 {
-                    listBoxContent.Items.Add(page.Name);
+                    listBoxContent.Items.Add(page);
                 }
             }
             catch (Exception ex)
@@ -171,19 +173,44 @@ namespace BasicFacebookFeatures
 
             if (listBoxContent.Items.Count == 0)
             {
-                                MessageBox.Show("No liked pages to retrieve :(");
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "liked pages"));
             }
+        }
+
+        private void switchShownContent(string i_ContentCategoryName)
+        {
+            labelViewTitle.Text = string.Format("{0}:", i_ContentCategoryName);
+            listBoxContent.Items.Clear();
+            pictureBoxSelectedContent.Image = null;
         }
 
         private void listBoxContent_SelectedIndexChanged(object sender, EventArgs e)
         {
             object selectedItem = listBoxContent.SelectedItem;
-            if (selectedItem is Post) {
-                pictureBoxSelectedContent.ImageLocation = ((selectedItem as Post).PictureURL);
-            } else if (selectedItem is Group) {
-                pictureBoxSelectedContent.ImageLocation = ((selectedItem as Group).PictureNormalURL);
-            } else if (listBoxContent.SelectedItem is Page) {
-                pictureBoxSelectedContent.ImageLocation = ((listBoxContent.SelectedItem as Page).PictureNormalURL);
+            if (selectedItem is Post) 
+            {
+                //pictureBoxSelectedContent.ImageLocation = ((selectedItem as Post).PictureURL);
+            } 
+            else if (selectedItem is Album)
+            {
+                Album selectedAlbum = selectedItem as Album;
+                pictureBoxSelectedContent.LoadAsync(selectedAlbum.PictureAlbumURL);
+            }
+            else if (selectedItem is Group)
+            {
+                Group selectedGroup = selectedItem as Group;
+                pictureBoxSelectedContent.LoadAsync(selectedGroup.PictureNormalURL);
+            }
+            else if (selectedItem is Event)
+            {
+                Event selectedEvent = selectedItem as Event;
+                pictureBoxSelectedContent.LoadAsync(selectedEvent.PictureNormalURL);
+
+            }
+            else if (listBoxContent.SelectedItem is Page)
+            {
+                Page selectedPage = selectedItem as Page;
+                pictureBoxSelectedContent.LoadAsync(selectedPage.PictureNormalURL);
             }
         }
     }
