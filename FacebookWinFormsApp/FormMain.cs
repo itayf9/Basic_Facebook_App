@@ -34,8 +34,7 @@ namespace BasicFacebookFeatures
 
         private void buttonPosts_Click(object sender, EventArgs e)
         {
-            labelViewTitle.Text = "Posts:";
-            listBoxContent.Items.Clear();
+            switchShownContent("Posts");
 
             try
             {
@@ -72,8 +71,7 @@ namespace BasicFacebookFeatures
 
         private void buttonAlbums_Click(object sender, EventArgs e)
         {
-            labelViewTitle.Text = "Albums:";
-            listBoxContent.Items.Clear();
+            switchShownContent("Albums");
             listBoxContent.DisplayMember = "Name";
 
             try
@@ -97,8 +95,7 @@ namespace BasicFacebookFeatures
 
         private void buttonGroups_Click(object sender, EventArgs e)
         {
-            labelViewTitle.Text = "Groups:";
-            listBoxContent.Items.Clear();
+            switchShownContent("Groups");
             listBoxContent.DisplayMember = "Name";
 
             try
@@ -121,8 +118,7 @@ namespace BasicFacebookFeatures
 
         private void buttonEvents_Click(object sender, EventArgs e)
         {
-            labelViewTitle.Text = "Events:";
-            listBoxContent.Items.Clear();
+            switchShownContent("Events");
             listBoxContent.DisplayMember = "Name";
             foreach (Event fbEvent in m_LoggedInUser.Events)
             {
@@ -137,8 +133,7 @@ namespace BasicFacebookFeatures
 
         private void buttonFavoriteTeams_Click(object sender, EventArgs e)
         {
-            labelViewTitle.Text = "Favofrite Teams:";
-            listBoxContent.Items.Clear();
+            switchShownContent("Favofrite Teams");
             listBoxContent.DisplayMember = "Name";
 
             try
@@ -161,8 +156,7 @@ namespace BasicFacebookFeatures
 
         private void buttonLikedPages_Click(object sender, EventArgs e)
         {
-            labelViewTitle.Text = "Liked Pages:";
-            listBoxContent.Items.Clear();
+            switchShownContent("Liked Pages");
             listBoxContent.DisplayMember = "Name";
 
             try
@@ -181,6 +175,13 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "liked pages"));
             }
+        }
+
+        private void switchShownContent(string i_ContentCategoryName)
+        {
+            labelViewTitle.Text = string.Format("{0}:", i_ContentCategoryName);
+            listBoxContent.Items.Clear();
+            pictureBoxSelectedContent.Image = null;
         }
 
         private void listBoxContent_SelectedIndexChanged(object sender, EventArgs e)
