@@ -169,7 +169,7 @@ namespace BasicFacebookFeatures
             {
                 foreach (Page page in m_LoggedInUser.LikedPages)
                 {
-                    listBoxContent.Items.Add(page.Name);
+                    listBoxContent.Items.Add(page);
                 }
             }
             catch (Exception ex)
@@ -186,12 +186,30 @@ namespace BasicFacebookFeatures
         private void listBoxContent_SelectedIndexChanged(object sender, EventArgs e)
         {
             object selectedItem = listBoxContent.SelectedItem;
-            if (selectedItem is Post) {
-                pictureBoxSelectedContent.ImageLocation = ((selectedItem as Post).PictureURL);
-            } else if (selectedItem is Group) {
-                pictureBoxSelectedContent.ImageLocation = ((selectedItem as Group).PictureNormalURL);
-            } else if (listBoxContent.SelectedItem is Page) {
-                pictureBoxSelectedContent.ImageLocation = ((listBoxContent.SelectedItem as Page).PictureNormalURL);
+            if (selectedItem is Post) 
+            {
+                //pictureBoxSelectedContent.ImageLocation = ((selectedItem as Post).PictureURL);
+            } 
+            else if (selectedItem is Album)
+            {
+                Album selectedAlbum = selectedItem as Album;
+                pictureBoxSelectedContent.LoadAsync(selectedAlbum.PictureAlbumURL);
+            }
+            else if (selectedItem is Group)
+            {
+                Group selectedGroup = selectedItem as Group;
+                pictureBoxSelectedContent.LoadAsync(selectedGroup.PictureNormalURL);
+            }
+            else if (selectedItem is Event)
+            {
+                Event selectedEvent = selectedItem as Event;
+                pictureBoxSelectedContent.LoadAsync(selectedEvent.PictureNormalURL);
+
+            }
+            else if (listBoxContent.SelectedItem is Page)
+            {
+                Page selectedPage = selectedItem as Page;
+                pictureBoxSelectedContent.LoadAsync(selectedPage.PictureNormalURL);
             }
         }
     }
