@@ -73,18 +73,26 @@ namespace BasicFacebookFeatures
         private void buttonAlbums_Click(object sender, EventArgs e)
         {
             labelViewTitle.Text = "Albums:";
-
             listBoxContent.Items.Clear();
             listBoxContent.DisplayMember = "Name";
-            foreach (Album album in m_LoggedInUser.Albums)
+
+            try
             {
-                listBoxContent.Items.Add(album);
+                foreach (Album album in m_LoggedInUser.Albums)
+                {
+                    listBoxContent.Items.Add(album);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
 
-            if (listBoxContent.Items.Count == 0)
-            {
-                MessageBox.Show("No Albums to retrieve :(");
-            }
+             if (listBoxContent.Items.Count == 0)
+             {
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Albums"));
+             }
+
         }
 
         private void buttonGroups_Click(object sender, EventArgs e)
@@ -107,7 +115,7 @@ namespace BasicFacebookFeatures
 
             if (listBoxContent.Items.Count == 0)
             {
-                MessageBox.Show("No groups to retrieve :(");
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "groups"));
             }
         }
 
@@ -123,7 +131,7 @@ namespace BasicFacebookFeatures
 
             if (listBoxContent.Items.Count == 0)
             {
-                MessageBox.Show("No Events to retrieve :(");
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Events"));
             }
         }
 
@@ -140,14 +148,14 @@ namespace BasicFacebookFeatures
                     listBoxContent.Items.Add(team.Name);
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Favorite Teams"));
             }
 
             if (listBoxContent.Items.Count == 0)
             {
-                MessageBox.Show("No Favorite Teams to retrieve :(");
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Favorite Teams"));
             }
         }
 
@@ -171,7 +179,7 @@ namespace BasicFacebookFeatures
 
             if (listBoxContent.Items.Count == 0)
             {
-                                MessageBox.Show("No liked pages to retrieve :(");
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "liked pages"));
             }
         }
 

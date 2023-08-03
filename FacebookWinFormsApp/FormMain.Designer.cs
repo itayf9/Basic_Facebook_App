@@ -31,6 +31,7 @@
             this.buttonLogout = new System.Windows.Forms.Button();
             this.tabControlApp = new System.Windows.Forms.TabControl();
             this.tabPageProfile = new System.Windows.Forms.TabPage();
+            this.pictureBoxSelectedContent = new System.Windows.Forms.PictureBox();
             this.labelViewTitle = new System.Windows.Forms.Label();
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.listBoxContent = new System.Windows.Forms.ListBox();
@@ -43,12 +44,11 @@
             this.buttonLikedPages = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();
             this.tabPageFeatures = new System.Windows.Forms.TabPage();
-            this.pictureBoxSelectedContent = new System.Windows.Forms.PictureBox();
             this.tabControlApp.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedContent)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogout
@@ -92,14 +92,23 @@
             this.tabPageProfile.Text = "Profile";
             this.tabPageProfile.UseVisualStyleBackColor = true;
             // 
+            // pictureBoxSelectedContent
+            // 
+            this.pictureBoxSelectedContent.Location = new System.Drawing.Point(216, 225);
+            this.pictureBoxSelectedContent.Name = "pictureBoxSelectedContent";
+            this.pictureBoxSelectedContent.Size = new System.Drawing.Size(79, 78);
+            this.pictureBoxSelectedContent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxSelectedContent.TabIndex = 61;
+            this.pictureBoxSelectedContent.TabStop = false;
+            // 
             // labelViewTitle
             // 
             this.labelViewTitle.AutoSize = true;
             this.labelViewTitle.Location = new System.Drawing.Point(331, 193);
             this.labelViewTitle.Name = "labelViewTitle";
-            this.labelViewTitle.Size = new System.Drawing.Size(64, 26);
+            this.labelViewTitle.Size = new System.Drawing.Size(73, 26);
             this.labelViewTitle.TabIndex = 60;
-            this.labelViewTitle.Text = "posts";
+            this.labelViewTitle.Text = "Posts:";
             // 
             // pictureBoxProfile
             // 
@@ -214,15 +223,6 @@
             this.tabPageFeatures.Text = "Extra Features";
             this.tabPageFeatures.UseVisualStyleBackColor = true;
             // 
-            // pictureBoxSelectedContent
-            // 
-            this.pictureBoxSelectedContent.Location = new System.Drawing.Point(216, 225);
-            this.pictureBoxSelectedContent.Name = "pictureBoxSelectedContent";
-            this.pictureBoxSelectedContent.Size = new System.Drawing.Size(79, 78);
-            this.pictureBoxSelectedContent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxSelectedContent.TabIndex = 61;
-            this.pictureBoxSelectedContent.TabStop = false;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
@@ -237,9 +237,9 @@
             this.tabControlApp.ResumeLayout(false);
             this.tabPageProfile.ResumeLayout(false);
             this.tabPageProfile.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedContent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedContent)).EndInit();
             this.ResumeLayout(false);
 
         }
