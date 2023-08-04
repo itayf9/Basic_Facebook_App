@@ -33,18 +33,17 @@ namespace BasicFacebookFeatures
             labelEmail.Text = m_LoggedInUser.Email;
             labelCity.Text = m_LoggedInUser.Location.Name;
             labelGender.Text = m_LoggedInUser.Gender.ToString();
-            fetchFriends();
         }
 
         private void fetchFriends()
         {
+            
+
             try
             {
                 foreach (User friend in m_LoggedInUser.Friends)
                 {
-                    Button friendButton = new Button();
-                    friendButton.Text = friend.Name;
-                    flowLayoutPanel4.Controls.Add(friendButton);
+                    listBoxContent.Items.Add(friend);
                 }
 
                 if (listBoxContent.Items.Count == 0)
@@ -55,7 +54,7 @@ namespace BasicFacebookFeatures
             }
             catch (Exception)
             {
-                labelFriends.Text += "Can't fetch Friends information";
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "friends"));
             }
         }
 
@@ -247,6 +246,11 @@ namespace BasicFacebookFeatures
             {
                 //pictureBoxSelectedContent.ImageLocation = ((selectedItem as Post).PictureURL);
             } 
+            else if (selectedItem is User)
+            {
+                User selectedFriend = selectedItem as User;
+                pictureBoxSelectedContent.LoadAsync(selectedFriend.PictureNormalURL);
+            }
             else if (selectedItem is Album)
             {
                 Album selectedAlbum = selectedItem as Album;
@@ -268,6 +272,14 @@ namespace BasicFacebookFeatures
                 Page selectedPage = selectedItem as Page;
                 pictureBoxSelectedContent.LoadAsync(selectedPage.PictureNormalURL);
             }
+        }
+
+        private void buttonFriends_Click(object sender, EventArgs e)
+        {
+            switchShownContent("Friends");
+            listBoxContent.DisplayMember = "Name";
+
+            fetchFriends();
         }
     }
 }
