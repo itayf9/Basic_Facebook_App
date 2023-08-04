@@ -52,13 +52,13 @@
             this.buttonFriends = new System.Windows.Forms.Button();
             this.panelSeparator = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanelDescription = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControlApp.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanelDescription.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonLogout
@@ -87,7 +87,7 @@
             // 
             // tabPageProfile
             // 
-            this.tabPageProfile.Controls.Add(this.flowLayoutPanel2);
+            this.tabPageProfile.Controls.Add(this.flowLayoutPanelDescription);
             this.tabPageProfile.Controls.Add(this.panel1);
             this.tabPageProfile.Controls.Add(this.panelSeparator);
             this.tabPageProfile.Controls.Add(this.labelGender);
@@ -312,13 +312,13 @@
             this.panel1.Size = new System.Drawing.Size(2, 538);
             this.panel1.TabIndex = 69;
             // 
-            // flowLayoutPanel2
+            // flowLayoutPanelDescription
             // 
-            this.flowLayoutPanel2.Controls.Add(this.pictureBoxSelectedContent);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(601, 178);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(529, 368);
-            this.flowLayoutPanel2.TabIndex = 70;
+            this.flowLayoutPanelDescription.Controls.Add(this.pictureBoxSelectedContent);
+            this.flowLayoutPanelDescription.Location = new System.Drawing.Point(601, 178);
+            this.flowLayoutPanelDescription.Name = "flowLayoutPanelDescription";
+            this.flowLayoutPanelDescription.Size = new System.Drawing.Size(529, 368);
+            this.flowLayoutPanelDescription.TabIndex = 70;
             // 
             // FormMain
             // 
@@ -338,7 +338,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedContent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanelDescription.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -366,7 +366,7 @@
         private System.Windows.Forms.Label labelCity;
         private System.Windows.Forms.Label labelGender;
         private System.Windows.Forms.Button buttonFriends;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelDescription;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelSeparator;
     }

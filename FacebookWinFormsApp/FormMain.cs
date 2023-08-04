@@ -254,7 +254,8 @@ namespace BasicFacebookFeatures
             else if (selectedItem is Album)
             {
                 Album selectedAlbum = selectedItem as Album;
-                pictureBoxSelectedContent.LoadAsync(selectedAlbum.PictureAlbumURL);
+                fetchAlbumPictures(selectedAlbum);
+
             }
             else if (selectedItem is Group)
             {
@@ -274,12 +275,56 @@ namespace BasicFacebookFeatures
             }
         }
 
+        private void fetchAlbumPictures(Album selectedAlbum)
+        {
+            pictureBoxSelectedContent.LoadAsync(selectedAlbum.PictureAlbumURL);
+            ListBox listBoxPictures = new ListBox();
+            listBoxPictures.FormattingEnabled = true;
+            listBoxPictures.ItemHeight = 26;
+            //listBoxPictures.Location = new System.Drawing.Point(243, 178);
+            listBoxPictures.Name = "listBoxPictures";
+            listBoxPictures.Size = new System.Drawing.Size(346, 368);
+            listBoxPictures.TabIndex = 59;
+            listBoxPictures.SelectedIndexChanged += new System.EventHandler(listBoxPictures_SelectedIndexChanged);
+
+            /*try
+            {
+                foreach (Page page in m_LoggedInUser.LikedPages)
+                {
+                    listBoxContent.Items.Add(page);
+                }
+
+                if (listBoxContent.Items.Count == 0)
+                {
+                    throw new NoDataAvailableException();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "liked pages"));
+            }*/
+
+            flowLayoutPanelDescription.Controls.Add(listBoxPictures);
+
+            
+
+        }
+
         private void buttonFriends_Click(object sender, EventArgs e)
         {
             switchShownContent("Friends");
             listBoxContent.DisplayMember = "Name";
 
             fetchFriends();
+        }
+
+        private void listBoxPictures_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /*PictureBox pictureBoxSelectedPictureFromAlbum = new PictureBox();
+            pictureBoxSelectedContent.LoadAsync(((sender as ListBox).SelectedItem as ).);
+
+            flowLayoutPanelDescription.Controls.Add(pictureBoxSelectedPictureFromAlbum);*/
+
         }
     }
 }
