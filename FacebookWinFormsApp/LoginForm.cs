@@ -16,6 +16,22 @@ namespace BasicFacebookFeatures
     {
 
         private const string k_AppID = "832742648143866";
+        private readonly string[] r_RequestedPermissions = {
+            "email",
+            "public_profile",
+            "user_age_range",
+            "user_birthday",
+            "user_events",
+            "user_friends",
+            "user_gender",
+            "user_hometown",
+            "user_likes",
+            "user_link",
+            "user_location",
+            "user_photos",
+            "user_posts",
+            "user_videos" 
+        };
         private User m_LoggedInUser;
 
         public LoginForm()
@@ -36,22 +52,7 @@ namespace BasicFacebookFeatures
 
         private void login()
         {
-            LoginResult loginResult = FacebookService.Login(
-                k_AppID,
-                "email",
-                "public_profile",
-                "user_age_range",
-                "user_birthday",
-                "user_events",
-                "user_friends",
-                "user_gender",
-                "user_hometown",
-                "user_likes",
-                "user_link",
-                "user_location",
-                "user_photos",
-                "user_posts",
-                "user_videos");
+            LoginResult loginResult = FacebookService.Login(k_AppID, r_RequestedPermissions);
 
             if (!string.IsNullOrEmpty(loginResult.AccessToken))
             {

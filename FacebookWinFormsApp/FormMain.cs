@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
@@ -20,9 +14,62 @@ namespace BasicFacebookFeatures
             m_LoggedInUser = i_LoggedInUser;
             InitializeComponent();
             FacebookService.s_CollectionLimit = 25;
+            initProfileInformation();
+        }
+
+        private void initProfileInformation()
+        {
+            buttonLogout.Enabled = true;
             labelName.Text = m_LoggedInUser.Name;
             pictureBoxProfile.ImageLocation = m_LoggedInUser.PictureNormalURL;
-            buttonLogout.Enabled = true;
+            labelBirthDay.Text = m_LoggedInUser.Birthday;
+
+            DateTime userBirthDay = DateTime.ParseExact(
+                m_LoggedInUser.Birthday,
+                "MM/dd/yyyy",
+                System.Globalization.CultureInfo.InvariantCulture);
+
+            labelAge.Text = CalculateAge(userBirthDay);
+            labelEmail.Text = m_LoggedInUser.Email;
+            labelCity.Text = m_LoggedInUser.Location.Name;
+            labelGender.Text = m_LoggedInUser.Gender.ToString();
+            fetchFriends();
+        }
+
+        private void fetchFriends()
+        {
+            try
+            {
+                foreach (User friend in m_LoggedInUser.Friends)
+                {
+                    Button friendButton = new Button();
+                    friendButton.Text = friend.Name;
+                    flowLayoutPanel4.Controls.Add(friendButton);
+                }
+
+                if (listBoxContent.Items.Count == 0)
+                {
+                    throw new NoDataAvailableException();
+                }
+
+            }
+            catch (Exception)
+            {
+                labelFriends.Text += "Can't fetch Friends information";
+            }
+        }
+
+        private string CalculateAge(DateTime i_BirthDay)
+        {
+            DateTime today = DateTime.Today;
+            int age = today.Year - i_BirthDay.Year;
+
+            if (i_BirthDay > today.AddYears(-age))
+            {
+                age--;
+            }
+
+            return age.ToString();
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -53,19 +100,20 @@ namespace BasicFacebookFeatures
                         listBoxContent.Items.Add(string.Format("[{0}]", post.Type));
                     }
                 }
+
+                if (listBoxContent.Items.Count == 0)
+                {
+                    throw new NoDataAvailableException();
+                }
+                else
+                {
+                    labelViewTitle.Text = (sender as Button).Text;
+                }
+
             } 
-            catch (Exception exception)
-            { 
-
-            }
-
-            if (listBoxContent.Items.Count == 0)
+            catch (Exception)
             {
-                MessageBox.Show("No Posts to retrieve :(");
-            }
-            else
-            {
-                labelViewTitle.Text = (sender as Button).Text;
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Posts"));
             }
         }
 
@@ -81,15 +129,15 @@ namespace BasicFacebookFeatures
                     listBoxContent.Items.Add(album);
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
 
-             if (listBoxContent.Items.Count == 0)
-             {
+            if (listBoxContent.Items.Count == 0)
+            {
                 MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Albums"));
-             }
+            }
 
         }
 
@@ -102,15 +150,15 @@ namespace BasicFacebookFeatures
             {
                 foreach (Group group in m_LoggedInUser.Groups)
                 {
-                    listBoxContent.Items.Add(group.Name);
+                    listBoxContent.Items.Add(group);
+                }
+
+                if (listBoxContent.Items.Count == 0)
+                {
+                    throw new NoDataAvailableException();
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            if (listBoxContent.Items.Count == 0)
+            catch (Exception)
             {
                 MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "groups"));
             }
@@ -120,12 +168,20 @@ namespace BasicFacebookFeatures
         {
             switchShownContent("Events");
             listBoxContent.DisplayMember = "Name";
-            foreach (Event fbEvent in m_LoggedInUser.Events)
-            {
-                listBoxContent.Items.Add(fbEvent.Name);
-            }
 
-            if (listBoxContent.Items.Count == 0)
+            try
+            {
+                foreach (Event fbEvent in m_LoggedInUser.Events)
+                {
+                    listBoxContent.Items.Add(fbEvent.Name);
+                }
+
+                if (listBoxContent.Items.Count == 0)
+                {
+                    throw new NoDataAvailableException();
+                }
+            }
+            catch (Exception)
             {
                 MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Events"));
             }
@@ -142,13 +198,13 @@ namespace BasicFacebookFeatures
                 {
                     listBoxContent.Items.Add(team.Name);
                 }
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Favorite Teams"));
-            }
 
-            if (listBoxContent.Items.Count == 0)
+                if (listBoxContent.Items.Count == 0)
+                {
+                    throw new NoDataAvailableException();
+                }
+            }
+            catch (Exception)
             {
                 MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Favorite Teams"));
             }
@@ -165,13 +221,13 @@ namespace BasicFacebookFeatures
                 {
                     listBoxContent.Items.Add(page);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
 
-            if (listBoxContent.Items.Count == 0)
+                if (listBoxContent.Items.Count == 0)
+                {
+                    throw new NoDataAvailableException();
+                }
+            }
+            catch (Exception)
             {
                 MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "liked pages"));
             }
