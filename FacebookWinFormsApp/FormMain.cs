@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
+using System.Drawing;
 
 namespace BasicFacebookFeatures
 {
@@ -237,6 +238,7 @@ namespace BasicFacebookFeatures
             labelViewTitle.Text = string.Format("{0}:", i_ContentCategoryName);
             listBoxContent.Items.Clear();
             pictureBoxSelectedContent.Image = null;
+            flowLayoutPanelDescription.Controls.Clear();
         }
 
         private void listBoxContent_SelectedIndexChanged(object sender, EventArgs e)
@@ -275,39 +277,38 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void fetchAlbumPictures(Album selectedAlbum)
+        private void fetchAlbumPictures(Album i_SelectedAlbum)
         {
-            pictureBoxSelectedContent.LoadAsync(selectedAlbum.PictureAlbumURL);
-            ListBox listBoxPictures = new ListBox();
-            listBoxPictures.FormattingEnabled = true;
-            listBoxPictures.ItemHeight = 26;
-            //listBoxPictures.Location = new System.Drawing.Point(243, 178);
-            listBoxPictures.Name = "listBoxPictures";
-            listBoxPictures.Size = new System.Drawing.Size(346, 368);
-            listBoxPictures.TabIndex = 59;
-            listBoxPictures.SelectedIndexChanged += new System.EventHandler(listBoxPictures_SelectedIndexChanged);
-
-            /*try
+            flowLayoutPanelDescription.Controls.Clear();
+            flowLayoutPanelDescription.Controls.Add(pictureBoxSelectedContent);
+            pictureBoxSelectedContent.LoadAsync(i_SelectedAlbum.PictureAlbumURL);
+            ListBox listBoxPictures = new ListBox
             {
-                foreach (Page page in m_LoggedInUser.LikedPages)
+                FormattingEnabled = true,
+                ItemHeight = 26,
+                Name = "listBoxPictures",
+                Size = new Size(346, 368)
+            };
+            listBoxPictures.SelectedIndexChanged += new EventHandler(listBoxPictures_SelectedIndexChanged);
+            listBoxPictures.DisplayMember = "CreatedTime";
+            try
+            {
+                foreach (Photo photo in i_SelectedAlbum.Photos)
                 {
-                    listBoxContent.Items.Add(page);
+                    listBoxPictures.Items.Add(photo);
                 }
 
-                if (listBoxContent.Items.Count == 0)
+                if (listBoxPictures.Items.Count == 0)
                 {
                     throw new NoDataAvailableException();
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "liked pages"));
-            }*/
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Photos"));
+            }
 
             flowLayoutPanelDescription.Controls.Add(listBoxPictures);
-
-            
-
         }
 
         private void buttonFriends_Click(object sender, EventArgs e)
@@ -320,11 +321,9 @@ namespace BasicFacebookFeatures
 
         private void listBoxPictures_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*PictureBox pictureBoxSelectedPictureFromAlbum = new PictureBox();
-            pictureBoxSelectedContent.LoadAsync(((sender as ListBox).SelectedItem as ).);
-
-            flowLayoutPanelDescription.Controls.Add(pictureBoxSelectedPictureFromAlbum);*/
-
+            pictureBoxSelectedContent.Image = ((sender as ListBox).SelectedItem as Photo).ImageNormal;
+            //PictureBox pictureBoxSelectedPictureFromAlbum = new PictureBox();
+            //flowLayoutPanelDescription.Controls.Add(pictureBoxSelectedPictureFromAlbum);
         }
     }
 }
