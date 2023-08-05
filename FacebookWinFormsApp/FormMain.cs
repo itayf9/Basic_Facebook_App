@@ -36,29 +36,6 @@ namespace BasicFacebookFeatures
             labelGender.Text = m_LoggedInUser.Gender.ToString();
         }
 
-        private void fetchFriends()
-        {
-            
-
-            try
-            {
-                foreach (User friend in m_LoggedInUser.Friends)
-                {
-                    listBoxContent.Items.Add(friend);
-                }
-
-                if (listBoxContent.Items.Count == 0)
-                {
-                    throw new NoDataAvailableException();
-                }
-
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "friends"));
-            }
-        }
-
         private string CalculateAge(DateTime i_BirthDay)
         {
             DateTime today = DateTime.Today;
@@ -82,7 +59,75 @@ namespace BasicFacebookFeatures
         private void buttonPosts_Click(object sender, EventArgs e)
         {
             switchShownContent("Posts");
+            fetchPosts();
+        }
 
+        private void buttonAlbums_Click(object sender, EventArgs e)
+        {
+            switchShownContent("Albums");
+            listBoxContent.DisplayMember = "Name";
+            fetchAlbums();
+        }
+
+        private void buttonGroups_Click(object sender, EventArgs e)
+        {
+            switchShownContent("Groups");
+            listBoxContent.DisplayMember = "Name";
+            fetchGroups();
+        }
+
+        private void buttonEvents_Click(object sender, EventArgs e)
+        {
+            switchShownContent("Events");
+            listBoxContent.DisplayMember = "Name";
+            fetchEvents();
+        }
+
+        private void buttonFavoriteTeams_Click(object sender, EventArgs e)
+        {
+            switchShownContent("Favofrite Teams");
+            listBoxContent.DisplayMember = "Name";
+            fetchFavoriteTeams();
+        }
+
+        private void buttonLikedPages_Click(object sender, EventArgs e)
+        {
+            switchShownContent("Liked Pages");
+            listBoxContent.DisplayMember = "Name";
+            fetchLikedPages();
+        }
+
+        private void buttonFriends_Click(object sender, EventArgs e)
+        {
+            switchShownContent("Friends");
+            listBoxContent.DisplayMember = "Name";
+
+            fetchFriends();
+        }
+
+        private void fetchFriends()
+        {
+            try
+            {
+                foreach (User friend in m_LoggedInUser.Friends)
+                {
+                    listBoxContent.Items.Add(friend);
+                }
+
+                if (listBoxContent.Items.Count == 0)
+                {
+                    throw new NoDataAvailableException();
+                }
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "friends"));
+            }
+        }
+
+        private void fetchPosts()
+        {
             try
             {
                 foreach (Post post in m_LoggedInUser.Posts)
@@ -105,47 +150,43 @@ namespace BasicFacebookFeatures
                 {
                     throw new NoDataAvailableException();
                 }
-                else
-                {
-                    labelViewTitle.Text = (sender as Button).Text;
-                }
-
-            } 
+            }
+            catch (NoDataAvailableException noDataAvailableException)
+            {
+                MessageBox.Show(noDataAvailableException.Message);
+            }
             catch (Exception)
             {
                 MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Posts"));
             }
         }
 
-        private void buttonAlbums_Click(object sender, EventArgs e)
+        private void fetchAlbums()
         {
-            switchShownContent("Albums");
-            listBoxContent.DisplayMember = "Name";
-
             try
             {
                 foreach (Album album in m_LoggedInUser.Albums)
                 {
                     listBoxContent.Items.Add(album);
                 }
+
+                if (listBoxContent.Items.Count == 0)
+                {
+                    throw new NoDataAvailableException();
+                }
+            }
+            catch (NoDataAvailableException noDataAvailableException)
+            {
+                MessageBox.Show(noDataAvailableException.Message);
             }
             catch (Exception)
             {
-                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
-            }
-
-            if (listBoxContent.Items.Count == 0)
-            {
                 MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Albums"));
             }
-
         }
 
-        private void buttonGroups_Click(object sender, EventArgs e)
+        private void fetchGroups()
         {
-            switchShownContent("Groups");
-            listBoxContent.DisplayMember = "Name";
-
             try
             {
                 foreach (Group group in m_LoggedInUser.Groups)
@@ -158,17 +199,18 @@ namespace BasicFacebookFeatures
                     throw new NoDataAvailableException();
                 }
             }
+            catch (NoDataAvailableException noDataAvailableException)
+            {
+                MessageBox.Show(noDataAvailableException.Message);
+            }
             catch (Exception)
             {
                 MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "groups"));
             }
         }
 
-        private void buttonEvents_Click(object sender, EventArgs e)
+        private void fetchEvents()
         {
-            switchShownContent("Events");
-            listBoxContent.DisplayMember = "Name";
-
             try
             {
                 foreach (Event fbEvent in m_LoggedInUser.Events)
@@ -181,17 +223,18 @@ namespace BasicFacebookFeatures
                     throw new NoDataAvailableException();
                 }
             }
+            catch (NoDataAvailableException noDataAvailableException)
+            {
+                MessageBox.Show(noDataAvailableException.Message);
+            }
             catch (Exception)
             {
                 MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Events"));
             }
         }
 
-        private void buttonFavoriteTeams_Click(object sender, EventArgs e)
+        private void fetchFavoriteTeams()
         {
-            switchShownContent("Favofrite Teams");
-            listBoxContent.DisplayMember = "Name";
-
             try
             {
                 foreach (Page team in m_LoggedInUser.FavofriteTeams)
@@ -204,17 +247,18 @@ namespace BasicFacebookFeatures
                     throw new NoDataAvailableException();
                 }
             }
+            catch (NoDataAvailableException noDataAvailableException)
+            {
+                MessageBox.Show(noDataAvailableException.Message);
+            }
             catch (Exception)
             {
                 MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Favorite Teams"));
             }
         }
 
-        private void buttonLikedPages_Click(object sender, EventArgs e)
+        private void fetchLikedPages()
         {
-            switchShownContent("Liked Pages");
-            listBoxContent.DisplayMember = "Name";
-
             try
             {
                 foreach (Page page in m_LoggedInUser.LikedPages)
@@ -226,6 +270,10 @@ namespace BasicFacebookFeatures
                 {
                     throw new NoDataAvailableException();
                 }
+            }
+            catch (NoDataAvailableException noDataAvailableException)
+            {
+                MessageBox.Show(noDataAvailableException.Message);
             }
             catch (Exception)
             {
@@ -309,14 +357,6 @@ namespace BasicFacebookFeatures
             }
 
             flowLayoutPanelDescription.Controls.Add(listBoxPictures);
-        }
-
-        private void buttonFriends_Click(object sender, EventArgs e)
-        {
-            switchShownContent("Friends");
-            listBoxContent.DisplayMember = "Name";
-
-            fetchFriends();
         }
 
         private void listBoxPictures_SelectedIndexChanged(object sender, EventArgs e)
