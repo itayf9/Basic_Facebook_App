@@ -9,6 +9,7 @@ namespace BasicFacebookFeatures
     public partial class FormMain : Form
     {
         private User m_LoggedInUser;
+        private AlbumViewer m_AlbumViewer;
 
         public FormMain(User i_LoggedInUser)
         {
@@ -16,6 +17,9 @@ namespace BasicFacebookFeatures
             InitializeComponent();
             FacebookService.s_CollectionLimit = 25;
             initProfileInformation();
+            m_AlbumViewer = new AlbumViewer();
+            this.Controls.Add(m_AlbumViewer.ListBoxPictures);
+            this.Controls.Add(m_AlbumViewer.PictureBoxSelectedPicture);
         }
 
         private void initProfileInformation()
@@ -66,7 +70,10 @@ namespace BasicFacebookFeatures
         {
             switchShownContent("Albums");
             listBoxContent.DisplayMember = "Name";
+
             fetchAlbums();
+            
+
         }
 
         private void buttonGroups_Click(object sender, EventArgs e)
@@ -286,11 +293,12 @@ namespace BasicFacebookFeatures
             labelViewTitle.Text = string.Format("{0}:", i_ContentCategoryName);
             listBoxContent.Items.Clear();
             pictureBoxSelectedContent.Image = null;
-            flowLayoutPanelDescription.Controls.Clear();
         }
 
         private void listBoxContent_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //flowLayoutPanelDescription.Controls.Clear();
+
             object selectedItem = listBoxContent.SelectedItem;
             if (selectedItem is Post) 
             {
@@ -327,43 +335,12 @@ namespace BasicFacebookFeatures
 
         private void fetchAlbumPictures(Album i_SelectedAlbum)
         {
-            flowLayoutPanelDescription.Controls.Clear();
-            flowLayoutPanelDescription.Controls.Add(pictureBoxSelectedContent);
+            m_AlbumViewer.Album = i_SelectedAlbum;
+
             pictureBoxSelectedContent.LoadAsync(i_SelectedAlbum.PictureAlbumURL);
-            ListBox listBoxPictures = new ListBox
-            {
-                FormattingEnabled = true,
-                ItemHeight = 26,
-                Name = "listBoxPictures",
-                Size = new Size(346, 368)
-            };
-            listBoxPictures.SelectedIndexChanged += new EventHandler(listBoxPictures_SelectedIndexChanged);
-            listBoxPictures.DisplayMember = "CreatedTime";
-            try
-            {
-                foreach (Photo photo in i_SelectedAlbum.Photos)
-                {
-                    listBoxPictures.Items.Add(photo);
-                }
-
-                if (listBoxPictures.Items.Count == 0)
-                {
-                    throw new NoDataAvailableException();
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Photos"));
-            }
-
-            flowLayoutPanelDescription.Controls.Add(listBoxPictures);
+            
+           
         }
 
-        private void listBoxPictures_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            pictureBoxSelectedContent.Image = ((sender as ListBox).SelectedItem as Photo).ImageNormal;
-            //PictureBox pictureBoxSelectedPictureFromAlbum = new PictureBox();
-            //flowLayoutPanelDescription.Controls.Add(pictureBoxSelectedPictureFromAlbum);
-        }
     }
 }
