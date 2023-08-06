@@ -18,8 +18,8 @@ namespace BasicFacebookFeatures
             FacebookService.s_CollectionLimit = 25;
             initProfileInformation();
             m_AlbumViewer = new AlbumViewer();
-            this.Controls.Add(m_AlbumViewer.ListBoxPictures);
-            this.Controls.Add(m_AlbumViewer.PictureBoxSelectedPicture);
+            tabPageProfile.Controls.Add(m_AlbumViewer.ListBoxPictures);
+            tabPageProfile.Controls.Add(m_AlbumViewer.PictureBoxSelectedPicture);
         }
 
         private void initProfileInformation()
@@ -70,10 +70,7 @@ namespace BasicFacebookFeatures
         {
             switchShownContent("Albums");
             listBoxContent.DisplayMember = "Name";
-
             fetchAlbums();
-            
-
         }
 
         private void buttonGroups_Click(object sender, EventArgs e)
@@ -293,54 +290,51 @@ namespace BasicFacebookFeatures
             labelViewTitle.Text = string.Format("{0}:", i_ContentCategoryName);
             listBoxContent.Items.Clear();
             pictureBoxSelectedContent.Image = null;
+            HideViewers();
+        }
+
+        private void HideViewers()
+        {
+            m_AlbumViewer.setVisible(false);
         }
 
         private void listBoxContent_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //flowLayoutPanelDescription.Controls.Clear();
-
             object selectedItem = listBoxContent.SelectedItem;
-            if (selectedItem is Post) 
-            {
-                //pictureBoxSelectedContent.ImageLocation = ((selectedItem as Post).PictureURL);
-            } 
-            else if (selectedItem is User)
-            {
-                User selectedFriend = selectedItem as User;
-                pictureBoxSelectedContent.LoadAsync(selectedFriend.PictureNormalURL);
-            }
-            else if (selectedItem is Album)
-            {
-                Album selectedAlbum = selectedItem as Album;
-                fetchAlbumPictures(selectedAlbum);
 
-            }
-            else if (selectedItem is Group)
+            switch (selectedItem)
             {
-                Group selectedGroup = selectedItem as Group;
-                pictureBoxSelectedContent.LoadAsync(selectedGroup.PictureNormalURL);
-            }
-            else if (selectedItem is Event)
-            {
-                Event selectedEvent = selectedItem as Event;
-                pictureBoxSelectedContent.LoadAsync(selectedEvent.PictureNormalURL);
+                case Post post:
+                    //pictureBoxSelectedContent.ImageLocation = post.PictureURL;
+                    break;
 
-            }
-            else if (listBoxContent.SelectedItem is Page)
-            {
-                Page selectedPage = selectedItem as Page;
-                pictureBoxSelectedContent.LoadAsync(selectedPage.PictureNormalURL);
+                case User selectedFriend:
+                    pictureBoxSelectedContent.LoadAsync(selectedFriend.PictureNormalURL);
+                    break;
+
+                case Album selectedAlbum:
+                    fetchAlbumPictures(selectedAlbum);
+                    break;
+
+                case Group selectedGroup:
+                    pictureBoxSelectedContent.LoadAsync(selectedGroup.PictureNormalURL);
+                    break;
+
+                case Event selectedEvent:
+                    pictureBoxSelectedContent.LoadAsync(selectedEvent.PictureNormalURL);
+                    break;
+
+                case Page selectedPage:
+                    pictureBoxSelectedContent.LoadAsync(selectedPage.PictureNormalURL);
+                    break;
             }
         }
 
         private void fetchAlbumPictures(Album i_SelectedAlbum)
         {
-            m_AlbumViewer.Album = i_SelectedAlbum;
-
             pictureBoxSelectedContent.LoadAsync(i_SelectedAlbum.PictureAlbumURL);
-            
-           
+            m_AlbumViewer.Album = i_SelectedAlbum;
+            m_AlbumViewer.setVisible(true);
         }
-
     }
 }

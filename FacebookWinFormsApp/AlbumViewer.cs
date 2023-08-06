@@ -25,6 +25,7 @@ namespace BasicFacebookFeatures
             r_ListBoxPictures.TabIndex = 70;
             r_ListBoxPictures.SelectedIndexChanged += new EventHandler(listBoxPictures_SelectedIndexChanged);
             r_ListBoxPictures.DisplayMember = "CreatedTime";
+            r_ListBoxPictures.Visible = false;
 
             r_PictureBoxSelectedPicture = new PictureBox();
             r_PictureBoxSelectedPicture.Location = new System.Drawing.Point(806, 178);
@@ -33,6 +34,7 @@ namespace BasicFacebookFeatures
             r_PictureBoxSelectedPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             r_PictureBoxSelectedPicture.TabIndex = 71;
             r_PictureBoxSelectedPicture.TabStop = false;
+            r_PictureBoxSelectedPicture.Visible = false;
         }
 
         public ListBox ListBoxPictures
@@ -52,6 +54,12 @@ namespace BasicFacebookFeatures
             } 
         }
 
+        public void setVisible(bool i_Visible)
+        {
+            r_ListBoxPictures.Visible = i_Visible;
+            r_PictureBoxSelectedPicture.Visible = i_Visible;
+        }
+
         private void listBoxPictures_SelectedIndexChanged(object sender, EventArgs e)
         {
             PictureBoxSelectedPicture.Image = ((sender as ListBox).SelectedItem as Photo).ImageNormal;
@@ -59,6 +67,9 @@ namespace BasicFacebookFeatures
 
         private void loadPicturesToListBox()
         {
+            r_ListBoxPictures.Items.Clear();
+            r_PictureBoxSelectedPicture.Image = null;
+
             try
             {
                 foreach (Photo photo in m_Album.Photos)
