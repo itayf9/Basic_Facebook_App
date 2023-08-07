@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="AlbumViewer.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="EventViewer.cs" />
     <Compile Include="eViewerIndex.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -114,6 +115,7 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NoDataAvailableException.cs" />
+    <Compile Include="PageViewer.cs" />
     <Compile Include="PostViewer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

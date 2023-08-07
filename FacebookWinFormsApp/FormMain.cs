@@ -314,7 +314,6 @@ namespace BasicFacebookFeatures
                     break;
 
                 case User selectedFriend:
-                    pictureBoxSelectedContent.LoadAsync(selectedFriend.PictureNormalURL);
                     loadFriendDetails(selectedFriend);
                     break;
 
@@ -328,17 +327,28 @@ namespace BasicFacebookFeatures
                     break;
 
                 case Event selectedEvent:
-                    pictureBoxSelectedContent.LoadAsync(selectedEvent.PictureNormalURL);
+                    loadEventDetails(selectedEvent);
                     break;
 
                 case Page selectedPage:
-                    pictureBoxSelectedContent.LoadAsync(selectedPage.PictureNormalURL);
+                    loadPageDetails(selectedPage);
                     break;
             }
         }
 
+        private void loadEventDetails(Event selectedEvent)
+        {
+            pictureBoxSelectedContent.LoadAsync(selectedEvent.PictureNormalURL);
+        }
+
+        private void loadPageDetails(Page selectedPage)
+        {
+            pictureBoxSelectedContent.LoadAsync(selectedPage.PictureNormalURL);
+        }
+
         private void loadFriendDetails(User selectedFriend)
         {
+            pictureBoxSelectedContent.LoadAsync(selectedFriend.PictureNormalURL);
         }
 
         private void loadPostDetails(Post selectedPost)
