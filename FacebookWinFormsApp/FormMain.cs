@@ -138,18 +138,18 @@ namespace BasicFacebookFeatures
             {
                 foreach (Post post in m_LoggedInUser.Posts)
                 {
-                    if (post.Message != null)
+                    /*if (post.Message != null)*/
                     {
-                        listBoxContent.Items.Add(post.Message);
+                        listBoxContent.Items.Add(post);
                     }
-                    else if (post.Caption != null)
+                    /*else if (post.Caption != null)
                     {
-                        listBoxContent.Items.Add(post.Caption);
+                        listBoxContent.Items.Add(post);
                     }
                     else
                     {
-                        listBoxContent.Items.Add(string.Format("[{0}]", post.Type));
-                    }
+                        listBoxContent.Items.Add(string.Format("[{0}]", post.));
+                    }*/
                 }
 
                 if (listBoxContent.Items.Count == 0)
@@ -297,7 +297,7 @@ namespace BasicFacebookFeatures
 
         private void hideAllViewers()
         {
-            foreach (IViewer viewer in viewers) 
+            foreach (IViewer viewer in viewers)
             {
                 viewer.HideControls();
             }
@@ -309,8 +309,8 @@ namespace BasicFacebookFeatures
 
             switch (selectedItem)
             {
-                case Post post:
-                    //pictureBoxSelectedContent.ImageLocation = post.PictureURL;
+                case Post selectedPost:
+                    loadPostDetails(selectedPost);
                     break;
 
                 case User selectedFriend:
@@ -323,7 +323,7 @@ namespace BasicFacebookFeatures
 
                 case Group selectedGroup:
                     loadGroupDetails(selectedGroup);
-                  
+
                     break;
 
                 case Event selectedEvent:
@@ -334,6 +334,11 @@ namespace BasicFacebookFeatures
                     pictureBoxSelectedContent.LoadAsync(selectedPage.PictureNormalURL);
                     break;
             }
+        }
+
+        private void loadPostDetails(Post selectedPost)
+        {
+
         }
 
         private void loadGroupDetails(Group i_SelectedGroup)

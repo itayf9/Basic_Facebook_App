@@ -34,23 +34,6 @@ namespace BasicFacebookFeatures
             r_TextBoxDescription.Visible = false;
             r_TextBoxDescription.ReadOnly = true;
 
-            r_LabelNumberOfMembersTitle = new Label();
-            r_LabelNumberOfMembersTitle.AutoSize = true;
-            r_LabelNumberOfMembersTitle.Location = new System.Drawing.Point(610, 395);
-            r_LabelNumberOfMembersTitle.Name = "labelNumberOfMembersTitle";
-            r_LabelNumberOfMembersTitle.Size = new System.Drawing.Size(222, 26);
-            r_LabelNumberOfMembersTitle.TabIndex = 72;
-            r_LabelNumberOfMembersTitle.Text = "Number Of Members:";
-            r_LabelNumberOfMembersTitle.Visible = false;
-
-            // r_LabelNumberOfMembersValue = new Label();
-            // r_LabelNumberOfMembersValue.AutoSize = true;
-            // r_LabelNumberOfMembersValue.Location = new System.Drawing.Point(838, 395);
-            // r_LabelNumberOfMembersValue.Name = "labelNumberOfMembersValue";
-            // r_LabelNumberOfMembersValue.Size = new System.Drawing.Size(48, 26);
-            // r_LabelNumberOfMembersValue.TabIndex = 73;
-            // r_LabelNumberOfMembersValue.Text = "100";
-            // r_LabelNumberOfMembersValue.Visible = false;
         }
 
         public Label LabelDecription { get { return r_LabelDescription; } }
