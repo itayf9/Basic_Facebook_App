@@ -1,15 +1,17 @@
-﻿using FacebookWrapper;
-using FacebookWrapper.ObjectModel;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using FacebookWrapper;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
     public partial class LoginForm : Form
     {
-
         private const string k_AppID = "832742648143866";
-        private readonly string[] r_RequestedPermissions = {
+        private const string k_SessionLoginButtonText = "Continue With Facebook";
+
+        private readonly string[] r_RequestedPermissions =
+        {
             "email",
             "public_profile",
             "user_age_range",
@@ -23,8 +25,6 @@ namespace BasicFacebookFeatures
             "user_location",
             "user_photos",
             "user_posts",
-            "user_videos",
-            "groups_access_member_info",
         };
 
         private Session session;
@@ -34,13 +34,19 @@ namespace BasicFacebookFeatures
         {
             InitializeComponent();
             FacebookService.s_CollectionLimit = 25;
+
+            if (Session.IsSessionExist())
+            {
+                checkBoxRememberMe.Checked = true;
+                buttonLogin.Text = k_SessionLoginButtonText;
+            }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!session.IsRememberMeChecked)
+            if (!checkBoxRememberMe.Checked)
             {
-                session.DeleteSession();
+                Session.DeleteSession();
             }
 
             base.OnFormClosing(e);
@@ -51,7 +57,6 @@ namespace BasicFacebookFeatures
             if (Session.IsSessionExist())
             {
                 session = Session.LoadFromFile();
-                checkBoxRememberMe.Checked = true;
                 loginWithSession(session);
             }
             else
@@ -66,9 +71,9 @@ namespace BasicFacebookFeatures
             {
                 LoginResult loginResult = FacebookService.Connect(session.AccessToken);
                 m_LoggedInUser = loginResult.LoggedInUser;
-                this.Hide();
+                Hide();
                 new FormMain(m_LoggedInUser).ShowDialog();
-                this.Show();
+                Show();
             }
             catch (Exception)
             {
@@ -89,9 +94,11 @@ namespace BasicFacebookFeatures
 
                     if (checkBoxRememberMe.Checked)
                     {
-                        session = new Session();
-                        session.AccessToken = loginResult.AccessToken;
-                        session.IsRememberMeChecked = true;
+                        session = new Session
+                        {
+                            AccessToken = loginResult.AccessToken,
+                            IsRememberMeChecked = true,
+                        };
                         session.SaveToFile();
                     }
 

@@ -1,27 +1,43 @@
 ﻿using System;
-using System.Windows.Forms;
-using FacebookWrapper.ObjectModel;
-using FacebookWrapper;
-using System.Drawing;
-using System.Collections;
 using System.Collections.Generic;
+using System.Windows.Forms;
+using FacebookWrapper;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
     public partial class FormMain : Form
     {
+        private readonly List<IViewer> r_Viewers;
         private User m_LoggedInUser;
-        private List<IViewer> viewers;
 
         public FormMain(User i_LoggedInUser)
         {
             m_LoggedInUser = i_LoggedInUser;
-            viewers = new List<IViewer>();
+            r_Viewers = new List<IViewer>();
             InitializeComponent();
             FacebookService.s_CollectionLimit = 25;
             initProfileInformation();
-            viewers.Add(new AlbumViewer());
-            viewers.Add(new GroupViewer());
+            initViewers();
+        }
+
+        private void initViewers()
+        {
+            r_Viewers.Add(new AlbumViewer());
+            r_Viewers.Add(new GroupViewer());
+            r_Viewers.Add(new PostViewer());
+            r_Viewers.Add(new EventViewer());
+            r_Viewers.Add(new FriendViewer());
+            r_Viewers.Add(new PageViewer());
+            addAllViewersComponents(tabPageProfile);
+        }
+
+        private void addAllViewersComponents(TabPage tabPageProfile)
+        {
+            foreach (IViewer viewer in r_Viewers)
+            {
+                viewer.AddControls(tabPageProfile);
+            }
         }
 
         private void initProfileInformation()
@@ -65,6 +81,7 @@ namespace BasicFacebookFeatures
         private void buttonPosts_Click(object sender, EventArgs e)
         {
             switchShownContent("Posts");
+            listBoxContent.DisplayMember = "CreatedTime";
             fetchPosts();
         }
 
@@ -122,13 +139,12 @@ namespace BasicFacebookFeatures
 
                 if (listBoxContent.Items.Count == 0)
                 {
-                    throw new NoDataAvailableException();
+                    throw new NoDataAvailableException("Friends");
                 }
-
             }
             catch (Exception)
             {
-                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "friends"));
+                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
         }
 
@@ -138,23 +154,12 @@ namespace BasicFacebookFeatures
             {
                 foreach (Post post in m_LoggedInUser.Posts)
                 {
-                    /*if (post.Message != null)*/
-                    {
-                        listBoxContent.Items.Add(post);
-                    }
-                    /*else if (post.Caption != null)
-                    {
-                        listBoxContent.Items.Add(post);
-                    }
-                    else
-                    {
-                        listBoxContent.Items.Add(string.Format("[{0}]", post.));
-                    }*/
+                    listBoxContent.Items.Add(post);
                 }
 
                 if (listBoxContent.Items.Count == 0)
                 {
-                    throw new NoDataAvailableException();
+                    throw new NoDataAvailableException("Photos");
                 }
             }
             catch (NoDataAvailableException noDataAvailableException)
@@ -163,7 +168,7 @@ namespace BasicFacebookFeatures
             }
             catch (Exception)
             {
-                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Posts"));
+                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
         }
 
@@ -178,7 +183,7 @@ namespace BasicFacebookFeatures
 
                 if (listBoxContent.Items.Count == 0)
                 {
-                    throw new NoDataAvailableException();
+                    throw new NoDataAvailableException("Albums");
                 }
             }
             catch (NoDataAvailableException noDataAvailableException)
@@ -187,7 +192,7 @@ namespace BasicFacebookFeatures
             }
             catch (Exception)
             {
-                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Albums"));
+                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
         }
 
@@ -202,7 +207,7 @@ namespace BasicFacebookFeatures
 
                 if (listBoxContent.Items.Count == 0)
                 {
-                    throw new NoDataAvailableException();
+                    throw new NoDataAvailableException("Groups");
                 }
             }
             catch (NoDataAvailableException noDataAvailableException)
@@ -211,7 +216,7 @@ namespace BasicFacebookFeatures
             }
             catch (Exception)
             {
-                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "groups"));
+                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
         }
 
@@ -226,7 +231,7 @@ namespace BasicFacebookFeatures
 
                 if (listBoxContent.Items.Count == 0)
                 {
-                    throw new NoDataAvailableException();
+                    throw new NoDataAvailableException("Events");
                 }
             }
             catch (NoDataAvailableException noDataAvailableException)
@@ -235,7 +240,7 @@ namespace BasicFacebookFeatures
             }
             catch (Exception)
             {
-                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Events"));
+                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
         }
 
@@ -245,12 +250,12 @@ namespace BasicFacebookFeatures
             {
                 foreach (Page team in m_LoggedInUser.FavofriteTeams)
                 {
-                    listBoxContent.Items.Add(team.Name);
+                    listBoxContent.Items.Add(team);
                 }
 
                 if (listBoxContent.Items.Count == 0)
                 {
-                    throw new NoDataAvailableException();
+                    throw new NoDataAvailableException("Favofite Teams");
                 }
             }
             catch (NoDataAvailableException noDataAvailableException)
@@ -259,7 +264,7 @@ namespace BasicFacebookFeatures
             }
             catch (Exception)
             {
-                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Favorite Teams"));
+                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
         }
 
@@ -274,7 +279,7 @@ namespace BasicFacebookFeatures
 
                 if (listBoxContent.Items.Count == 0)
                 {
-                    throw new NoDataAvailableException();
+                    throw new NoDataAvailableException("Liked Pages");
                 }
             }
             catch (NoDataAvailableException noDataAvailableException)
@@ -283,7 +288,7 @@ namespace BasicFacebookFeatures
             }
             catch (Exception)
             {
-                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "liked pages"));
+                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
         }
 
@@ -297,7 +302,7 @@ namespace BasicFacebookFeatures
 
         private void hideAllViewers()
         {
-            foreach (IViewer viewer in viewers)
+            foreach (IViewer viewer in r_Viewers)
             {
                 viewer.HideControls();
             }
@@ -336,36 +341,39 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void loadEventDetails(Event selectedEvent)
+        private void loadEventDetails(Event i_SelectedEvent)
         {
-            pictureBoxSelectedContent.LoadAsync(selectedEvent.PictureNormalURL);
+            pictureBoxSelectedContent.LoadAsync(i_SelectedEvent.PictureNormalURL);
+            (r_Viewers[(int)eViewerIndex.EventViewerIndex] as EventViewer).loadEventDetailsToComponents(i_SelectedEvent);
         }
 
-        private void loadPageDetails(Page selectedPage)
+        private void loadPageDetails(Page i_SelectedPage)
         {
-            pictureBoxSelectedContent.LoadAsync(selectedPage.PictureNormalURL);
+            pictureBoxSelectedContent.LoadAsync(i_SelectedPage.PictureNormalURL);
+            (r_Viewers[(int)eViewerIndex.PageViewerInde] as PageViewer).loadPageDetailsToComponents(i_SelectedPage);
         }
 
-        private void loadFriendDetails(User selectedFriend)
+        private void loadFriendDetails(User i_SelectedFriend)
         {
-            pictureBoxSelectedContent.LoadAsync(selectedFriend.PictureNormalURL);
+            pictureBoxSelectedContent.LoadAsync(i_SelectedFriend.PictureNormalURL);
+            (r_Viewers[(int)eViewerIndex.FriendViewerIndex] as FriendViewer).loadFriendDetailsToComponents(i_SelectedFriend);
         }
 
-        private void loadPostDetails(Post selectedPost)
+        private void loadPostDetails(Post i_SelectedPost)
         {
-
+            (r_Viewers[(int)eViewerIndex.PostViewerIndex] as PostViewer).loadPostDetailsToComponents(i_SelectedPost);
         }
 
         private void loadGroupDetails(Group i_SelectedGroup)
         {
             pictureBoxSelectedContent.LoadAsync(i_SelectedGroup.PictureNormalURL);
-            (viewers[(int)eViewerIndex.GroupViewerIndex] as GroupViewer).LoadGroupDetailsToComponents(i_SelectedGroup);
+            (r_Viewers[(int)eViewerIndex.GroupViewerIndex] as GroupViewer).LoadGroupDetailsToComponents(i_SelectedGroup);
         }
 
         private void fetchAlbumPictures(Album i_SelectedAlbum)
         {
             pictureBoxSelectedContent.LoadAsync(i_SelectedAlbum.PictureAlbumURL);
-            (viewers[(int)eViewerIndex.AlbumViewerIndex] as AlbumViewer).LoadPicturesToListBox(i_SelectedAlbum);
+            (r_Viewers[(int)eViewerIndex.AlbumViewerIndex] as AlbumViewer).LoadPicturesToListBox(i_SelectedAlbum);
         }
     }
 }

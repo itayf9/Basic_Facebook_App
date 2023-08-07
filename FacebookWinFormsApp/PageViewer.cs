@@ -1,33 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class PageViewer
+    internal class PageViewer : IViewer
     {
         private readonly Label r_LabelDescription;
         private readonly TextBox r_TextBoxDescription;
 
         public PageViewer()
         {
-            r_LabelDescription = new Label();
-            r_LabelDescription.AutoSize = true;
-            r_LabelDescription.Location = new System.Drawing.Point(595, 178);
-            r_LabelDescription.Name = "labelDescription";
-            r_LabelDescription.Size = new System.Drawing.Size(127, 26);
-            r_LabelDescription.TabIndex = 70;
-            r_LabelDescription.Text = "Description:";
+            r_LabelDescription = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(595, 178),
+                Name = "labelDescription",
+                Size = new System.Drawing.Size(127, 26),
+                TabIndex = 70,
+                Text = "Description:",
+            };
 
-            r_TextBoxDescription = new TextBox();
-            r_TextBoxDescription.Location = new System.Drawing.Point(600, 211);
-            r_TextBoxDescription.Multiline = true;
-            r_TextBoxDescription.Name = "textBoxDescription";
-            r_TextBoxDescription.Size = new System.Drawing.Size(521, 135);
-            r_TextBoxDescription.TabIndex = 71;
+            r_TextBoxDescription = new TextBox
+            {
+                Location = new System.Drawing.Point(600, 211),
+                Multiline = true,
+                Name = "textBoxDescription",
+                Size = new System.Drawing.Size(521, 135),
+                TabIndex = 71,
+                ReadOnly = true,
+            };
+
+            setVisible(false);
+        }
+
+        public void loadPageDetailsToComponents(Page i_Page)
+        {
+            if (i_Page.Description != null)
+            {
+                r_TextBoxDescription.Text = i_Page.Description;
+            }
+            else
+            {
+                r_TextBoxDescription.Text = Constants.NO_DESCRIPTION;
+            }
+
+            setVisible(true);
+        }
+
+        public void AddControls(TabPage i_TabPage)
+        {
+            i_TabPage.Controls.Add(r_LabelDescription);
+            i_TabPage.Controls.Add(r_TextBoxDescription);
+        }
+
+        public void HideControls()
+        {
+            setVisible(false);
+        }
+
+        internal void setVisible(bool i_Visible)
+        {
+            r_LabelDescription.Visible = i_Visible;
+            r_TextBoxDescription.Visible = i_Visible;
         }
     }
 }

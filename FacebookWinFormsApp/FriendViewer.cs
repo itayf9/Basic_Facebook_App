@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class FriendViewer
+    internal class FriendViewer : IViewer
     {
         private readonly Label r_LabelBirthdayTitle;
         private readonly Label r_LabelBirthdayValue;
@@ -16,37 +12,76 @@ namespace BasicFacebookFeatures
 
         public FriendViewer()
         {
-            r_LabelBirthdayTitle = new Label();
-            r_LabelBirthdayTitle.AutoSize = true;
-            r_LabelBirthdayTitle.Location = new System.Drawing.Point(595, 178);
-            r_LabelBirthdayTitle.Name = "labelBirthdayTitle";
-            r_LabelBirthdayTitle.Size = new System.Drawing.Size(98, 26);
-            r_LabelBirthdayTitle.TabIndex = 70;
-            r_LabelBirthdayTitle.Text = "Birthday:";
+            r_LabelBirthdayTitle = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(595, 178),
+                Name = "labelBirthdayTitle",
+                Size = new System.Drawing.Size(98, 26),
+                TabIndex = 70,
+                Text = "Birthday:",
+            };
 
-            r_LabelBirthdayValue = new Label();
-            r_LabelBirthdayValue.AutoSize = true;
-            r_LabelBirthdayValue.Location = new System.Drawing.Point(699, 178);
-            r_LabelBirthdayValue.Name = "labelBirthdayValue";
-            r_LabelBirthdayValue.Size = new System.Drawing.Size(96, 26);
-            r_LabelBirthdayValue.TabIndex = 71;
-            r_LabelBirthdayValue.Text = "0/0/0001";
+            r_LabelBirthdayValue = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(699, 178),
+                Name = "labelBirthdayValue",
+                Size = new System.Drawing.Size(96, 26),
+                TabIndex = 71,
+                Text = "0/0/0001",
+            };
 
-            r_LabelGenderTitle = new Label();
-            r_LabelGenderTitle.AutoSize = true;
-            r_LabelGenderTitle.Location = new System.Drawing.Point(595, 214);
-            r_LabelGenderTitle.Name = "labelGenderTitle";
-            r_LabelGenderTitle.Size = new System.Drawing.Size(90, 26);
-            r_LabelGenderTitle.TabIndex = 72;
-            r_LabelGenderTitle.Text = "Gender:";
+            r_LabelGenderTitle = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(595, 214),
+                Name = "labelGenderTitle",
+                Size = new System.Drawing.Size(90, 26),
+                TabIndex = 72,
+                Text = "Gender:",
+            };
 
-            r_LabelGenderValue = new Label();
-            r_LabelGenderValue.AutoSize = true;
-            r_LabelGenderValue.Location = new System.Drawing.Point(699, 214);
-            r_LabelGenderValue.Name = "labelGenderValue";
-            r_LabelGenderValue.Size = new System.Drawing.Size(60, 26);
-            r_LabelGenderValue.TabIndex = 73;
-            r_LabelGenderValue.Text = "male";
+            r_LabelGenderValue = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(699, 214),
+                Name = "labelGenderValue",
+                Size = new System.Drawing.Size(60, 26),
+                TabIndex = 73,
+                Text = "male",
+            };
+
+            setVisible(false);
+        }
+
+        public void loadFriendDetailsToComponents(User i_Friend)
+        {
+            r_LabelBirthdayValue.Text = i_Friend.Birthday.ToString();
+            r_LabelGenderValue.Text = i_Friend.Gender.ToString();
+
+            setVisible(true);
+        }
+
+        public void AddControls(TabPage i_TabPage)
+        {
+            i_TabPage.Controls.Add(r_LabelGenderValue);
+            i_TabPage.Controls.Add(r_LabelGenderTitle);
+            i_TabPage.Controls.Add(r_LabelBirthdayValue);
+            i_TabPage.Controls.Add(r_LabelBirthdayTitle);
+        }
+
+        public void HideControls()
+        {
+            setVisible(false);
+        }
+
+        internal void setVisible(bool i_Visible)
+        {
+            r_LabelGenderValue.Visible = i_Visible;
+            r_LabelGenderTitle.Visible = i_Visible;
+            r_LabelBirthdayValue.Visible = i_Visible;
+            r_LabelBirthdayTitle.Visible = i_Visible;
         }
     }
 }

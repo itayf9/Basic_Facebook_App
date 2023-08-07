@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
@@ -15,46 +11,39 @@ namespace BasicFacebookFeatures
 
         public AlbumViewer()
         {
-            r_ListBoxPictures = new ListBox();
-            r_ListBoxPictures.FormattingEnabled = true;
-            r_ListBoxPictures.ItemHeight = 26;
-            r_ListBoxPictures.Location = new System.Drawing.Point(595, 178);
-            r_ListBoxPictures.Name = "listBoxPictures";
-            r_ListBoxPictures.Size = new System.Drawing.Size(205, 342);
-            r_ListBoxPictures.TabIndex = 70;
+            r_ListBoxPictures = new ListBox
+            {
+                FormattingEnabled = true,
+                ItemHeight = 26,
+                Location = new System.Drawing.Point(595, 178),
+                Name = "listBoxPictures",
+                Size = new System.Drawing.Size(205, 342),
+                TabIndex = 70,
+            };
             r_ListBoxPictures.SelectedIndexChanged += new EventHandler(listBoxPictures_SelectedIndexChanged);
             r_ListBoxPictures.DisplayMember = "CreatedTime";
-            r_ListBoxPictures.Visible = false;
 
-            r_PictureBoxSelectedPicture = new PictureBox();
-            r_PictureBoxSelectedPicture.Location = new System.Drawing.Point(806, 178);
-            r_PictureBoxSelectedPicture.Name = "pictureBoxSelectedPicture";
-            r_PictureBoxSelectedPicture.Size = new System.Drawing.Size(324, 301);
-            r_PictureBoxSelectedPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            r_PictureBoxSelectedPicture.TabIndex = 71;
-            r_PictureBoxSelectedPicture.TabStop = false;
-            r_PictureBoxSelectedPicture.Visible = false;
+            r_PictureBoxSelectedPicture = new PictureBox
+            {
+                Location = new System.Drawing.Point(806, 178),
+                Name = "pictureBoxSelectedPicture",
+                Size = new System.Drawing.Size(324, 301),
+                SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage,
+                TabIndex = 71,
+                TabStop = false,
+            };
+
+            setVisible(false);
         }
 
         public ListBox ListBoxPictures
-        { 
+        {
             get { return r_ListBoxPictures; }
         }
 
-        public PictureBox PictureBoxSelectedPicture 
-        { 
+        public PictureBox PictureBoxSelectedPicture
+        {
             get { return r_PictureBoxSelectedPicture; }
-        }
-
-        public void setVisible(bool i_Visible)
-        {
-            r_ListBoxPictures.Visible = i_Visible;
-            r_PictureBoxSelectedPicture.Visible = i_Visible;
-        }
-
-        private void listBoxPictures_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            PictureBoxSelectedPicture.Image = ((sender as ListBox).SelectedItem as Photo).ImageNormal;
         }
 
         public void LoadPicturesToListBox(Album i_SelectedAlbum)
@@ -71,14 +60,18 @@ namespace BasicFacebookFeatures
 
                 if (r_ListBoxPictures.Items.Count == 0)
                 {
-                    throw new NoDataAvailableException();
+                    throw new NoDataAvailableException("Photos");
                 }
 
                 setVisible(true);
             }
+            catch (NoDataAvailableException noDataAvailableException)
+            {
+                MessageBox.Show(noDataAvailableException.Message);
+            }
             catch (Exception)
             {
-                MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Photos"));
+                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
         }
 
@@ -91,6 +84,17 @@ namespace BasicFacebookFeatures
         public void HideControls()
         {
             setVisible(false);
+        }
+
+        internal void setVisible(bool i_Visible)
+        {
+            r_ListBoxPictures.Visible = i_Visible;
+            r_PictureBoxSelectedPicture.Visible = i_Visible;
+        }
+
+        private void listBoxPictures_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PictureBoxSelectedPicture.Image = ((sender as ListBox).SelectedItem as Photo).ImageNormal;
         }
     }
 }

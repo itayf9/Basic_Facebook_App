@@ -1,10 +1,5 @@
-﻿using FacebookWrapper.ObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
@@ -15,31 +10,38 @@ namespace BasicFacebookFeatures
 
         public GroupViewer()
         {
-            r_LabelDescription = new Label();
-            r_LabelDescription.AutoSize = true;
-            r_LabelDescription.Location = new System.Drawing.Point(610, 178);
-            r_LabelDescription.Name = "labelDesctiption";
-            r_LabelDescription.Size = new System.Drawing.Size(193, 26);
-            r_LabelDescription.TabIndex = 70;
-            r_LabelDescription.Text = "Group Description:";
-            r_LabelDescription.Visible = false;
+            r_LabelDescription = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(610, 178),
+                Name = "labelDesctiption",
+                Size = new System.Drawing.Size(193, 26),
+                TabIndex = 70,
+                Text = "Group Description:",
+            };
 
+            r_TextBoxDescription = new TextBox
+            {
+                Location = new System.Drawing.Point(615, 219),
+                Multiline = true,
+                Name = "textBoxDescription",
+                Size = new System.Drawing.Size(308, 152),
+                TabIndex = 71,
+                ReadOnly = true,
+            };
 
-            r_TextBoxDescription = new TextBox();
-            r_TextBoxDescription.Location = new System.Drawing.Point(615, 219);
-            r_TextBoxDescription.Multiline = true;
-            r_TextBoxDescription.Name = "textBoxDescription";
-            r_TextBoxDescription.Size = new System.Drawing.Size(308, 152);
-            r_TextBoxDescription.TabIndex = 71;
-            r_TextBoxDescription.Visible = false;
-            r_TextBoxDescription.ReadOnly = true;
-
+            setVisible(false);
         }
 
-        public Label LabelDecription { get { return r_LabelDescription; } }
+        public Label LabelDecription
+        {
+            get { return r_LabelDescription; }
+        }
 
-        public TextBox TextBoxDescription {  get { return r_TextBoxDescription; } }
-
+        public TextBox TextBoxDescription
+        {
+            get { return r_TextBoxDescription; }
+        }
 
         public void AddControls(TabPage i_TabPage)
         {

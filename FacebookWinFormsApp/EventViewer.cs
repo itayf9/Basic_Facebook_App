@@ -1,13 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class EventViewer
+    internal class EventViewer : IViewer
     {
+        public void AddControls(TabPage i_TabPage)
+        {
+        }
 
+        public void HideControls()
+        {
+        }
+
+        internal void loadEventDetailsToComponents(Event i_SelectedEvent)
+        {
+        }
     }
 }

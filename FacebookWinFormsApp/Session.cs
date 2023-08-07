@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Xml.Serialization;
 
 namespace BasicFacebookFeatures
@@ -33,24 +32,24 @@ namespace BasicFacebookFeatures
 
         public void SaveToFile()
         {
-            Stream stream = null;
+            FileMode fileMode;
             if (File.Exists(k_SessionFileName))
             {
-                stream = new FileStream(k_SessionFileName, FileMode.Truncate);
+                fileMode = FileMode.Truncate;
             }
             else
             {
-                stream = new FileStream(k_SessionFileName, FileMode.CreateNew);
+                fileMode = FileMode.CreateNew;
             }
 
-            using (stream)
+            using (Stream stream = new FileStream(k_SessionFileName, fileMode))
             {
                 XmlSerializer serializer = new XmlSerializer(this.GetType());
                 serializer.Serialize(stream, this);
             }
         }
 
-        internal void DeleteSession()
+        internal static void DeleteSession()
         {
             File.Delete(k_SessionFileName);
         }

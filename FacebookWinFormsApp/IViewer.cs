@@ -10,6 +10,7 @@ namespace BasicFacebookFeatures
     public interface IViewer
     {
         void AddControls(TabPage i_TabPage);
+
         void HideControls();
     }
 }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class PostViewer
+    internal class PostViewer : IViewer
     {
         private readonly Label r_LabelCaption;
         private readonly TextBox r_TextBoxCaption;
@@ -15,28 +11,70 @@ namespace BasicFacebookFeatures
 
         public PostViewer()
         {
-            r_LabelCaption = new Label();
-            r_LabelCaption.AutoSize = true;
-            r_LabelCaption.Location = new System.Drawing.Point(596, 178);
-            r_LabelCaption.Name = "labelCaption";
-            r_LabelCaption.Size = new System.Drawing.Size(93, 26);
-            r_LabelCaption.TabIndex = 70;
-            r_LabelCaption.Text = "Caption:";
+            r_LabelCaption = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(596, 178),
+                Name = "labelCaption",
+                Size = new System.Drawing.Size(93, 26),
+                TabIndex = 70,
+                Text = "Caption:",
+            };
 
-            r_TextBoxCaption = new TextBox();
-            r_TextBoxCaption.Location = new System.Drawing.Point(601, 208);
-            r_TextBoxCaption.Multiline = true;
-            r_TextBoxCaption.Name = "textBoxCaption";
-            r_TextBoxCaption.Size = new System.Drawing.Size(520, 88);
-            r_TextBoxCaption.TabIndex = 71;
+            r_TextBoxCaption = new TextBox
+            {
+                Location = new System.Drawing.Point(601, 208),
+                Multiline = true,
+                Name = "textBoxCaption",
+                Size = new System.Drawing.Size(520, 88),
+                TabIndex = 71,
+                ReadOnly = true,
+            };
 
-            r_PictureBoxPost = new PictureBox();
-            r_PictureBoxPost.Location = new System.Drawing.Point(601, 304);
-            r_PictureBoxPost.Name = "pictureBoxPost";
-            r_PictureBoxPost.Size = new System.Drawing.Size(520, 243);
-            r_PictureBoxPost.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            r_PictureBoxPost.TabIndex = 72;
-            r_PictureBoxPost.TabStop = false;
+            r_PictureBoxPost = new PictureBox
+            {
+                Location = new System.Drawing.Point(601, 304),
+                Name = "pictureBoxPost",
+                Size = new System.Drawing.Size(520, 243),
+                SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage,
+                TabIndex = 72,
+                TabStop = false,
+            };
+
+            setVisible(false);
+        }
+
+        public void loadPostDetailsToComponents(Post i_Post)
+        {
+            r_PictureBoxPost.Image = null;
+
+            r_TextBoxCaption.Text = i_Post.Caption;
+
+            if (i_Post.PictureURL != null)
+            {
+                r_PictureBoxPost.LoadAsync(i_Post.PictureURL);
+            }
+
+            setVisible(true);
+        }
+
+        public void AddControls(TabPage i_TabPage)
+        {
+            i_TabPage.Controls.Add(r_LabelCaption);
+            i_TabPage.Controls.Add(r_TextBoxCaption);
+            i_TabPage.Controls.Add(r_PictureBoxPost);
+        }
+
+        public void HideControls()
+        {
+            setVisible(false);
+        }
+
+        internal void setVisible(bool i_Visible)
+        {
+            r_LabelCaption.Visible = i_Visible;
+            r_TextBoxCaption.Visible = i_Visible;
+            r_PictureBoxPost.Visible = i_Visible;
         }
     }
 }
