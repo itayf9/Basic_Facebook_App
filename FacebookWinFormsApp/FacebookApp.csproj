@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="AlbumViewer.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="EventViewer.cs" />
     <Compile Include="eViewerIndex.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -104,6 +105,7 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FriendViewer.cs" />
     <Compile Include="GroupViewer.cs" />
     <Compile Include="IViewer.cs" />
     <Compile Include="LoginForm.cs">
@@ -113,6 +115,8 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NoDataAvailableException.cs" />
+    <Compile Include="PageViewer.cs" />
+    <Compile Include="PostViewer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session.cs" />

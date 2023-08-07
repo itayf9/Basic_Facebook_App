@@ -53,6 +53,8 @@
             this.buttonLikedPages = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();
             this.tabPageFeatures = new System.Windows.Forms.TabPage();
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.printDialog2 = new System.Windows.Forms.PrintDialog();
             this.tabControlApp.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedContent)).BeginInit();
@@ -318,6 +320,14 @@
             this.tabPageFeatures.Text = "Extra Features";
             this.tabPageFeatures.UseVisualStyleBackColor = true;
             // 
+            // printDialog1
+            // 
+            this.printDialog1.UseEXDialog = true;
+            // 
+            // printDialog2
+            // 
+            this.printDialog2.UseEXDialog = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
@@ -365,6 +375,8 @@
         private System.Windows.Forms.Button buttonFriends;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelSeparator;
+        private System.Windows.Forms.PrintDialog printDialog1;
+        private System.Windows.Forms.PrintDialog printDialog2;
     }
 }
 

@@ -33,6 +33,7 @@ namespace BasicFacebookFeatures
             r_TextBoxDescription.TabIndex = 71;
             r_TextBoxDescription.Visible = false;
             r_TextBoxDescription.ReadOnly = true;
+
         }
 
         public Label LabelDecription { get { return r_LabelDescription; } }
