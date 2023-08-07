@@ -104,6 +104,7 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FriendViewer.cs" />
     <Compile Include="GroupViewer.cs" />
     <Compile Include="IViewer.cs" />
     <Compile Include="LoginForm.cs">

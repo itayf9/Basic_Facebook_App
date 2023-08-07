@@ -315,6 +315,7 @@ namespace BasicFacebookFeatures
 
                 case User selectedFriend:
                     pictureBoxSelectedContent.LoadAsync(selectedFriend.PictureNormalURL);
+                    loadFriendDetails(selectedFriend);
                     break;
 
                 case Album selectedAlbum:
@@ -334,6 +335,10 @@ namespace BasicFacebookFeatures
                     pictureBoxSelectedContent.LoadAsync(selectedPage.PictureNormalURL);
                     break;
             }
+        }
+
+        private void loadFriendDetails(User selectedFriend)
+        {
         }
 
         private void loadPostDetails(Post selectedPost)

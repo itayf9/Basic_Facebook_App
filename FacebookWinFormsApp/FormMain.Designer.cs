@@ -53,17 +53,13 @@
             this.buttonLikedPages = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();
             this.tabPageFeatures = new System.Windows.Forms.TabPage();
-            this.labelCaption = new System.Windows.Forms.Label();
-            this.textBoxCaption = new System.Windows.Forms.TextBox();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
-            this.pictureBoxPost = new System.Windows.Forms.PictureBox();
             this.tabControlApp.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPost)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogout
@@ -92,9 +88,6 @@
             // 
             // tabPageProfile
             // 
-            this.tabPageProfile.Controls.Add(this.pictureBoxPost);
-            this.tabPageProfile.Controls.Add(this.textBoxCaption);
-            this.tabPageProfile.Controls.Add(this.labelCaption);
             this.tabPageProfile.Controls.Add(this.pictureBoxSelectedContent);
             this.tabPageProfile.Controls.Add(this.panel1);
             this.tabPageProfile.Controls.Add(this.panelSeparator);
@@ -327,23 +320,6 @@
             this.tabPageFeatures.Text = "Extra Features";
             this.tabPageFeatures.UseVisualStyleBackColor = true;
             // 
-            // labelCaption
-            // 
-            this.labelCaption.AutoSize = true;
-            this.labelCaption.Location = new System.Drawing.Point(596, 178);
-            this.labelCaption.Name = "labelCaption";
-            this.labelCaption.Size = new System.Drawing.Size(93, 26);
-            this.labelCaption.TabIndex = 70;
-            this.labelCaption.Text = "Caption:";
-            // 
-            // textBoxCaption
-            // 
-            this.textBoxCaption.Location = new System.Drawing.Point(601, 208);
-            this.textBoxCaption.Multiline = true;
-            this.textBoxCaption.Name = "textBoxCaption";
-            this.textBoxCaption.Size = new System.Drawing.Size(520, 88);
-            this.textBoxCaption.TabIndex = 71;
-            // 
             // printDialog1
             // 
             this.printDialog1.UseEXDialog = true;
@@ -351,15 +327,6 @@
             // printDialog2
             // 
             this.printDialog2.UseEXDialog = true;
-            // 
-            // pictureBoxPost
-            // 
-            this.pictureBoxPost.Location = new System.Drawing.Point(601, 304);
-            this.pictureBoxPost.Name = "pictureBoxPost";
-            this.pictureBoxPost.Size = new System.Drawing.Size(520, 243);
-            this.pictureBoxPost.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPost.TabIndex = 72;
-            this.pictureBoxPost.TabStop = false;
             // 
             // FormMain
             // 
@@ -379,7 +346,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedContent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPost)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -409,9 +375,6 @@
         private System.Windows.Forms.Button buttonFriends;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelSeparator;
-        private System.Windows.Forms.PictureBox pictureBoxPost;
-        private System.Windows.Forms.TextBox textBoxCaption;
-        private System.Windows.Forms.Label labelCaption;
         private System.Windows.Forms.PrintDialog printDialog1;
         private System.Windows.Forms.PrintDialog printDialog2;
     }
