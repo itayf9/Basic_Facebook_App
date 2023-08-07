@@ -12,7 +12,6 @@ namespace BasicFacebookFeatures
     {
         private readonly ListBox r_ListBoxPictures;
         private readonly PictureBox r_PictureBoxSelectedPicture;
-        private Album m_Album;
 
         public AlbumViewer()
         {
@@ -47,13 +46,6 @@ namespace BasicFacebookFeatures
             get { return r_PictureBoxSelectedPicture; }
         }
 
-        public Album Album
-        { 
-            set { m_Album = value;
-                loadPicturesToListBox();
-            } 
-        }
-
         public void setVisible(bool i_Visible)
         {
             r_ListBoxPictures.Visible = i_Visible;
@@ -65,7 +57,7 @@ namespace BasicFacebookFeatures
             PictureBoxSelectedPicture.Image = ((sender as ListBox).SelectedItem as Photo).ImageNormal;
         }
 
-        private void loadPicturesToListBox()
+        public void LoadPicturesToListBox()
         {
             r_ListBoxPictures.Items.Clear();
             r_PictureBoxSelectedPicture.Image = null;
@@ -87,7 +79,6 @@ namespace BasicFacebookFeatures
                 MessageBox.Show(string.Format(Constants.NO_ITEMS_TO_RETREIVE_MESSAGE, "Photos"));
             }
         }
-
 
     }
 }
