@@ -1,13 +1,6 @@
 ﻿using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BasicFacebookFeatures
@@ -31,8 +24,10 @@ namespace BasicFacebookFeatures
             "user_photos",
             "user_posts",
             "user_videos",
-            "groups_access_member_info"
+            "groups_access_member_info",
         };
+
+        private Session session;
         private User m_LoggedInUser;
 
         public LoginForm()
@@ -41,38 +36,83 @@ namespace BasicFacebookFeatures
             FacebookService.s_CollectionLimit = 25;
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (!session.IsRememberMeChecked)
+            {
+                session.DeleteSession();
+            }
+
+            base.OnFormClosing(e);
+        }
+
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText("design.patterns");
-
-            if (m_LoggedInUser == null)
+            if (Session.IsSessionExist())
+            {
+                session = Session.LoadFromFile();
+                checkBoxRememberMe.Checked = true;
+                loginWithSession(session);
+            }
+            else
             {
                 login();
             }
         }
 
-        private void login()
+        private void loginWithSession(Session session)
         {
-            LoginResult loginResult = FacebookService.Login(k_AppID, r_RequestedPermissions);
-
-            if (!string.IsNullOrEmpty(loginResult.AccessToken))
+            try
             {
-                labelError.Visible = false;
+                LoginResult loginResult = FacebookService.Connect(session.AccessToken);
                 m_LoggedInUser = loginResult.LoggedInUser;
                 this.Hide();
                 new FormMain(m_LoggedInUser).ShowDialog();
                 this.Show();
-                m_LoggedInUser = null;
             }
-            else if (loginResult.ErrorMessage.Equals(""))
+            catch (Exception)
             {
-                labelError.Visible = true;
-                labelError.Text = "Login Error !! Please Try Again.";
+                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
-            else 
+        }
+
+        private void login()
+        {
+            try
             {
-                labelError.Enabled = true;
-                labelError.Text = loginResult.ErrorMessage;
+                LoginResult loginResult = FacebookService.Login(k_AppID, r_RequestedPermissions);
+
+                if (!string.IsNullOrEmpty(loginResult.AccessToken))
+                {
+                    labelError.Visible = false;
+                    m_LoggedInUser = loginResult.LoggedInUser;
+
+                    if (checkBoxRememberMe.Checked)
+                    {
+                        session = new Session();
+                        session.AccessToken = loginResult.AccessToken;
+                        session.IsRememberMeChecked = true;
+                        session.SaveToFile();
+                    }
+
+                    this.Hide();
+                    new FormMain(m_LoggedInUser).ShowDialog();
+                    this.Show();
+                }
+                else if (loginResult.ErrorMessage.Equals(string.Empty))
+                {
+                    labelError.Visible = true;
+                    labelError.Text = "Login Error !! Please Try Again.";
+                }
+                else
+                {
+                    labelError.Enabled = true;
+                    labelError.Text = loginResult.ErrorMessage;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
             }
         }
     }

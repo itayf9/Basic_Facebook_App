@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelError = new System.Windows.Forms.Label();
+            this.checkBoxRememberMe = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // buttonLogin
@@ -48,18 +49,29 @@
             // 
             this.labelError.AutoSize = true;
             this.labelError.ForeColor = System.Drawing.Color.Firebrick;
-            this.labelError.Location = new System.Drawing.Point(34, 131);
+            this.labelError.Location = new System.Drawing.Point(34, 142);
             this.labelError.Name = "labelError";
             this.labelError.Size = new System.Drawing.Size(29, 13);
             this.labelError.TabIndex = 1;
             this.labelError.Text = "Error";
             this.labelError.Visible = false;
             // 
+            // checkBoxRememberMe
+            // 
+            this.checkBoxRememberMe.AutoSize = true;
+            this.checkBoxRememberMe.Location = new System.Drawing.Point(37, 113);
+            this.checkBoxRememberMe.Name = "checkBoxRememberMe";
+            this.checkBoxRememberMe.Size = new System.Drawing.Size(94, 17);
+            this.checkBoxRememberMe.TabIndex = 2;
+            this.checkBoxRememberMe.Text = "Remember me";
+            this.checkBoxRememberMe.UseVisualStyleBackColor = true;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 181);
+            this.Controls.Add(this.checkBoxRememberMe);
             this.Controls.Add(this.labelError);
             this.Controls.Add(this.buttonLogin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -76,5 +88,6 @@
 
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.CheckBox checkBoxRememberMe;
     }
 }
