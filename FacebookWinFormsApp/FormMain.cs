@@ -349,7 +349,7 @@ namespace BasicFacebookFeatures
         private void fetchAlbumPictures(Album i_SelectedAlbum)
         {
             pictureBoxSelectedContent.LoadAsync(i_SelectedAlbum.PictureAlbumURL);
-            m_AlbumViewer.LoadPicturesToListBox();
+            m_AlbumViewer.LoadPicturesToListBox(i_SelectedAlbum);
             m_AlbumViewer.setVisible(true);
         }
     }

@@ -57,14 +57,14 @@ namespace BasicFacebookFeatures
             PictureBoxSelectedPicture.Image = ((sender as ListBox).SelectedItem as Photo).ImageNormal;
         }
 
-        public void LoadPicturesToListBox()
+        public void LoadPicturesToListBox(Album i_SelectedAlbum)
         {
             r_ListBoxPictures.Items.Clear();
             r_PictureBoxSelectedPicture.Image = null;
 
             try
             {
-                foreach (Photo photo in m_Album.Photos)
+                foreach (Photo photo in i_SelectedAlbum.Photos)
                 {
                     r_ListBoxPictures.Items.Add(photo);
                 }
