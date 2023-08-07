@@ -30,7 +30,8 @@ namespace BasicFacebookFeatures
             "user_location",
             "user_photos",
             "user_posts",
-            "user_videos" 
+            "user_videos",
+            "groups_access_member_info"
         };
         private User m_LoggedInUser;
 

@@ -3,30 +3,25 @@ using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 using System.Drawing;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace BasicFacebookFeatures
 {
     public partial class FormMain : Form
     {
         private User m_LoggedInUser;
-        private AlbumViewer m_AlbumViewer;
-        private GroupViewer m_GroupViewer;
+        private List<IViewer> viewers;
 
         public FormMain(User i_LoggedInUser)
         {
             m_LoggedInUser = i_LoggedInUser;
+            viewers = new List<IViewer>();
             InitializeComponent();
             FacebookService.s_CollectionLimit = 25;
             initProfileInformation();
-            m_AlbumViewer = new AlbumViewer();
-            tabPageProfile.Controls.Add(m_AlbumViewer.ListBoxPictures);
-            tabPageProfile.Controls.Add(m_AlbumViewer.PictureBoxSelectedPicture);
-            m_GroupViewer = new GroupViewer();
-            tabPageProfile.Controls.Add(m_GroupViewer.LabelDecription);
-            tabPageProfile.Controls.Add(m_GroupViewer.TextBoxDescription);
-            tabPageProfile.Controls.Add(m_GroupViewer.LabelNumberOfMembersTitle);
-            tabPageProfile.Controls.Add(m_GroupViewer.LabelNumberOfMembersValue);
-
+            viewers.Add(new AlbumViewer());
+            viewers.Add(new GroupViewer());
         }
 
         private void initProfileInformation()
@@ -302,7 +297,10 @@ namespace BasicFacebookFeatures
 
         private void hideAllViewers()
         {
-            m_AlbumViewer.setVisible(false);
+            foreach (IViewer viewer in viewers) 
+            {
+                viewer.HideControls();
+            }
         }
 
         private void listBoxContent_SelectedIndexChanged(object sender, EventArgs e)
@@ -341,16 +339,13 @@ namespace BasicFacebookFeatures
         private void loadGroupDetails(Group i_SelectedGroup)
         {
             pictureBoxSelectedContent.LoadAsync(i_SelectedGroup.PictureNormalURL);
-            m_GroupViewer.LoadGroupDetailsToComponents(i_SelectedGroup);
-            m_GroupViewer.setVisible(true);
-
+            (viewers[(int)eViewerIndex.GroupViewerIndex] as GroupViewer).LoadGroupDetailsToComponents(i_SelectedGroup);
         }
 
         private void fetchAlbumPictures(Album i_SelectedAlbum)
         {
             pictureBoxSelectedContent.LoadAsync(i_SelectedAlbum.PictureAlbumURL);
-            m_AlbumViewer.LoadPicturesToListBox(i_SelectedAlbum);
-            m_AlbumViewer.setVisible(true);
+            (viewers[(int)eViewerIndex.AlbumViewerIndex] as AlbumViewer).LoadPicturesToListBox(i_SelectedAlbum);
         }
     }
 }

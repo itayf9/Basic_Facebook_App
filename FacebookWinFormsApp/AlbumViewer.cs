@@ -8,7 +8,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class AlbumViewer
+    internal class AlbumViewer : IViewer
     {
         private readonly ListBox r_ListBoxPictures;
         private readonly PictureBox r_PictureBoxSelectedPicture;
@@ -73,6 +73,8 @@ namespace BasicFacebookFeatures
                 {
                     throw new NoDataAvailableException();
                 }
+
+                setVisible(true);
             }
             catch (Exception)
             {
@@ -80,5 +82,15 @@ namespace BasicFacebookFeatures
             }
         }
 
+        public void AddControls(TabPage i_TabPage)
+        {
+            i_TabPage.Controls.Add(r_ListBoxPictures);
+            i_TabPage.Controls.Add(r_PictureBoxSelectedPicture);
+        }
+
+        public void HideControls()
+        {
+            setVisible(false);
+        }
     }
 }

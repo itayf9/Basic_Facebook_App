@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="AlbumViewer.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="eViewerIndex.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +105,7 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="GroupViewer.cs" />
+    <Compile Include="IViewer.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
