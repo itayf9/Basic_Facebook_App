@@ -46,6 +46,20 @@ namespace BasicFacebookFeatures
             setLoginFormComponents();
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (m_Session != null && !checkBoxRememberMe.Checked)
+            {
+                Session.DeleteSession();
+            }
+            else if (m_Session != null)
+            {
+                m_Session.SaveToFile();
+            }
+
+            base.OnFormClosing(e);
+        }
+
         private void setLoginFormComponents()
         {
             if (m_Session != null)
@@ -59,20 +73,6 @@ namespace BasicFacebookFeatures
                 checkBoxRememberMe.Checked = false;
                 buttonLogin.Text = k_DefaultLoginButtonText;
             }
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            if (m_Session != null && !checkBoxRememberMe.Checked)
-            {
-                Session.DeleteSession();
-            }
-            else if (m_Session != null)
-            {
-                m_Session.SaveToFile();
-            }
-
-            base.OnFormClosing(e);
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -95,7 +95,6 @@ namespace BasicFacebookFeatures
                 m_LoggedInUser = loginResult.LoggedInUser;
 
                 handleAppearenceOfLoginAndMainDialogs();
-
             }
             catch (Exception)
             {
@@ -122,7 +121,6 @@ namespace BasicFacebookFeatures
                     m_Session.SaveToFile();
 
                     handleAppearenceOfLoginAndMainDialogs();
-
                 }
                 else if (loginResult.ErrorMessage.Equals(string.Empty))
                 {

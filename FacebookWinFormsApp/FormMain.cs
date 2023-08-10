@@ -9,11 +9,11 @@ namespace BasicFacebookFeatures
     public partial class FormMain : Form
     {
         private readonly List<IViewer> r_Viewers;
-        private User m_LoggedInUser;
+        private readonly User r_LoggedInUser;
 
         public FormMain(User i_LoggedInUser)
         {
-            m_LoggedInUser = i_LoggedInUser;
+            r_LoggedInUser = i_LoggedInUser;
             r_Viewers = new List<IViewer>();
             InitializeComponent();
             FacebookService.s_CollectionLimit = 25;
@@ -43,19 +43,19 @@ namespace BasicFacebookFeatures
         private void initProfileInformation()
         {
             buttonLogout.Enabled = true;
-            labelName.Text = m_LoggedInUser.Name;
-            pictureBoxProfile.ImageLocation = m_LoggedInUser.PictureNormalURL;
-            labelBirthDay.Text = m_LoggedInUser.Birthday;
+            labelName.Text = r_LoggedInUser.Name;
+            pictureBoxProfile.ImageLocation = r_LoggedInUser.PictureNormalURL;
+            labelBirthDay.Text = r_LoggedInUser.Birthday;
 
             DateTime userBirthDay = DateTime.ParseExact(
-                m_LoggedInUser.Birthday,
+                r_LoggedInUser.Birthday,
                 "MM/dd/yyyy",
                 System.Globalization.CultureInfo.InvariantCulture);
 
             labelAge.Text = CalculateAge(userBirthDay);
-            labelEmail.Text = m_LoggedInUser.Email;
-            labelCity.Text = m_LoggedInUser.Location.Name;
-            labelGender.Text = m_LoggedInUser.Gender.ToString();
+            labelEmail.Text = r_LoggedInUser.Email;
+            labelCity.Text = r_LoggedInUser.Location.Name;
+            labelGender.Text = r_LoggedInUser.Gender.ToString();
         }
 
         private string CalculateAge(DateTime i_BirthDay)
@@ -137,7 +137,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                foreach (User friend in m_LoggedInUser.Friends)
+                foreach (User friend in r_LoggedInUser.Friends)
                 {
                     listBoxContent.Items.Add(friend);
                 }
@@ -157,7 +157,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                foreach (Post post in m_LoggedInUser.Posts)
+                foreach (Post post in r_LoggedInUser.Posts)
                 {
                     listBoxContent.Items.Add(post);
                 }
@@ -181,7 +181,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                foreach (Album album in m_LoggedInUser.Albums)
+                foreach (Album album in r_LoggedInUser.Albums)
                 {
                     listBoxContent.Items.Add(album);
                 }
@@ -205,7 +205,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                foreach (Group group in m_LoggedInUser.Groups)
+                foreach (Group group in r_LoggedInUser.Groups)
                 {
                     listBoxContent.Items.Add(group);
                 }
@@ -229,7 +229,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                foreach (Event fbEvent in m_LoggedInUser.Events)
+                foreach (Event fbEvent in r_LoggedInUser.Events)
                 {
                     listBoxContent.Items.Add(fbEvent.Name);
                 }
@@ -253,7 +253,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                foreach (Page team in m_LoggedInUser.FavofriteTeams)
+                foreach (Page team in r_LoggedInUser.FavofriteTeams)
                 {
                     listBoxContent.Items.Add(team);
                 }
@@ -277,7 +277,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                foreach (Page page in m_LoggedInUser.LikedPages)
+                foreach (Page page in r_LoggedInUser.LikedPages)
                 {
                     listBoxContent.Items.Add(page);
                 }
