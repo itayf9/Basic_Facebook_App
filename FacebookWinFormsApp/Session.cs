@@ -7,11 +7,11 @@ namespace BasicFacebookFeatures
     {
         private const string k_SessionFileName = "Session.xml";
         private string m_AccessToken;
-        private bool m_IsRememberMeChecked;
+        private bool m_IsRememberMe;
 
         public string AccessToken { get; set; }
 
-        public bool IsRememberMeChecked { get; set; }
+        public bool IsRememberMe { get; set; }
 
         public static bool IsSessionExist()
         {

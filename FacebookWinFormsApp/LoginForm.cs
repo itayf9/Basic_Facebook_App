@@ -8,7 +8,10 @@ namespace BasicFacebookFeatures
     public partial class LoginForm : Form
     {
         private const string k_AppID = "832742648143866";
+
         private const string k_SessionLoginButtonText = "Continue With Facebook";
+
+        private const string k_DefaultLoginButtonText = "Login";
 
         private readonly string[] r_RequestedPermissions =
         {
@@ -27,7 +30,7 @@ namespace BasicFacebookFeatures
             "user_posts",
         };
 
-        private Session session;
+        private Session m_Session;
         private User m_LoggedInUser;
 
         public LoginForm()
@@ -37,16 +40,36 @@ namespace BasicFacebookFeatures
 
             if (Session.IsSessionExist())
             {
-                checkBoxRememberMe.Checked = true;
-                buttonLogin.Text = k_SessionLoginButtonText;
+                m_Session = Session.LoadFromFile();
+            }
+
+            setLoginFormComponents();
+        }
+
+        private void setLoginFormComponents()
+        {
+            if (m_Session != null)
+            {
+                checkBoxRememberMe.Checked = m_Session.IsRememberMe;
+                buttonLogin.Text = m_Session.IsRememberMe ? k_SessionLoginButtonText
+                    : k_DefaultLoginButtonText;
+            }
+            else
+            {
+                checkBoxRememberMe.Checked = false;
+                buttonLogin.Text = k_DefaultLoginButtonText;
             }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!checkBoxRememberMe.Checked)
+            if (m_Session != null && !checkBoxRememberMe.Checked)
             {
                 Session.DeleteSession();
+            }
+            else if (m_Session != null)
+            {
+                m_Session.SaveToFile();
             }
 
             base.OnFormClosing(e);
@@ -54,14 +77,13 @@ namespace BasicFacebookFeatures
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            if (Session.IsSessionExist())
+            if (m_Session != null)
             {
-                session = Session.LoadFromFile();
-                loginWithSession(session);
+                loginWithSession(m_Session);
             }
             else
             {
-                login();
+                loginWithoutSession();
             }
         }
 
@@ -71,9 +93,9 @@ namespace BasicFacebookFeatures
             {
                 LoginResult loginResult = FacebookService.Connect(session.AccessToken);
                 m_LoggedInUser = loginResult.LoggedInUser;
-                Hide();
-                new FormMain(m_LoggedInUser).ShowDialog();
-                Show();
+
+                handleAppearenceOfLoginAndMainDialogs();
+
             }
             catch (Exception)
             {
@@ -81,7 +103,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void login()
+        private void loginWithoutSession()
         {
             try
             {
@@ -92,19 +114,15 @@ namespace BasicFacebookFeatures
                     labelError.Visible = false;
                     m_LoggedInUser = loginResult.LoggedInUser;
 
-                    if (checkBoxRememberMe.Checked)
+                    m_Session = new Session
                     {
-                        session = new Session
-                        {
-                            AccessToken = loginResult.AccessToken,
-                            IsRememberMeChecked = true,
-                        };
-                        session.SaveToFile();
-                    }
+                        AccessToken = loginResult.AccessToken,
+                        IsRememberMe = checkBoxRememberMe.Checked,
+                    };
+                    m_Session.SaveToFile();
 
-                    this.Hide();
-                    new FormMain(m_LoggedInUser).ShowDialog();
-                    this.Show();
+                    handleAppearenceOfLoginAndMainDialogs();
+
                 }
                 else if (loginResult.ErrorMessage.Equals(string.Empty))
                 {
@@ -120,6 +138,27 @@ namespace BasicFacebookFeatures
             catch (Exception)
             {
                 MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
+            }
+        }
+
+        private void handleAppearenceOfLoginAndMainDialogs()
+        {
+            this.Hide();
+            new FormMain(m_LoggedInUser).ShowDialog();
+            if (!Session.IsSessionExist())
+            {
+                m_Session = null;
+            }
+
+            setLoginFormComponents();
+            this.Show();
+        }
+
+        private void checkBoxRememberMe_CheckedChanged(object sender, EventArgs e)
+        {
+            if (m_Session != null)
+            {
+                m_Session.IsRememberMe = checkBoxRememberMe.Checked;
             }
         }
     }

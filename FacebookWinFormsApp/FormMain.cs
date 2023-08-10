@@ -74,7 +74,12 @@ namespace BasicFacebookFeatures
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             FacebookService.LogoutWithUI();
-            m_LoggedInUser = null;
+
+            if (Session.IsSessionExist())
+            {
+                Session.DeleteSession();
+            }
+
             this.Close();
         }
 
