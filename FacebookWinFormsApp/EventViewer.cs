@@ -4,18 +4,31 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class EventViewer : IViewer
+    internal class EventViewer : PictureAndNameObjectViewer, IViewer
     {
-        public void AddControls(TabPage i_TabPage)
+
+        public EventViewer() : base()
         {
         }
 
-        public void HideControls()
+        public override void AddControls(TabPage i_TabPage)
         {
+            base.AddControls(i_TabPage);
+        }
+
+        public override void HideControls()
+        {
+            base.HideControls();
+        }
+
+        public override void SetVisible(bool i_Visible)
+        {
+            base.SetVisible(i_Visible);
         }
 
         internal void loadEventDetailsToComponents(Event i_SelectedEvent)
         {
+            LoadMainPictureAndNameToComponents(i_SelectedEvent.PictureNormalURL, i_SelectedEvent.Name);
         }
     }
 }

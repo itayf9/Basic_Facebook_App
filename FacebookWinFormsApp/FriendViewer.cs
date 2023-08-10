@@ -3,14 +3,14 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class FriendViewer : IViewer
+    internal class FriendViewer : PictureAndNameObjectViewer, IViewer
     {
         private readonly Label r_LabelBirthdayTitle;
         private readonly Label r_LabelBirthdayValue;
         private readonly Label r_LabelGenderTitle;
         private readonly Label r_LabelGenderValue;
 
-        public FriendViewer()
+        public FriendViewer() : base()
         {
             r_LabelBirthdayTitle = new Label
             {
@@ -57,23 +57,29 @@ namespace BasicFacebookFeatures
 
         public void loadFriendDetailsToComponents(User i_Friend)
         {
+            LoadMainPictureAndNameToComponents(i_Friend.PictureNormalURL, i_Friend.Name);
+
             r_LabelBirthdayValue.Text = i_Friend.Birthday.ToString();
             r_LabelGenderValue.Text = i_Friend.Gender.ToString();
 
             setVisible(true);
         }
 
-        public void AddControls(TabPage i_TabPage)
+        public override void AddControls(TabPage i_TabPage)
         {
             i_TabPage.Controls.Add(r_LabelGenderValue);
             i_TabPage.Controls.Add(r_LabelGenderTitle);
             i_TabPage.Controls.Add(r_LabelBirthdayValue);
             i_TabPage.Controls.Add(r_LabelBirthdayTitle);
+
+            base.AddControls(i_TabPage);
         }
 
-        public void HideControls()
+        public override void HideControls()
         {
             setVisible(false);
+
+            base.HideControls();
         }
 
         internal void setVisible(bool i_Visible)
@@ -82,6 +88,8 @@ namespace BasicFacebookFeatures
             r_LabelGenderTitle.Visible = i_Visible;
             r_LabelBirthdayValue.Visible = i_Visible;
             r_LabelBirthdayTitle.Visible = i_Visible;
+
+            base.SetVisible(i_Visible);
         }
     }
 }

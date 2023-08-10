@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="NoDataAvailableException.cs" />
     <Compile Include="PageViewer.cs" />
+    <Compile Include="PictureAndNameObjectViewer.cs" />
     <Compile Include="PostViewer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

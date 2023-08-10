@@ -3,12 +3,12 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class GroupViewer : IViewer
+    internal class GroupViewer : PictureAndNameObjectViewer, IViewer
     {
         private readonly Label r_LabelDescription;
         private readonly TextBox r_TextBoxDescription;
 
-        public GroupViewer()
+        public GroupViewer() : base()
         {
             r_LabelDescription = new Label
             {
@@ -43,15 +43,19 @@ namespace BasicFacebookFeatures
             get { return r_TextBoxDescription; }
         }
 
-        public void AddControls(TabPage i_TabPage)
+        public override void AddControls(TabPage i_TabPage)
         {
             i_TabPage.Controls.Add(r_LabelDescription);
             i_TabPage.Controls.Add(r_TextBoxDescription);
+
+            base.AddControls(i_TabPage);
         }
 
-        public void HideControls()
+        public override void HideControls()
         {
             setVisible(false);
+
+            base.HideControls();
         }
 
         internal void LoadGroupDetailsToComponents(Group i_SelectedGroup)
@@ -64,6 +68,8 @@ namespace BasicFacebookFeatures
         {
            r_LabelDescription.Visible = i_Visible;
            r_TextBoxDescription.Visible = i_Visible;
+
+            base.SetVisible(i_Visible);
         }
     }
 }

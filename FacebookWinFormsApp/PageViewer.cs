@@ -3,12 +3,12 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class PageViewer : IViewer
+    internal class PageViewer : PictureAndNameObjectViewer, IViewer
     {
         private readonly Label r_LabelDescription;
         private readonly TextBox r_TextBoxDescription;
 
-        public PageViewer()
+        public PageViewer() : base()
         {
             r_LabelDescription = new Label
             {
@@ -35,6 +35,8 @@ namespace BasicFacebookFeatures
 
         public void loadPageDetailsToComponents(Page i_Page)
         {
+            LoadMainPictureAndNameToComponents(i_Page.PictureNormalURL, i_Page.Name);
+
             if (i_Page.Description != null)
             {
                 r_TextBoxDescription.Text = i_Page.Description;
@@ -47,21 +49,27 @@ namespace BasicFacebookFeatures
             setVisible(true);
         }
 
-        public void AddControls(TabPage i_TabPage)
+        public override void AddControls(TabPage i_TabPage)
         {
             i_TabPage.Controls.Add(r_LabelDescription);
             i_TabPage.Controls.Add(r_TextBoxDescription);
+
+            base.AddControls(i_TabPage);
         }
 
-        public void HideControls()
+        public override void HideControls()
         {
             setVisible(false);
+
+            base.HideControls();
         }
 
         internal void setVisible(bool i_Visible)
         {
             r_LabelDescription.Visible = i_Visible;
             r_TextBoxDescription.Visible = i_Visible;
+
+            base.SetVisible(i_Visible);
         }
     }
 }

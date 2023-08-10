@@ -4,12 +4,12 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class AlbumViewer : IViewer
+    internal class AlbumViewer : PictureAndNameObjectViewer, IViewer
     {
         private readonly ListBox r_ListBoxPictures;
         private readonly PictureBox r_PictureBoxSelectedPicture;
 
-        public AlbumViewer()
+        public AlbumViewer() : base()
         {
             r_ListBoxPictures = new ListBox
             {
@@ -46,6 +46,12 @@ namespace BasicFacebookFeatures
             get { return r_PictureBoxSelectedPicture; }
         }
 
+        internal void LoadAlbumDetailsToComponents(Album i_SelectedAlbum)
+        {
+            LoadMainPictureAndNameToComponents(i_SelectedAlbum.PictureAlbumURL, i_SelectedAlbum.Name);
+            LoadPicturesToListBox(i_SelectedAlbum);
+        }
+
         public void LoadPicturesToListBox(Album i_SelectedAlbum)
         {
             r_ListBoxPictures.Items.Clear();
@@ -75,26 +81,33 @@ namespace BasicFacebookFeatures
             }
         }
 
-        public void AddControls(TabPage i_TabPage)
+        public override void AddControls(TabPage i_TabPage)
         {
             i_TabPage.Controls.Add(r_ListBoxPictures);
             i_TabPage.Controls.Add(r_PictureBoxSelectedPicture);
+
+            base.AddControls(i_TabPage);
         }
 
-        public void HideControls()
+        public override void HideControls()
         {
             setVisible(false);
+
+            base.HideControls();
         }
 
         internal void setVisible(bool i_Visible)
         {
             r_ListBoxPictures.Visible = i_Visible;
             r_PictureBoxSelectedPicture.Visible = i_Visible;
+
+            base.SetVisible(i_Visible);
         }
 
         private void listBoxPictures_SelectedIndexChanged(object sender, EventArgs e)
         {
             PictureBoxSelectedPicture.Image = ((sender as ListBox).SelectedItem as Photo).ImageNormal;
         }
+
     }
 }

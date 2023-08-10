@@ -301,7 +301,6 @@ namespace BasicFacebookFeatures
         {
             labelViewTitle.Text = string.Format("{0}:", i_ContentCategoryName);
             listBoxContent.Items.Clear();
-            pictureBoxSelectedContent.Image = null;
             hideAllViewers();
         }
 
@@ -348,19 +347,16 @@ namespace BasicFacebookFeatures
 
         private void loadEventDetails(Event i_SelectedEvent)
         {
-            pictureBoxSelectedContent.LoadAsync(i_SelectedEvent.PictureNormalURL);
             (r_Viewers[(int)eViewerIndex.EventViewerIndex] as EventViewer).loadEventDetailsToComponents(i_SelectedEvent);
         }
 
         private void loadPageDetails(Page i_SelectedPage)
         {
-            pictureBoxSelectedContent.LoadAsync(i_SelectedPage.PictureNormalURL);
             (r_Viewers[(int)eViewerIndex.PageViewerInde] as PageViewer).loadPageDetailsToComponents(i_SelectedPage);
         }
 
         private void loadFriendDetails(User i_SelectedFriend)
         {
-            pictureBoxSelectedContent.LoadAsync(i_SelectedFriend.PictureNormalURL);
             (r_Viewers[(int)eViewerIndex.FriendViewerIndex] as FriendViewer).loadFriendDetailsToComponents(i_SelectedFriend);
         }
 
@@ -371,14 +367,12 @@ namespace BasicFacebookFeatures
 
         private void loadGroupDetails(Group i_SelectedGroup)
         {
-            pictureBoxSelectedContent.LoadAsync(i_SelectedGroup.PictureNormalURL);
             (r_Viewers[(int)eViewerIndex.GroupViewerIndex] as GroupViewer).LoadGroupDetailsToComponents(i_SelectedGroup);
         }
 
         private void fetchAlbumPictures(Album i_SelectedAlbum)
         {
-            pictureBoxSelectedContent.LoadAsync(i_SelectedAlbum.PictureAlbumURL);
-            (r_Viewers[(int)eViewerIndex.AlbumViewerIndex] as AlbumViewer).LoadPicturesToListBox(i_SelectedAlbum);
+            (r_Viewers[(int)eViewerIndex.AlbumViewerIndex] as AlbumViewer).LoadAlbumDetailsToComponents(i_SelectedAlbum);
         }
     }
 }
