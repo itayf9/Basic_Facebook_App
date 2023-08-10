@@ -3,12 +3,13 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class GroupViewer : PictureAndNameObjectViewer, IViewer
+    internal class GroupViewer : PictureAndNameObjectViewer
     {
         private readonly Label r_LabelDescription;
         private readonly TextBox r_TextBoxDescription;
 
-        public GroupViewer() : base()
+        public GroupViewer()
+            : base()
         {
             r_LabelDescription = new Label
             {
@@ -69,7 +70,7 @@ namespace BasicFacebookFeatures
            r_LabelDescription.Visible = i_Visible;
            r_TextBoxDescription.Visible = i_Visible;
 
-            base.SetVisible(i_Visible);
+           base.SetVisible(i_Visible);
         }
     }
 }

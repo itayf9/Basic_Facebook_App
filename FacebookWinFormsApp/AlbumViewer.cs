@@ -4,12 +4,13 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class AlbumViewer : PictureAndNameObjectViewer, IViewer
+    internal class AlbumViewer : PictureAndNameObjectViewer
     {
         private readonly ListBox r_ListBoxPictures;
         private readonly PictureBox r_PictureBoxSelectedPicture;
 
-        public AlbumViewer() : base()
+        public AlbumViewer()
+            : base()
         {
             r_ListBoxPictures = new ListBox
             {
@@ -108,6 +109,5 @@ namespace BasicFacebookFeatures
         {
             PictureBoxSelectedPicture.Image = ((sender as ListBox).SelectedItem as Photo).ImageNormal;
         }
-
     }
 }

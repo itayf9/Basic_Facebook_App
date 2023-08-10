@@ -3,19 +3,20 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class FriendViewer : PictureAndNameObjectViewer, IViewer
+    internal class FriendViewer : PictureAndNameObjectViewer
     {
         private readonly Label r_LabelBirthdayTitle;
         private readonly Label r_LabelBirthdayValue;
         private readonly Label r_LabelGenderTitle;
         private readonly Label r_LabelGenderValue;
 
-        public FriendViewer() : base()
+        public FriendViewer()
+            : base()
         {
             r_LabelBirthdayTitle = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(595, 178),
+                Location = new System.Drawing.Point(615, 185),
                 Name = "labelBirthdayTitle",
                 Size = new System.Drawing.Size(98, 26),
                 TabIndex = 70,
@@ -25,7 +26,7 @@ namespace BasicFacebookFeatures
             r_LabelBirthdayValue = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(699, 178),
+                Location = new System.Drawing.Point(699, 185),
                 Name = "labelBirthdayValue",
                 Size = new System.Drawing.Size(96, 26),
                 TabIndex = 71,
@@ -35,7 +36,7 @@ namespace BasicFacebookFeatures
             r_LabelGenderTitle = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(595, 214),
+                Location = new System.Drawing.Point(615, 220),
                 Name = "labelGenderTitle",
                 Size = new System.Drawing.Size(90, 26),
                 TabIndex = 72,
@@ -45,7 +46,7 @@ namespace BasicFacebookFeatures
             r_LabelGenderValue = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(699, 214),
+                Location = new System.Drawing.Point(699, 220),
                 Name = "labelGenderValue",
                 Size = new System.Drawing.Size(60, 26),
                 TabIndex = 73,

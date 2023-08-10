@@ -4,10 +4,10 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class EventViewer : PictureAndNameObjectViewer, IViewer
+    internal class EventViewer : PictureAndNameObjectViewer
     {
-
-        public EventViewer() : base()
+        public EventViewer()
+            : base()
         {
         }
 

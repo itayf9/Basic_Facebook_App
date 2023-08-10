@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace BasicFacebookFeatures
 {
@@ -19,34 +14,47 @@ namespace BasicFacebookFeatures
             {
                 Location = new System.Drawing.Point(1014, 178),
                 Name = "pictureBoxSelectedContent",
-                Size = new System.Drawing.Size(10, 109),
-                SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage,
+                Size = new System.Drawing.Size(110, 110),
+                SizeMode = PictureBoxSizeMode.StretchImage,
                 TabIndex = 61,
                 TabStop = false,
             };
 
-            r_LabelName = new Label();
-            r_LabelName.AutoSize = true;
-            r_LabelName.Location = new System.Drawing.Point(128, 12);
-            r_LabelName.Name = "labelFullName";
-            r_LabelName.Size = new System.Drawing.Size(173, 26);
-            r_LabelName.TabIndex = 70;
+            r_LabelName = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(128, 12),
+                Name = "labelFullName",
+                Size = new System.Drawing.Size(173, 26),
+                TabIndex = 70,
+            };
 
-            r_PanelPictureAndNameArea = new Panel();
-            r_PanelPictureAndNameArea.BackColor = System.Drawing.Color.White;
-            r_PanelPictureAndNameArea.Location = new System.Drawing.Point(606, 178);
-            r_PanelPictureAndNameArea.Name = "panelPictureAndNameBackground";
-            r_PanelPictureAndNameArea.Size = new System.Drawing.Size(395, 137);
-            r_PanelPictureAndNameArea.TabIndex = 71;
+            r_PanelPictureAndNameArea = new Panel
+            {
+                BackColor = System.Drawing.Color.White,
+                Location = new System.Drawing.Point(606, 178),
+                Name = "panelPictureAndNameBackground",
+                Size = new System.Drawing.Size(395, 137),
+                TabIndex = 71,
+            };
             r_PanelPictureAndNameArea.Controls.Add(r_PictureBoxMainPicture);
             r_PanelPictureAndNameArea.Controls.Add(r_LabelName);
         }
 
-        public PictureBox PictureBoxMainPicture { get { return r_PictureBoxMainPicture; } }
+        public PictureBox PictureBoxMainPicture
+        {
+            get { return r_PictureBoxMainPicture; }
+        }
 
-        public Label LabelName { get { return r_LabelName; } }
+        public Label LabelName
+        {
+            get { return r_LabelName; }
+        }
 
-        public Panel PanelPictureAndNameArea { get { return r_PanelPictureAndNameArea; } }
+        public Panel PanelPictureAndNameArea
+        {
+            get { return r_PanelPictureAndNameArea; }
+        }
 
         protected void LoadMainPictureAndNameToComponents(string i_PictureURL, string i_Name)
         {

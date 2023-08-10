@@ -3,17 +3,18 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    internal class PageViewer : PictureAndNameObjectViewer, IViewer
+    internal class PageViewer : PictureAndNameObjectViewer
     {
         private readonly Label r_LabelDescription;
         private readonly TextBox r_TextBoxDescription;
 
-        public PageViewer() : base()
+        public PageViewer()
+            : base()
         {
             r_LabelDescription = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(595, 178),
+                Location = new System.Drawing.Point(595, 325),
                 Name = "labelDescription",
                 Size = new System.Drawing.Size(127, 26),
                 TabIndex = 70,
@@ -22,7 +23,7 @@ namespace BasicFacebookFeatures
 
             r_TextBoxDescription = new TextBox
             {
-                Location = new System.Drawing.Point(600, 211),
+                Location = new System.Drawing.Point(600, 350),
                 Multiline = true,
                 Name = "textBoxDescription",
                 Size = new System.Drawing.Size(521, 135),
