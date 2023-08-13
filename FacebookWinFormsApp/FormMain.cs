@@ -351,7 +351,6 @@ namespace BasicFacebookFeatures
 
                 case Group selectedGroup:
                     loadGroupDetails(selectedGroup);
-
                     break;
 
                 case Event selectedEvent:
@@ -431,8 +430,6 @@ namespace BasicFacebookFeatures
                 }
             }
 
-            
-
             try
             {
                 if (filteredNonEmptyAlbums.Count == 0)
@@ -468,7 +465,6 @@ namespace BasicFacebookFeatures
 
         private void showNostalgiaPost()
         {
-
             List<Post> fetchedPosts = fetchPostsToList();
 
             Random randomGenerator = new Random();

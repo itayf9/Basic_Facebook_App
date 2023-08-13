@@ -58,12 +58,12 @@
             this.buttonLikedPages = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();
             this.tabPageFeatures = new System.Windows.Forms.TabPage();
+            this.textBoxUploadDate = new System.Windows.Forms.TextBox();
+            this.pictureBoxRandomPhoto = new System.Windows.Forms.PictureBox();
             this.buttonNostalgia = new System.Windows.Forms.Button();
             this.comboBoxMediaType = new System.Windows.Forms.ComboBox();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
-            this.pictureBoxRandomPhoto = new System.Windows.Forms.PictureBox();
-            this.textBoxUploadDate = new System.Windows.Forms.TextBox();
             this.tabControlApp.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
@@ -378,6 +378,22 @@
             this.tabPageFeatures.Text = "Extra Features";
             this.tabPageFeatures.UseVisualStyleBackColor = true;
             // 
+            // textBoxUploadDate
+            // 
+            this.textBoxUploadDate.Location = new System.Drawing.Point(344, 58);
+            this.textBoxUploadDate.Name = "textBoxUploadDate";
+            this.textBoxUploadDate.ReadOnly = true;
+            this.textBoxUploadDate.Size = new System.Drawing.Size(323, 32);
+            this.textBoxUploadDate.TabIndex = 3;
+            // 
+            // pictureBoxRandomPhoto
+            // 
+            this.pictureBoxRandomPhoto.Location = new System.Drawing.Point(344, 96);
+            this.pictureBoxRandomPhoto.Name = "pictureBoxRandomPhoto";
+            this.pictureBoxRandomPhoto.Size = new System.Drawing.Size(786, 451);
+            this.pictureBoxRandomPhoto.TabIndex = 2;
+            this.pictureBoxRandomPhoto.TabStop = false;
+            // 
             // buttonNostalgia
             // 
             this.buttonNostalgia.Location = new System.Drawing.Point(9, 68);
@@ -406,22 +422,6 @@
             // printDialog2
             // 
             this.printDialog2.UseEXDialog = true;
-            // 
-            // pictureBoxRandomPhoto
-            // 
-            this.pictureBoxRandomPhoto.Location = new System.Drawing.Point(344, 96);
-            this.pictureBoxRandomPhoto.Name = "pictureBoxRandomPhoto";
-            this.pictureBoxRandomPhoto.Size = new System.Drawing.Size(786, 451);
-            this.pictureBoxRandomPhoto.TabIndex = 2;
-            this.pictureBoxRandomPhoto.TabStop = false;
-            // 
-            // textBoxUploadDate
-            // 
-            this.textBoxUploadDate.Location = new System.Drawing.Point(344, 58);
-            this.textBoxUploadDate.Name = "textBoxUploadDate";
-            this.textBoxUploadDate.ReadOnly = true;
-            this.textBoxUploadDate.Size = new System.Drawing.Size(323, 32);
-            this.textBoxUploadDate.TabIndex = 3;
             // 
             // FormMain
             // 
