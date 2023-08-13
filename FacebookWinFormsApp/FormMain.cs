@@ -422,12 +422,27 @@ namespace BasicFacebookFeatures
             Random randomGenerator = new Random();
 
             List<Album> fetchedAlbums = fetchAlbumsIntoList();
-            List<bool> listOfIndexesOfAlbums = new List<bool>(fetchedAlbums.Count) { false };
-            int indexOfRandomAlbum = randomGenerator.Next(fetchedAlbums.Count);
-            Album selectedAlbum = fetchedAlbums[indexOfRandomAlbum];
+            List<Album> filteredNonEmptyAlbums = new List<Album>();
+            foreach (Album album in fetchedAlbums)
+            {
+                if (album.Count != 0)
+                {
+                    filteredNonEmptyAlbums.Add(album);
+                }
+            }
+
+            
 
             try
             {
+                if (filteredNonEmptyAlbums.Count == 0)
+                {
+                    throw new NoDataAvailableException("Photos");
+                }
+
+                int indexOfRandomAlbum = randomGenerator.Next(filteredNonEmptyAlbums.Count);
+                Album selectedAlbum = filteredNonEmptyAlbums[indexOfRandomAlbum];
+
                 FacebookObjectCollection<Photo> listOfPhotosFromSelectedAlbum = selectedAlbum.Photos;
 
                 if (listOfPhotosFromSelectedAlbum.Count == 0)
