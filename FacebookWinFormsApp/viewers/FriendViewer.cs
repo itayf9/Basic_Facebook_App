@@ -16,7 +16,7 @@ namespace BasicFacebookFeatures
             r_LabelBirthdayTitle = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(615, 185),
+                Location = new System.Drawing.Point(615, 300),
                 Name = "labelBirthdayTitle",
                 Size = new System.Drawing.Size(98, 26),
                 TabIndex = 70,
@@ -26,7 +26,7 @@ namespace BasicFacebookFeatures
             r_LabelBirthdayValue = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(699, 185),
+                Location = new System.Drawing.Point(699, 300),
                 Name = "labelBirthdayValue",
                 Size = new System.Drawing.Size(96, 26),
                 TabIndex = 71,
@@ -36,7 +36,7 @@ namespace BasicFacebookFeatures
             r_LabelGenderTitle = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(615, 220),
+                Location = new System.Drawing.Point(615, 335),
                 Name = "labelGenderTitle",
                 Size = new System.Drawing.Size(90, 26),
                 TabIndex = 72,
@@ -46,7 +46,7 @@ namespace BasicFacebookFeatures
             r_LabelGenderValue = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(699, 220),
+                Location = new System.Drawing.Point(699, 335),
                 Name = "labelGenderValue",
                 Size = new System.Drawing.Size(60, 26),
                 TabIndex = 73,

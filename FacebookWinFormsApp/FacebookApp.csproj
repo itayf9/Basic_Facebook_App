@@ -95,9 +95,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlbumViewer.cs" />
+    <Compile Include="viewers\AlbumViewer.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="EventViewer.cs" />
+    <Compile Include="viewers\EventViewer.cs" />
     <Compile Include="eViewerIndex.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -105,9 +105,9 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FriendViewer.cs" />
-    <Compile Include="GroupViewer.cs" />
-    <Compile Include="IViewer.cs" />
+    <Compile Include="viewers\FriendViewer.cs" />
+    <Compile Include="viewers\GroupViewer.cs" />
+    <Compile Include="viewers\IViewer.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,9 +115,9 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NoDataAvailableException.cs" />
-    <Compile Include="PageViewer.cs" />
-    <Compile Include="PictureAndNameObjectViewer.cs" />
-    <Compile Include="PostViewer.cs" />
+    <Compile Include="viewers\PageViewer.cs" />
+    <Compile Include="viewers\PictureAndNameObjectViewer.cs" />
+    <Compile Include="viewers\PostViewer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

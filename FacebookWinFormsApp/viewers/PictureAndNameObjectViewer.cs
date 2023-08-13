@@ -12,7 +12,7 @@ namespace BasicFacebookFeatures
         {
             r_PictureBoxMainPicture = new PictureBox
             {
-                Location = new System.Drawing.Point(1014, 178),
+                Location = new System.Drawing.Point(615, 187),
                 Name = "pictureBoxSelectedContent",
                 Size = new System.Drawing.Size(110, 110),
                 SizeMode = PictureBoxSizeMode.StretchImage,
@@ -22,10 +22,11 @@ namespace BasicFacebookFeatures
 
             r_LabelName = new Label
             {
-                AutoSize = true,
-                Location = new System.Drawing.Point(128, 12),
+                AutoSize = false,
+                Location = new System.Drawing.Point(725, 187),
                 Name = "labelFullName",
-                Size = new System.Drawing.Size(173, 26),
+                Size = new System.Drawing.Size(320, 110),
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20, System.Drawing.FontStyle.Bold),
                 TabIndex = 70,
             };
 
@@ -34,7 +35,7 @@ namespace BasicFacebookFeatures
                 BackColor = System.Drawing.Color.White,
                 Location = new System.Drawing.Point(606, 178),
                 Name = "panelPictureAndNameBackground",
-                Size = new System.Drawing.Size(395, 137),
+                Size = new System.Drawing.Size(500, 137),
                 TabIndex = 71,
             };
             r_PanelPictureAndNameArea.Controls.Add(r_PictureBoxMainPicture);

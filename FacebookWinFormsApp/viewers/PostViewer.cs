@@ -29,6 +29,7 @@ namespace BasicFacebookFeatures
                 Size = new System.Drawing.Size(520, 88),
                 TabIndex = 71,
                 ReadOnly = true,
+                ScrollBars = ScrollBars.Vertical,
             };
 
             r_PictureBoxPost = new PictureBox
