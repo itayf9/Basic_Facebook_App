@@ -9,12 +9,12 @@ namespace BasicFacebookFeatures
         private readonly TextBox r_TextBoxCaption;
         private readonly PictureBox r_PictureBoxPost;
 
-        public PostViewer()
+        public PostViewer(int i_topLeftX, int i_topLeftY)
         {
             r_LabelCaption = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(596, 178),
+                Location = new System.Drawing.Point(i_topLeftX, i_topLeftY),
                 Name = "labelCaption",
                 Size = new System.Drawing.Size(93, 26),
                 TabIndex = 70,
@@ -23,7 +23,7 @@ namespace BasicFacebookFeatures
 
             r_TextBoxCaption = new TextBox
             {
-                Location = new System.Drawing.Point(601, 208),
+                Location = new System.Drawing.Point(i_topLeftX + 7, i_topLeftY + 30),
                 Multiline = true,
                 Name = "textBoxCaption",
                 Size = new System.Drawing.Size(520, 88),
@@ -33,7 +33,7 @@ namespace BasicFacebookFeatures
 
             r_PictureBoxPost = new PictureBox
             {
-                Location = new System.Drawing.Point(601, 304),
+                Location = new System.Drawing.Point(i_topLeftX + 7, i_topLeftY + 126 ),
                 Name = "pictureBoxPost",
                 Size = new System.Drawing.Size(520, 243),
                 SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage,

@@ -7,6 +7,6 @@
         PostViewerIndex,
         EventViewerIndex,
         FriendViewerIndex,
-        PageViewerInde,
+        PageViewerIndex,
     }
 }

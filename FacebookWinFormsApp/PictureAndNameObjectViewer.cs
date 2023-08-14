@@ -23,7 +23,7 @@ namespace BasicFacebookFeatures
             r_LabelName = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(128, 12),
+                Location = new System.Drawing.Point(615, 178),
                 Name = "labelFullName",
                 Size = new System.Drawing.Size(173, 26),
                 TabIndex = 70,

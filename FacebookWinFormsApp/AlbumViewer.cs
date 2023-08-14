@@ -16,21 +16,21 @@ namespace BasicFacebookFeatures
             {
                 FormattingEnabled = true,
                 ItemHeight = 26,
-                Location = new System.Drawing.Point(595, 178),
+                Location = new System.Drawing.Point(595, 290),
                 Name = "listBoxPictures",
-                Size = new System.Drawing.Size(205, 342),
-                TabIndex = 70,
+                Size = new System.Drawing.Size(205, 150),
+                TabIndex = 72,
             };
             r_ListBoxPictures.SelectedIndexChanged += new EventHandler(listBoxPictures_SelectedIndexChanged);
             r_ListBoxPictures.DisplayMember = "CreatedTime";
 
             r_PictureBoxSelectedPicture = new PictureBox
             {
-                Location = new System.Drawing.Point(806, 178),
+                Location = new System.Drawing.Point(806, 290),
                 Name = "pictureBoxSelectedPicture",
                 Size = new System.Drawing.Size(324, 301),
                 SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage,
-                TabIndex = 71,
+                TabIndex = 73,
                 TabStop = false,
             };
 
