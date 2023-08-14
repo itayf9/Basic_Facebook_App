@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BasicFacebookFeatures.EventViewer">
+    <Position X="3.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAQAAAAAAAAAAAQQAAAAAAAAAAA=</HashCode>
+      <FileName>EventViewer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicFacebookFeatures.AlbumViewer">
+    <Position X="0.5" Y="4.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAChgAAAAAAAAAAAQAAAAAQAAAAAAQAgBAAAAAAAA=</HashCode>
+      <FileName>AlbumViewer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicFacebookFeatures.FriendViewer">
+    <Position X="5.25" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAwAAAQAAACAAAQAAAAAAAAAAAAQBAAAAAAAAAA=</HashCode>
+      <FileName>FriendViewer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicFacebookFeatures.GroupViewer">
+    <Position X="7.75" Y="4.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQgACQAAAIAAAAQAAAAAAAAAAAAQAAIAAAAAAAA=</HashCode>
+      <FileName>GroupViewer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicFacebookFeatures.PictureAndNameObjectViewer">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAgQIAAAAAAUCAAAAAAAAAEAQAABAAAAAAAA=</HashCode>
+      <FileName>PictureAndNameObjectViewer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BasicFacebookFeatures.NoDataAvailableException">
+    <Position X="12.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NoDataAvailableException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicFacebookFeatures.PageViewer">
+    <Position X="10.5" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQgAAAAAAAAAAAQAAAAAAAAAAAAQAAIAAAAAAAA=</HashCode>
+      <FileName>PageViewer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicFacebookFeatures.PostViewer">
+    <Position X="13" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAhAQAAAAAAQAAQAAAQAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>PostViewer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BasicFacebookFeatures.Session">
+    <Position X="8.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAgAAAAAAAARAAAAAQAEAABAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Session.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicFacebookFeatures.Program">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicFacebookFeatures.LoginForm">
+    <Position X="15.75" Y="8.75" Width="3" />
+    <Members>
+      <Field Name="buttonLogin" Hidden="true" />
+      <Field Name="checkBoxRememberMe" Hidden="true" />
+      <Field Name="components" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="labelError" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAQIABAgBCAAABAACACAAAYSQEAECAAAAAASAAAAAAA=</HashCode>
+      <FileName>LoginForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicFacebookFeatures.FormMain">
+    <Position X="15.75" Y="1.25" Width="3" />
+    <Members>
+      <Field Name="buttonAlbums" Hidden="true" />
+      <Field Name="buttonEvents" Hidden="true" />
+      <Field Name="buttonFavoriteTeams" Hidden="true" />
+      <Field Name="buttonFriends" Hidden="true" />
+      <Field Name="buttonGroups" Hidden="true" />
+      <Field Name="buttonLikedPages" Hidden="true" />
+      <Field Name="buttonLogout" Hidden="true" />
+      <Field Name="buttonPosts" Hidden="true" />
+      <Field Name="components" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Field Name="flowLayoutPanel1" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="labelAge" Hidden="true" />
+      <Field Name="labelAgeIcon" Hidden="true" />
+      <Field Name="labelBirthDay" Hidden="true" />
+      <Field Name="labelBirthDayIcon" Hidden="true" />
+      <Field Name="labelCity" Hidden="true" />
+      <Field Name="labelCityIcon" Hidden="true" />
+      <Field Name="labelEmail" Hidden="true" />
+      <Field Name="labelEmailIcon" Hidden="true" />
+      <Field Name="labelGender" Hidden="true" />
+      <Field Name="labelGenderIcon" Hidden="true" />
+      <Field Name="labelName" Hidden="true" />
+      <Field Name="labelNameIcon" Hidden="true" />
+      <Field Name="labelViewTitle" Hidden="true" />
+      <Field Name="listBoxContent" Hidden="true" />
+      <Field Name="panel1" Hidden="true" />
+      <Field Name="panelSeparator" Hidden="true" />
+      <Field Name="pictureBoxProfile" Hidden="true" />
+      <Field Name="printDialog1" Hidden="true" />
+      <Field Name="printDialog2" Hidden="true" />
+      <Field Name="tabControlApp" Hidden="true" />
+      <Field Name="tabPageFeatures" Hidden="true" />
+      <Field Name="tabPageProfile" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>iwEAIAIwMiNAAgCFQECAgQQCaMJQwwMAA0wEIQYQRAA=</HashCode>
+      <FileName>FormMain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="BasicFacebookFeatures.IViewer">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>IViewer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="BasicFacebookFeatures.eViewerIndex">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAQAAAAAAAAAEACAEAAAAAAACAAAA=</HashCode>
+      <FileName>eViewerIndex.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
