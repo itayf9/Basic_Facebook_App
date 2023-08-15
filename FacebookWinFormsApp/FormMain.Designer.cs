@@ -36,8 +36,6 @@
             this.labelGenderIcon = new System.Windows.Forms.Label();
             this.labelCityIcon = new System.Windows.Forms.Label();
             this.labelAgeIcon = new System.Windows.Forms.Label();
-            this.labelEmailIcon = new System.Windows.Forms.Label();
-            this.labelNameIcon = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelSeparator = new System.Windows.Forms.Panel();
             this.labelGender = new System.Windows.Forms.Label();
@@ -57,20 +55,21 @@
             this.buttonFavoriteTeams = new System.Windows.Forms.Button();
             this.buttonLikedPages = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();
-            this.tabPageFeatures = new System.Windows.Forms.TabPage();
+            this.tabPageNostalgia = new System.Windows.Forms.TabPage();
+            this.labelNostaldiaExplaination = new System.Windows.Forms.Label();
             this.textBoxUploadDate = new System.Windows.Forms.TextBox();
-            this.pictureBoxRandomPhoto = new System.Windows.Forms.PictureBox();
             this.buttonNostalgia = new System.Windows.Forms.Button();
             this.comboBoxMediaType = new System.Windows.Forms.ComboBox();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
-            this.labelNostaldiaExplaination = new System.Windows.Forms.Label();
+            this.tabPageCommentGenerator = new System.Windows.Forms.TabPage();
+            this.labelEmailIcon = new System.Windows.Forms.Label();
+            this.labelNameIcon = new System.Windows.Forms.Label();
             this.tabControlApp.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            this.tabPageFeatures.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRandomPhoto)).BeginInit();
+            this.tabPageNostalgia.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonLogout
@@ -88,7 +87,8 @@
             // tabControlApp
             // 
             this.tabControlApp.Controls.Add(this.tabPageProfile);
-            this.tabControlApp.Controls.Add(this.tabPageFeatures);
+            this.tabControlApp.Controls.Add(this.tabPageNostalgia);
+            this.tabControlApp.Controls.Add(this.tabPageCommentGenerator);
             this.tabControlApp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlApp.Location = new System.Drawing.Point(0, 0);
             this.tabControlApp.Multiline = true;
@@ -157,22 +157,6 @@
             this.labelAgeIcon.Name = "labelAgeIcon";
             this.labelAgeIcon.Size = new System.Drawing.Size(37, 37);
             this.labelAgeIcon.TabIndex = 72;
-            // 
-            // labelEmailIcon
-            // 
-            this.labelEmailIcon.Image = global::BasicFacebookFeatures.Properties.Resources.envelope_solid;
-            this.labelEmailIcon.Location = new System.Drawing.Point(382, 37);
-            this.labelEmailIcon.Name = "labelEmailIcon";
-            this.labelEmailIcon.Size = new System.Drawing.Size(37, 37);
-            this.labelEmailIcon.TabIndex = 71;
-            // 
-            // labelNameIcon
-            // 
-            this.labelNameIcon.Image = global::BasicFacebookFeatures.Properties.Resources.user_solid;
-            this.labelNameIcon.Location = new System.Drawing.Point(380, 0);
-            this.labelNameIcon.Name = "labelNameIcon";
-            this.labelNameIcon.Size = new System.Drawing.Size(37, 37);
-            this.labelNameIcon.TabIndex = 70;
             // 
             // panel1
             // 
@@ -365,20 +349,28 @@
             this.labelName.TabIndex = 57;
             this.labelName.Text = "Full Name";
             // 
-            // tabPageFeatures
+            // tabPageNostalgia
             // 
-            this.tabPageFeatures.Controls.Add(this.labelNostaldiaExplaination);
-            this.tabPageFeatures.Controls.Add(this.textBoxUploadDate);
-            this.tabPageFeatures.Controls.Add(this.pictureBoxRandomPhoto);
-            this.tabPageFeatures.Controls.Add(this.buttonNostalgia);
-            this.tabPageFeatures.Controls.Add(this.comboBoxMediaType);
-            this.tabPageFeatures.Location = new System.Drawing.Point(4, 35);
-            this.tabPageFeatures.Name = "tabPageFeatures";
-            this.tabPageFeatures.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFeatures.Size = new System.Drawing.Size(1138, 555);
-            this.tabPageFeatures.TabIndex = 1;
-            this.tabPageFeatures.Text = "Extra Features";
-            this.tabPageFeatures.UseVisualStyleBackColor = true;
+            this.tabPageNostalgia.Controls.Add(this.labelNostaldiaExplaination);
+            this.tabPageNostalgia.Controls.Add(this.textBoxUploadDate);
+            this.tabPageNostalgia.Controls.Add(this.buttonNostalgia);
+            this.tabPageNostalgia.Controls.Add(this.comboBoxMediaType);
+            this.tabPageNostalgia.Location = new System.Drawing.Point(4, 35);
+            this.tabPageNostalgia.Name = "tabPageNostalgia";
+            this.tabPageNostalgia.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageNostalgia.Size = new System.Drawing.Size(1138, 555);
+            this.tabPageNostalgia.TabIndex = 1;
+            this.tabPageNostalgia.Text = "Nostalgia";
+            this.tabPageNostalgia.UseVisualStyleBackColor = true;
+            // 
+            // labelNostaldiaExplaination
+            // 
+            this.labelNostaldiaExplaination.AutoSize = true;
+            this.labelNostaldiaExplaination.Location = new System.Drawing.Point(6, 7);
+            this.labelNostaldiaExplaination.Name = "labelNostaldiaExplaination";
+            this.labelNostaldiaExplaination.Size = new System.Drawing.Size(715, 26);
+            this.labelNostaldiaExplaination.TabIndex = 4;
+            this.labelNostaldiaExplaination.Text = "Select the kind of nostalgia that you want and click the \"nostalgia\" button.";
             // 
             // textBoxUploadDate
             // 
@@ -387,14 +379,7 @@
             this.textBoxUploadDate.ReadOnly = true;
             this.textBoxUploadDate.Size = new System.Drawing.Size(323, 32);
             this.textBoxUploadDate.TabIndex = 3;
-            // 
-            // pictureBoxRandomPhoto
-            // 
-            this.pictureBoxRandomPhoto.Location = new System.Drawing.Point(344, 96);
-            this.pictureBoxRandomPhoto.Name = "pictureBoxRandomPhoto";
-            this.pictureBoxRandomPhoto.Size = new System.Drawing.Size(786, 451);
-            this.pictureBoxRandomPhoto.TabIndex = 2;
-            this.pictureBoxRandomPhoto.TabStop = false;
+            this.textBoxUploadDate.Visible = false;
             // 
             // buttonNostalgia
             // 
@@ -410,13 +395,13 @@
             // 
             this.comboBoxMediaType.FormattingEnabled = true;
             this.comboBoxMediaType.Items.AddRange(new object[] {
-            "Photo",
-            "Post"});
+            "Photos",
+            "Posts"});
             this.comboBoxMediaType.Location = new System.Drawing.Point(8, 36);
             this.comboBoxMediaType.Name = "comboBoxMediaType";
             this.comboBoxMediaType.Size = new System.Drawing.Size(121, 34);
             this.comboBoxMediaType.TabIndex = 0;
-            this.comboBoxMediaType.Text = "Photo";
+            this.comboBoxMediaType.Text = "Photos";
             // 
             // printDialog1
             // 
@@ -426,14 +411,30 @@
             // 
             this.printDialog2.UseEXDialog = true;
             // 
-            // labelNostaldiaExplaination
+            // tabPageCommentGenerator
             // 
-            this.labelNostaldiaExplaination.AutoSize = true;
-            this.labelNostaldiaExplaination.Location = new System.Drawing.Point(6, 7);
-            this.labelNostaldiaExplaination.Name = "labelNostaldiaExplaination";
-            this.labelNostaldiaExplaination.Size = new System.Drawing.Size(715, 26);
-            this.labelNostaldiaExplaination.TabIndex = 4;
-            this.labelNostaldiaExplaination.Text = "Select the kind of nostalgia that you want and click the \"nostalgia\" button.";
+            this.tabPageCommentGenerator.Location = new System.Drawing.Point(4, 35);
+            this.tabPageCommentGenerator.Name = "tabPageCommentGenerator";
+            this.tabPageCommentGenerator.Size = new System.Drawing.Size(1138, 555);
+            this.tabPageCommentGenerator.TabIndex = 2;
+            this.tabPageCommentGenerator.Text = "Comment Generator";
+            this.tabPageCommentGenerator.UseVisualStyleBackColor = true;
+            // 
+            // labelEmailIcon
+            // 
+            this.labelEmailIcon.Image = global::BasicFacebookFeatures.Properties.Resources.envelope_solid;
+            this.labelEmailIcon.Location = new System.Drawing.Point(382, 37);
+            this.labelEmailIcon.Name = "labelEmailIcon";
+            this.labelEmailIcon.Size = new System.Drawing.Size(37, 37);
+            this.labelEmailIcon.TabIndex = 71;
+            // 
+            // labelNameIcon
+            // 
+            this.labelNameIcon.Image = global::BasicFacebookFeatures.Properties.Resources.user_solid;
+            this.labelNameIcon.Location = new System.Drawing.Point(380, 0);
+            this.labelNameIcon.Name = "labelNameIcon";
+            this.labelNameIcon.Size = new System.Drawing.Size(37, 37);
+            this.labelNameIcon.TabIndex = 70;
             // 
             // FormMain
             // 
@@ -442,6 +443,7 @@
             this.ClientSize = new System.Drawing.Size(1146, 594);
             this.Controls.Add(this.tabControlApp);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMain";
@@ -452,9 +454,8 @@
             this.tabPageProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.tabPageFeatures.ResumeLayout(false);
-            this.tabPageFeatures.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRandomPhoto)).EndInit();
+            this.tabPageNostalgia.ResumeLayout(false);
+            this.tabPageNostalgia.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -463,7 +464,7 @@
 		private System.Windows.Forms.Button buttonLogout;
 		private System.Windows.Forms.TabControl tabControlApp;
 		private System.Windows.Forms.TabPage tabPageProfile;
-		private System.Windows.Forms.TabPage tabPageFeatures;
+		private System.Windows.Forms.TabPage tabPageNostalgia;
         private System.Windows.Forms.PictureBox pictureBoxProfile;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -485,17 +486,17 @@
         private System.Windows.Forms.Panel panelSeparator;
         private System.Windows.Forms.PrintDialog printDialog1;
         private System.Windows.Forms.PrintDialog printDialog2;
-        private System.Windows.Forms.Label labelNameIcon;
         private System.Windows.Forms.Label labelCityIcon;
         private System.Windows.Forms.Label labelAgeIcon;
-        private System.Windows.Forms.Label labelEmailIcon;
         private System.Windows.Forms.Label labelBirthDayIcon;
         private System.Windows.Forms.Label labelGenderIcon;
         private System.Windows.Forms.Button buttonNostalgia;
         private System.Windows.Forms.ComboBox comboBoxMediaType;
         private System.Windows.Forms.TextBox textBoxUploadDate;
-        private System.Windows.Forms.PictureBox pictureBoxRandomPhoto;
         private System.Windows.Forms.Label labelNostaldiaExplaination;
+        private System.Windows.Forms.TabPage tabPageCommentGenerator;
+        private System.Windows.Forms.Label labelEmailIcon;
+        private System.Windows.Forms.Label labelNameIcon;
     }
 }
 

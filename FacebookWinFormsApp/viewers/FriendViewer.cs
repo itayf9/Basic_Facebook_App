@@ -10,13 +10,13 @@ namespace BasicFacebookFeatures
         private readonly Label r_LabelGenderTitle;
         private readonly Label r_LabelGenderValue;
 
-        public FriendViewer()
-            : base()
+        public FriendViewer(int i_TopLeftX, int i_TopLeftY)
+            : base(i_TopLeftX, i_TopLeftY)
         {
             r_LabelBirthdayTitle = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(615, 300),
+                Location = new System.Drawing.Point(i_TopLeftX, i_TopLeftY + 130),
                 Name = "labelBirthdayTitle",
                 Size = new System.Drawing.Size(98, 26),
                 TabIndex = 70,
@@ -26,7 +26,7 @@ namespace BasicFacebookFeatures
             r_LabelBirthdayValue = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(699, 300),
+                Location = new System.Drawing.Point(i_TopLeftX + 84, i_TopLeftY + 130),
                 Name = "labelBirthdayValue",
                 Size = new System.Drawing.Size(96, 26),
                 TabIndex = 71,
@@ -36,7 +36,7 @@ namespace BasicFacebookFeatures
             r_LabelGenderTitle = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(615, 335),
+                Location = new System.Drawing.Point(i_TopLeftX, i_TopLeftY + 165),
                 Name = "labelGenderTitle",
                 Size = new System.Drawing.Size(90, 26),
                 TabIndex = 72,
@@ -46,14 +46,14 @@ namespace BasicFacebookFeatures
             r_LabelGenderValue = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(699, 335),
+                Location = new System.Drawing.Point(i_TopLeftX + 84, i_TopLeftY + 165),
                 Name = "labelGenderValue",
                 Size = new System.Drawing.Size(60, 26),
                 TabIndex = 73,
                 Text = "male",
             };
 
-            setVisible(false);
+            SetVisibility(false);
         }
 
         public void loadFriendDetailsToComponents(User i_Friend)
@@ -63,7 +63,7 @@ namespace BasicFacebookFeatures
             r_LabelBirthdayValue.Text = i_Friend.Birthday.ToString();
             r_LabelGenderValue.Text = i_Friend.Gender.ToString();
 
-            setVisible(true);
+            SetVisibility(true);
         }
 
         public override void AddControls(TabPage i_TabPage)
@@ -78,19 +78,19 @@ namespace BasicFacebookFeatures
 
         public override void HideControls()
         {
-            setVisible(false);
+            SetVisibility(false);
 
             base.HideControls();
         }
 
-        internal void setVisible(bool i_Visible)
+        public override void SetVisibility(bool i_IsShouldBecomeVisible)
         {
-            r_LabelGenderValue.Visible = i_Visible;
-            r_LabelGenderTitle.Visible = i_Visible;
-            r_LabelBirthdayValue.Visible = i_Visible;
-            r_LabelBirthdayTitle.Visible = i_Visible;
+            r_LabelGenderValue.Visible = i_IsShouldBecomeVisible;
+            r_LabelGenderTitle.Visible = i_IsShouldBecomeVisible;
+            r_LabelBirthdayValue.Visible = i_IsShouldBecomeVisible;
+            r_LabelBirthdayTitle.Visible = i_IsShouldBecomeVisible;
 
-            base.SetVisible(i_Visible);
+            base.SetVisibility(i_IsShouldBecomeVisible);
         }
     }
 }

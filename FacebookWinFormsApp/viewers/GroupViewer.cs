@@ -8,13 +8,13 @@ namespace BasicFacebookFeatures
         private readonly Label r_LabelDescription;
         private readonly TextBox r_TextBoxDescription;
 
-        public GroupViewer()
-            : base()
+        public GroupViewer(int i_TopLeftX, int i_TopLeftY)
+            : base(i_TopLeftX, i_TopLeftY)
         {
             r_LabelDescription = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(615, 300),
+                Location = new System.Drawing.Point(i_TopLeftX, i_TopLeftY + 130),
                 Name = "labelDesctiption",
                 Size = new System.Drawing.Size(193, 26),
                 TabIndex = 70,
@@ -23,7 +23,7 @@ namespace BasicFacebookFeatures
 
             r_TextBoxDescription = new TextBox
             {
-                Location = new System.Drawing.Point(615, 335),
+                Location = new System.Drawing.Point(i_TopLeftX, i_TopLeftY + 165),
                 Multiline = true,
                 Name = "textBoxDescription",
                 Size = new System.Drawing.Size(508, 152),
@@ -32,7 +32,7 @@ namespace BasicFacebookFeatures
                 ScrollBars = ScrollBars.Vertical,
             };
 
-            setVisible(false);
+            SetVisibility(false);
         }
 
         public Label LabelDecription
@@ -55,7 +55,7 @@ namespace BasicFacebookFeatures
 
         public override void HideControls()
         {
-            setVisible(false);
+            SetVisibility(false);
 
             base.HideControls();
         }
@@ -64,15 +64,15 @@ namespace BasicFacebookFeatures
         {
             LoadMainPictureAndNameToComponents(i_SelectedGroup.PictureNormalURL, i_SelectedGroup.Name);
             r_TextBoxDescription.Text = i_SelectedGroup.Description;
-            setVisible(true);
+            SetVisibility(true);
         }
 
-        internal void setVisible(bool i_Visible)
+        public override void SetVisibility(bool i_IsShouldBecomeVisible)
         {
-           r_LabelDescription.Visible = i_Visible;
-           r_TextBoxDescription.Visible = i_Visible;
+           r_LabelDescription.Visible = i_IsShouldBecomeVisible;
+           r_TextBoxDescription.Visible = i_IsShouldBecomeVisible;
 
-           base.SetVisible(i_Visible);
+           base.SetVisibility(i_IsShouldBecomeVisible);
         }
     }
 }

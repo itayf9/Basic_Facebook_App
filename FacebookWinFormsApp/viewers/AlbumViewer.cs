@@ -9,24 +9,25 @@ namespace BasicFacebookFeatures
         private readonly ListBox r_ListBoxPictures;
         private readonly PictureBox r_PictureBoxSelectedPicture;
 
-        public AlbumViewer()
-            : base()
+        public AlbumViewer(int i_TopLeftX, int i_TopLeftY)
+            : base(i_TopLeftX, i_TopLeftY)
         {
             r_ListBoxPictures = new ListBox
             {
                 FormattingEnabled = true,
                 ItemHeight = 26,
-                Location = new System.Drawing.Point(590, 290),
+                Location = new System.Drawing.Point(i_TopLeftX, i_TopLeftY + 130),
                 Name = "listBoxPictures",
-                Size = new System.Drawing.Size(180, 150),
+                Size = new System.Drawing.Size(140, 150),
                 TabIndex = 72,
+                HorizontalScrollbar = true,
             };
             r_ListBoxPictures.SelectedIndexChanged += new EventHandler(listBoxPictures_SelectedIndexChanged);
             r_ListBoxPictures.DisplayMember = "CreatedTime";
 
             r_PictureBoxSelectedPicture = new PictureBox
             {
-                Location = new System.Drawing.Point(801, 290),
+                Location = new System.Drawing.Point(i_TopLeftX + 195, i_TopLeftY + 130),
                 Name = "pictureBoxSelectedPicture",
                 Size = new System.Drawing.Size(349, 301),
                 SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage,
@@ -34,7 +35,7 @@ namespace BasicFacebookFeatures
                 TabStop = false,
             };
 
-            setVisible(false);
+            SetVisibility(false);
         }
 
         public ListBox ListBoxPictures
@@ -70,7 +71,7 @@ namespace BasicFacebookFeatures
                     throw new NoDataAvailableException("Photos");
                 }
 
-                setVisible(true);
+                SetVisibility(true);
             }
             catch (NoDataAvailableException noDataAvailableException)
             {
@@ -78,7 +79,7 @@ namespace BasicFacebookFeatures
             }
             catch (Exception)
             {
-                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
+                MessageBox.Show(Messages.k_GeneralErrorMessage);
             }
         }
 
@@ -92,17 +93,17 @@ namespace BasicFacebookFeatures
 
         public override void HideControls()
         {
-            setVisible(false);
+            SetVisibility(false);
 
             base.HideControls();
         }
 
-        internal void setVisible(bool i_Visible)
+        public override void SetVisibility(bool i_IsShouldBecomeVisible)
         {
-            r_ListBoxPictures.Visible = i_Visible;
-            r_PictureBoxSelectedPicture.Visible = i_Visible;
+            r_ListBoxPictures.Visible = i_IsShouldBecomeVisible;
+            r_PictureBoxSelectedPicture.Visible = i_IsShouldBecomeVisible;
 
-            base.SetVisible(i_Visible);
+            base.SetVisibility(i_IsShouldBecomeVisible);
         }
 
         private void listBoxPictures_SelectedIndexChanged(object sender, EventArgs e)

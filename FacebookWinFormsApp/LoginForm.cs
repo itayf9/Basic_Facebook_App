@@ -8,12 +8,10 @@ namespace BasicFacebookFeatures
     public partial class LoginForm : Form
     {
         private const string k_AppID = "832742648143866";
-
         private const string k_SessionLoginButtonText = "Continue With {0}";
-
         private const string k_DefaultLoginButtonText = "Login";
 
-        private readonly string[] r_RequestedPermissions =
+        private static readonly string[] sr_RequestedPermissions =
         {
             "email",
             "public_profile",
@@ -38,7 +36,7 @@ namespace BasicFacebookFeatures
             InitializeComponent();
             FacebookService.s_CollectionLimit = 25;
 
-            if (Session.IsSessionExist())
+            if (Session.IsSessionExists())
             {
                 m_Session = Session.LoadFromFile();
             }
@@ -66,8 +64,8 @@ namespace BasicFacebookFeatures
             {
                 checkBoxRememberMe.Checked = m_Session.IsRememberMe;
                 buttonLogin.Text = m_Session.IsRememberMe ?
-                    string.Format(k_SessionLoginButtonText, m_Session.LoggedInUserName)
-                    : k_DefaultLoginButtonText;
+                    string.Format(k_SessionLoginButtonText, m_Session.LoggedInUserName) :
+                    k_DefaultLoginButtonText;
             }
             else
             {
@@ -99,7 +97,7 @@ namespace BasicFacebookFeatures
             }
             catch (Exception)
             {
-                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
+                MessageBox.Show(Messages.k_GeneralErrorMessage);
             }
         }
 
@@ -107,7 +105,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                LoginResult loginResult = FacebookService.Login(k_AppID, r_RequestedPermissions);
+                LoginResult loginResult = FacebookService.Login(k_AppID, sr_RequestedPermissions);
 
                 if (!string.IsNullOrEmpty(loginResult.AccessToken))
                 {
@@ -137,7 +135,7 @@ namespace BasicFacebookFeatures
             }
             catch (Exception)
             {
-                MessageBox.Show(Constants.GENERAL_ERROR_MESSAGE);
+                MessageBox.Show(Messages.k_GeneralErrorMessage);
             }
         }
 
@@ -145,7 +143,7 @@ namespace BasicFacebookFeatures
         {
             this.Hide();
             new FormMain(m_LoggedInUser).ShowDialog();
-            if (!Session.IsSessionExist())
+            if (!Session.IsSessionExists())
             {
                 m_Session = null;
             }

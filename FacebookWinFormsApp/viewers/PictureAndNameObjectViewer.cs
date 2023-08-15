@@ -8,11 +8,11 @@ namespace BasicFacebookFeatures
         private readonly Label r_LabelName;
         private readonly Panel r_PanelPictureAndNameArea;
 
-        protected PictureAndNameObjectViewer()
+        protected PictureAndNameObjectViewer(int i_TopLeftX, int i_TopLeftY)
         {
             r_PictureBoxMainPicture = new PictureBox
             {
-                Location = new System.Drawing.Point(615, 187),
+                Location = new System.Drawing.Point(i_TopLeftX + 9, i_TopLeftY + 9),
                 Name = "pictureBoxSelectedContent",
                 Size = new System.Drawing.Size(110, 110),
                 SizeMode = PictureBoxSizeMode.StretchImage,
@@ -23,23 +23,26 @@ namespace BasicFacebookFeatures
             r_LabelName = new Label
             {
                 AutoSize = false,
-                Location = new System.Drawing.Point(725, 187),
+                Location = new System.Drawing.Point(i_TopLeftX + 120, i_TopLeftY + 9),
                 Name = "labelFullName",
                 Size = new System.Drawing.Size(320, 110),
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 20, System.Drawing.FontStyle.Bold),
                 TabIndex = 70,
+                BackColor = System.Drawing.Color.White,
             };
 
             r_PanelPictureAndNameArea = new Panel
             {
                 BackColor = System.Drawing.Color.White,
-                Location = new System.Drawing.Point(606, 178),
+                Location = new System.Drawing.Point(i_TopLeftX, i_TopLeftY),
                 Name = "panelPictureAndNameBackground",
-                Size = new System.Drawing.Size(500, 137),
+                Size = new System.Drawing.Size(500, 128),
                 TabIndex = 71,
+                BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle,
             };
             r_PanelPictureAndNameArea.Controls.Add(r_PictureBoxMainPicture);
             r_PanelPictureAndNameArea.Controls.Add(r_LabelName);
+
         }
 
         public PictureBox PictureBoxMainPicture
@@ -72,14 +75,14 @@ namespace BasicFacebookFeatures
 
         public virtual void HideControls()
         {
-            SetVisible(false);
+            SetVisibility(false);
         }
 
-        public virtual void SetVisible(bool i_Visible)
+        public virtual void SetVisibility(bool i_IsShouldBecomeVisible)
         {
-            r_PictureBoxMainPicture.Visible = i_Visible;
-            r_LabelName.Visible = i_Visible;
-            r_PanelPictureAndNameArea.Visible = i_Visible;
+            r_PictureBoxMainPicture.Visible = i_IsShouldBecomeVisible;
+            r_LabelName.Visible = i_IsShouldBecomeVisible;
+            r_PanelPictureAndNameArea.Visible = i_IsShouldBecomeVisible;
         }
     }
 }

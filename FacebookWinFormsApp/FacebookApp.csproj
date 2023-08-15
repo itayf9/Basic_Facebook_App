@@ -95,10 +95,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utillity.cs" />
     <Compile Include="viewers\AlbumViewer.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Messages.cs" />
     <Compile Include="viewers\EventViewer.cs" />
-    <Compile Include="eViewerIndex.cs" />
+    <Compile Include="eProfileViewerIndex.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +117,7 @@
     </Compile>
     <Compile Include="NoDataAvailableException.cs" />
     <Compile Include="viewers\PageViewer.cs" />
+    <Compile Include="viewers\PhotoViewer.cs" />
     <Compile Include="viewers\PictureAndNameObjectViewer.cs" />
     <Compile Include="viewers\PostViewer.cs" />
     <Compile Include="Program.cs" />
@@ -143,6 +145,7 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="ClassDiagram.cd" />
+    <Compile Include="eNostalgiaViewerIndex.cs" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
