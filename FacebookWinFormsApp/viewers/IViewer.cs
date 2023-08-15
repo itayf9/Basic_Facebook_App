@@ -9,8 +9,10 @@ namespace BasicFacebookFeatures
 {
     public interface IViewer
     {
-        void AddControls(TabPage i_TabPage);
+        void AddControls(TabPage i_TabPageToAddControlsTo);
 
         void HideControls();
+
+        void SetVisibility(bool i_IsShouldBecomeVisible);
     }
 }

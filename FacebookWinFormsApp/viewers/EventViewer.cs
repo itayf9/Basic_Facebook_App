@@ -6,8 +6,9 @@ namespace BasicFacebookFeatures
 {
     internal class EventViewer : PictureAndNameObjectViewer
     {
-        public EventViewer()
-            : base()
+
+        public EventViewer(int i_TopLeftX, int i_TopLeftY)
+            : base(i_TopLeftX, i_TopLeftY)
         {
         }
 
@@ -21,9 +22,9 @@ namespace BasicFacebookFeatures
             base.HideControls();
         }
 
-        public override void SetVisible(bool i_Visible)
+        public override void SetVisibility(bool i_IsShouldBecomeVisible)
         {
-            base.SetVisible(i_Visible);
+            base.SetVisibility(i_IsShouldBecomeVisible);
         }
 
         internal void loadEventDetailsToComponents(Event i_SelectedEvent)

@@ -23,7 +23,7 @@ namespace BasicFacebookFeatures
 
             r_TextBoxCaption = new TextBox
             {
-                Location = new System.Drawing.Point(i_topLeftX + 7, i_topLeftY + 30),
+                Location = new System.Drawing.Point(i_topLeftX, i_topLeftY + 35),
                 Multiline = true,
                 Name = "textBoxCaption",
                 Size = new System.Drawing.Size(520, 88),
@@ -34,7 +34,7 @@ namespace BasicFacebookFeatures
 
             r_PictureBoxPost = new PictureBox
             {
-                Location = new System.Drawing.Point(i_topLeftX + 7, i_topLeftY + 126 ),
+                Location = new System.Drawing.Point(i_topLeftX, i_topLeftY + 70 ),
                 Name = "pictureBoxPost",
                 Size = new System.Drawing.Size(520, 243),
                 SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage,
@@ -42,7 +42,7 @@ namespace BasicFacebookFeatures
                 TabStop = false,
             };
 
-            setVisible(false);
+            SetVisibility(false);
         }
 
         public void loadPostDetailsToComponents(Post i_Post)
@@ -56,7 +56,7 @@ namespace BasicFacebookFeatures
                 r_PictureBoxPost.LoadAsync(i_Post.PictureURL);
             }
 
-            setVisible(true);
+            SetVisibility(true);
         }
 
         public void AddControls(TabPage i_TabPage)
@@ -68,14 +68,14 @@ namespace BasicFacebookFeatures
 
         public void HideControls()
         {
-            setVisible(false);
+            SetVisibility(false);
         }
 
-        internal void setVisible(bool i_Visible)
+        public void SetVisibility(bool i_IsShouldBecomeVisible)
         {
-            r_LabelCaption.Visible = i_Visible;
-            r_TextBoxCaption.Visible = i_Visible;
-            r_PictureBoxPost.Visible = i_Visible;
+            r_LabelCaption.Visible = i_IsShouldBecomeVisible;
+            r_TextBoxCaption.Visible = i_IsShouldBecomeVisible;
+            r_PictureBoxPost.Visible = i_IsShouldBecomeVisible;
         }
     }
 }
