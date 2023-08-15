@@ -21,6 +21,7 @@ namespace BasicFacebookFeatures
         private readonly List<IViewer> r_ProfileViewers;
         private readonly List<IViewer> r_NostalgiaViewers;
         private readonly User r_LoggedInUser;
+        private readonly CommentGenerator r_CommentGenerator;
 
         public FormMain(User i_LoggedInUser)
         {
@@ -28,6 +29,7 @@ namespace BasicFacebookFeatures
             r_ProfileViewers = new List<IViewer>();
             r_NostalgiaViewers = new List<IViewer>();
             InitializeComponent();
+            r_CommentGenerator = new CommentGenerator(textBoxQuestions, textBoxCommentOutput, buttonStart, buttonPostComment, flowLayoutPanelOptionButtons);
             FacebookService.s_CollectionLimit = 25;
             initializeProfileInformation();
             initializeViewers();
@@ -399,7 +401,6 @@ namespace BasicFacebookFeatures
 
         private void buttonNostalgia_Click(object sender, EventArgs e)
         {
-
             if (comboBoxMediaType.Text == k_ContentCategoryPhotos)
             {
                 r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewerIndex].SetVisibility(false);
@@ -449,7 +450,7 @@ namespace BasicFacebookFeatures
                 Photo selectedPhoto = listOfPhotosFromSelectedAlbum[indexOfSelectedPhoto];
 
                 textBoxUploadDate.Visible = true;
-                textBoxUploadDate.Text = $"Created on {selectedPhoto.CreatedTime.ToString()}";
+                textBoxUploadDate.Text = $"Created on {selectedPhoto.CreatedTime}";
                 (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewerIndex] as PhotoViewer).loadRandomPhotoToComponents(selectedPhoto);
             }
             catch (NoDataAvailableException noDataAvailableException)
@@ -460,7 +461,6 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show(Messages.k_GeneralErrorMessage);
             }
-
         }
 
         private void showNostalgiaPost()
@@ -475,7 +475,7 @@ namespace BasicFacebookFeatures
             Post selectedPost = fetchedPosts[indexOfRandomPost];
 
             textBoxUploadDate.Visible = true;
-            textBoxUploadDate.Text = $"Created on {selectedPost.CreatedTime.ToString()}" ;
+            textBoxUploadDate.Text = $"Created on {selectedPost.CreatedTime}";
 
             (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewerIndex] as PostViewer).loadPostDetailsToComponents(selectedPost);
         }

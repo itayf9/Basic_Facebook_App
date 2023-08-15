@@ -95,6 +95,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommentGenerator.cs" />
     <Compile Include="Utillity.cs" />
     <Compile Include="viewers\AlbumViewer.cs" />
     <Compile Include="Messages.cs" />

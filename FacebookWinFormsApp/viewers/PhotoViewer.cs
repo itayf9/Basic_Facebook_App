@@ -1,10 +1,5 @@
-﻿using FacebookWrapper.ObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.viewers
 {
@@ -14,12 +9,14 @@ namespace BasicFacebookFeatures.viewers
 
         public PhotoViewer(int i_TopLeftX, int i_TopLeftY)
         {
-            r_PictureBoxRandomPhoto = new PictureBox();
-            r_PictureBoxRandomPhoto.Location = new System.Drawing.Point(i_TopLeftX, i_TopLeftY);
-            r_PictureBoxRandomPhoto.Name = "pictureBoxRandomPhoto";
-            r_PictureBoxRandomPhoto.Size = new System.Drawing.Size(786, 451);
-            r_PictureBoxRandomPhoto.TabIndex = 2;
-            r_PictureBoxRandomPhoto.TabStop = false;
+            r_PictureBoxRandomPhoto = new PictureBox
+            {
+                Location = new System.Drawing.Point(i_TopLeftX, i_TopLeftY),
+                Name = "pictureBoxRandomPhoto",
+                Size = new System.Drawing.Size(786, 451),
+                TabIndex = 2,
+                TabStop = false,
+            };
         }
 
         public void AddControls(TabPage i_TabPage)
