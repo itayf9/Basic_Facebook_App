@@ -14,7 +14,7 @@ namespace BasicFacebookFeatures
             r_LabelDescription = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(610, 178),
+                Location = new System.Drawing.Point(615, 300),
                 Name = "labelDesctiption",
                 Size = new System.Drawing.Size(193, 26),
                 TabIndex = 70,
@@ -23,12 +23,13 @@ namespace BasicFacebookFeatures
 
             r_TextBoxDescription = new TextBox
             {
-                Location = new System.Drawing.Point(615, 219),
+                Location = new System.Drawing.Point(615, 335),
                 Multiline = true,
                 Name = "textBoxDescription",
-                Size = new System.Drawing.Size(308, 152),
+                Size = new System.Drawing.Size(508, 152),
                 TabIndex = 71,
                 ReadOnly = true,
+                ScrollBars = ScrollBars.Vertical,
             };
 
             setVisible(false);
@@ -61,6 +62,7 @@ namespace BasicFacebookFeatures
 
         internal void LoadGroupDetailsToComponents(Group i_SelectedGroup)
         {
+            LoadMainPictureAndNameToComponents(i_SelectedGroup.PictureNormalURL, i_SelectedGroup.Name);
             r_TextBoxDescription.Text = i_SelectedGroup.Description;
             setVisible(true);
         }
