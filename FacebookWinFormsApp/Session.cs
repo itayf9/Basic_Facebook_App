@@ -6,8 +6,11 @@ namespace BasicFacebookFeatures
     public class Session
     {
         private const string k_SessionFileName = "Session.xml";
+        private string m_LoggedInUserName;
         private string m_AccessToken;
         private bool m_IsRememberMe;
+
+        public string LoggedInUserName { get; set; }
 
         public string AccessToken { get; set; }
 

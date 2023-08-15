@@ -9,7 +9,7 @@ namespace BasicFacebookFeatures
     {
         private const string k_AppID = "832742648143866";
 
-        private const string k_SessionLoginButtonText = "Continue With Facebook";
+        private const string k_SessionLoginButtonText = "Continue With {0}";
 
         private const string k_DefaultLoginButtonText = "Login";
 
@@ -65,7 +65,8 @@ namespace BasicFacebookFeatures
             if (m_Session != null)
             {
                 checkBoxRememberMe.Checked = m_Session.IsRememberMe;
-                buttonLogin.Text = m_Session.IsRememberMe ? k_SessionLoginButtonText
+                buttonLogin.Text = m_Session.IsRememberMe ?
+                    string.Format(k_SessionLoginButtonText, m_Session.LoggedInUserName)
                     : k_DefaultLoginButtonText;
             }
             else
@@ -117,6 +118,7 @@ namespace BasicFacebookFeatures
                     {
                         AccessToken = loginResult.AccessToken,
                         IsRememberMe = checkBoxRememberMe.Checked,
+                        LoggedInUserName = m_LoggedInUser.Name,
                     };
                     m_Session.SaveToFile();
 
