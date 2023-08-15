@@ -411,7 +411,7 @@ namespace BasicFacebookFeatures
         private void loadRandomPhotoToComponents(Photo i_SelectedPhoto)
         {
             pictureBoxRandomPhoto.Image = i_SelectedPhoto.ImageNormal;
-            textBoxUploadDate.Text = i_SelectedPhoto.CreatedTime.ToString();
+            textBoxUploadDate.Text = $"Created on {i_SelectedPhoto.CreatedTime.ToString()}";
         }
 
         private void showNostalgiaPhoto()
@@ -472,7 +472,7 @@ namespace BasicFacebookFeatures
             int indexOfRandomPost = randomGenerator.Next(fetchedPosts.Count);
             Post selectedPost = fetchedPosts[indexOfRandomPost];
 
-            textBoxUploadDate.Text = selectedPost.CreatedTime.ToString();
+            textBoxUploadDate.Text = $"Created on {selectedPost.CreatedTime.ToString()}" ;
 
             (r_NostalgiaViewers[0] as PostViewer).loadPostDetailsToComponents(selectedPost);
         }

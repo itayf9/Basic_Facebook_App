@@ -64,6 +64,7 @@
             this.comboBoxMediaType = new System.Windows.Forms.ComboBox();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
+            this.labelNostaldiaExplaination = new System.Windows.Forms.Label();
             this.tabControlApp.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
@@ -366,6 +367,7 @@
             // 
             // tabPageFeatures
             // 
+            this.tabPageFeatures.Controls.Add(this.labelNostaldiaExplaination);
             this.tabPageFeatures.Controls.Add(this.textBoxUploadDate);
             this.tabPageFeatures.Controls.Add(this.pictureBoxRandomPhoto);
             this.tabPageFeatures.Controls.Add(this.buttonNostalgia);
@@ -396,7 +398,7 @@
             // 
             // buttonNostalgia
             // 
-            this.buttonNostalgia.Location = new System.Drawing.Point(9, 68);
+            this.buttonNostalgia.Location = new System.Drawing.Point(6, 85);
             this.buttonNostalgia.Name = "buttonNostalgia";
             this.buttonNostalgia.Size = new System.Drawing.Size(242, 43);
             this.buttonNostalgia.TabIndex = 1;
@@ -410,10 +412,11 @@
             this.comboBoxMediaType.Items.AddRange(new object[] {
             "Photo",
             "Post"});
-            this.comboBoxMediaType.Location = new System.Drawing.Point(8, 6);
+            this.comboBoxMediaType.Location = new System.Drawing.Point(8, 36);
             this.comboBoxMediaType.Name = "comboBoxMediaType";
             this.comboBoxMediaType.Size = new System.Drawing.Size(121, 34);
             this.comboBoxMediaType.TabIndex = 0;
+            this.comboBoxMediaType.Text = "Photo";
             // 
             // printDialog1
             // 
@@ -422,6 +425,15 @@
             // printDialog2
             // 
             this.printDialog2.UseEXDialog = true;
+            // 
+            // labelNostaldiaExplaination
+            // 
+            this.labelNostaldiaExplaination.AutoSize = true;
+            this.labelNostaldiaExplaination.Location = new System.Drawing.Point(6, 7);
+            this.labelNostaldiaExplaination.Name = "labelNostaldiaExplaination";
+            this.labelNostaldiaExplaination.Size = new System.Drawing.Size(715, 26);
+            this.labelNostaldiaExplaination.TabIndex = 4;
+            this.labelNostaldiaExplaination.Text = "Select the kind of nostalgia that you want and click the \"nostalgia\" button.";
             // 
             // FormMain
             // 
@@ -483,6 +495,7 @@
         private System.Windows.Forms.ComboBox comboBoxMediaType;
         private System.Windows.Forms.TextBox textBoxUploadDate;
         private System.Windows.Forms.PictureBox pictureBoxRandomPhoto;
+        private System.Windows.Forms.Label labelNostaldiaExplaination;
     }
 }
 
