@@ -29,7 +29,8 @@ namespace BasicFacebookFeatures
             r_ProfileViewers = new List<IViewer>();
             r_NostalgiaViewers = new List<IViewer>();
             InitializeComponent();
-            r_CommentGenerator = new CommentGenerator(textBoxQuestions, textBoxCommentOutput, buttonStart, buttonPostComment, flowLayoutPanelOptionButtons);
+            List<Button> listOfInitialAnswerButtons = new List<Button> { buttonAnswer1_1, buttonAnswer1_2 };
+            r_CommentGenerator = new CommentGenerator(textBoxQuestion, textBoxCommentOutput, buttonStart, buttonPostComment, labelCommentOutputExplainationCommentGenerator, flowLayoutPanelOptionButtons, listOfInitialAnswerButtons);
             FacebookService.s_CollectionLimit = 25;
             initializeProfileInformation();
             initializeViewers();
@@ -478,6 +479,24 @@ namespace BasicFacebookFeatures
             textBoxUploadDate.Text = $"Created on {selectedPost.CreatedTime}";
 
             (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewerIndex] as PostViewer).loadPostDetailsToComponents(selectedPost);
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            r_CommentGenerator.startNewCommentGenerator();
+        }
+
+        private void buttonPostComment_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Status postedStatus = r_LoggedInUser.PostStatus(textBoxCommentOutput.Text);
+                MessageBox.Show("Successfully Posted!");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(Messages.k_GeneralErrorMessage);
+            }
         }
     }
 }
