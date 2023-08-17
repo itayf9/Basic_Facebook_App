@@ -95,12 +95,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommentGenerator.cs" />
-    <Compile Include="Utillity.cs" />
-    <Compile Include="viewers\AlbumViewer.cs" />
-    <Compile Include="Messages.cs" />
+    <Compile Include="utillities\Utillity.cs" />
+    <Compile Include="CommentGenerator.cs" />    <Compile Include="viewers\AlbumViewer.cs" />
+    <Compile Include="utillities\Messages.cs" />
     <Compile Include="viewers\EventViewer.cs" />
-    <Compile Include="eProfileViewerIndex.cs" />
+    <Compile Include="enums\eProfileViewerIndex.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,7 +115,7 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NoDataAvailableException.cs" />
+    <Compile Include="exceptions\NoDataAvailableException.cs" />
     <Compile Include="viewers\PageViewer.cs" />
     <Compile Include="viewers\PhotoViewer.cs" />
     <Compile Include="viewers\PictureAndNameObjectViewer.cs" />
@@ -128,7 +127,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Session.cs" />
+    <Compile Include="sessions\Session.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -146,7 +145,7 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="ClassDiagram.cd" />
-    <Compile Include="eNostalgiaViewerIndex.cs" />
+    <Compile Include="enums\eNostalgiaViewerIndex.cs" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
