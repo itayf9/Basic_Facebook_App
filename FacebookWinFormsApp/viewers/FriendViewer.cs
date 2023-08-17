@@ -9,6 +9,8 @@ namespace BasicFacebookFeatures
         private readonly Label r_LabelBirthdayValue;
         private readonly Label r_LabelGenderTitle;
         private readonly Label r_LabelGenderValue;
+        private readonly Label r_LabelHomeTownTitle;
+        private readonly Label r_LabelHomeTownValue;
 
         public FriendViewer(int i_TopLeftX, int i_TopLeftY)
             : base(i_TopLeftX, i_TopLeftY)
@@ -53,6 +55,26 @@ namespace BasicFacebookFeatures
                 Text = "male",
             };
 
+            r_LabelHomeTownTitle = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(i_TopLeftX, i_TopLeftY + 200),
+                Name = "labelHomeTownTitle",
+                Size = new System.Drawing.Size(90, 26),
+                TabIndex = 74,
+                Text = "City:",
+            };
+
+            r_LabelHomeTownValue = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(i_TopLeftX + 84, i_TopLeftY + 200),
+                Name = "labelHomeTownValue",
+                Size = new System.Drawing.Size(60, 26),
+                TabIndex = 75,
+                Text = "Tel Aviv",
+            };
+
             SetVisibility(false);
         }
 
@@ -60,8 +82,9 @@ namespace BasicFacebookFeatures
         {
             LoadMainPictureAndNameToComponents(i_Friend.PictureNormalURL, i_Friend.Name);
 
-            r_LabelBirthdayValue.Text = i_Friend.Birthday.ToString();
+            r_LabelBirthdayValue.Text = i_Friend.Birthday;
             r_LabelGenderValue.Text = i_Friend.Gender.ToString();
+            r_LabelHomeTownValue.Text = i_Friend.Location.Name;
 
             SetVisibility(true);
         }
@@ -72,6 +95,8 @@ namespace BasicFacebookFeatures
             i_TabPage.Controls.Add(r_LabelGenderTitle);
             i_TabPage.Controls.Add(r_LabelBirthdayValue);
             i_TabPage.Controls.Add(r_LabelBirthdayTitle);
+            i_TabPage.Controls.Add(r_LabelHomeTownValue);
+            i_TabPage.Controls.Add(r_LabelHomeTownTitle);
 
             base.AddControls(i_TabPage);
         }
@@ -89,6 +114,8 @@ namespace BasicFacebookFeatures
             r_LabelGenderTitle.Visible = i_IsShouldBecomeVisible;
             r_LabelBirthdayValue.Visible = i_IsShouldBecomeVisible;
             r_LabelBirthdayTitle.Visible = i_IsShouldBecomeVisible;
+            r_LabelHomeTownValue.Visible = i_IsShouldBecomeVisible;
+            r_LabelHomeTownTitle.Visible = i_IsShouldBecomeVisible;
 
             base.SetVisibility(i_IsShouldBecomeVisible);
         }

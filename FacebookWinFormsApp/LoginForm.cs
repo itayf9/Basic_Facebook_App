@@ -8,7 +8,7 @@ namespace BasicFacebookFeatures
     public partial class LoginForm : Form
     {
         private const string k_AppID = "832742648143866";
-        private const string k_SessionLoginButtonText = "Continue With {0}";
+        private const string k_SessionLoginButtonText = "Continue as {0}";
         private const string k_DefaultLoginButtonText = "Login";
 
         private static readonly string[] sr_RequestedPermissions =
