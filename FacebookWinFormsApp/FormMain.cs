@@ -76,7 +76,7 @@ namespace BasicFacebookFeatures
                 "MM/dd/yyyy",
                 System.Globalization.CultureInfo.InvariantCulture);
 
-            labelAge.Text = Utillity.CalculateAge(userBirthDay);
+            labelAge.Text = $"{Utillity.CalculateAge(userBirthDay)} Years old";
             labelEmail.Text = r_LoggedInUser.Email;
             labelCity.Text = r_LoggedInUser.Location.Name;
             labelGender.Text = r_LoggedInUser.Gender.ToString();
