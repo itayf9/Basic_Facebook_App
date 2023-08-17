@@ -255,9 +255,9 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                foreach (Event fbEvent in r_LoggedInUser.Events)
+                foreach (Event facebookEvent in r_LoggedInUser.Events)
                 {
-                    listBoxContent.Items.Add(fbEvent.Name);
+                    listBoxContent.Items.Add(facebookEvent);
                 }
 
                 if (listBoxContent.Items.Count == 0)
