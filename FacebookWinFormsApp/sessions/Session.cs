@@ -33,6 +33,11 @@ namespace BasicFacebookFeatures
             return sessionFromFile;
         }
 
+        public static void DeleteSession()
+        {
+            File.Delete(k_SessionFileName);
+        }
+
         public void SaveToFile()
         {
             FileMode fileMode = IsSessionExists() ? FileMode.Truncate : FileMode.CreateNew;
@@ -42,11 +47,6 @@ namespace BasicFacebookFeatures
                 XmlSerializer serializer = new XmlSerializer(this.GetType());
                 serializer.Serialize(stream, this);
             }
-        }
-
-        public static void DeleteSession()
-        {
-            File.Delete(k_SessionFileName);
         }
     }
 }

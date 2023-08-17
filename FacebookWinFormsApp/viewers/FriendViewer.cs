@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
@@ -9,6 +10,10 @@ namespace BasicFacebookFeatures
         private readonly Label r_LabelBirthdayValue;
         private readonly Label r_LabelGenderTitle;
         private readonly Label r_LabelGenderValue;
+        private readonly Label r_LabelHomeTownTitle;
+        private readonly Label r_LabelHomeTownValue;
+        private readonly Label r_LabelAgeTitle;
+        private readonly Label r_LabelAgeValue;
 
         public FriendViewer(int i_TopLeftX, int i_TopLeftY)
             : base(i_TopLeftX, i_TopLeftY)
@@ -53,6 +58,46 @@ namespace BasicFacebookFeatures
                 Text = "male",
             };
 
+            r_LabelHomeTownTitle = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(i_TopLeftX + 200, i_TopLeftY + 130),
+                Name = "labelHomeTownTitle",
+                Size = new System.Drawing.Size(90, 26),
+                TabIndex = 74,
+                Text = "City:",
+            };
+
+            r_LabelHomeTownValue = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(i_TopLeftX + 284, i_TopLeftY + 130),
+                Name = "labelHomeTownValue",
+                Size = new System.Drawing.Size(60, 26),
+                TabIndex = 75,
+                Text = "Tel Aviv",
+            };
+
+            r_LabelAgeTitle = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(i_TopLeftX + 200, i_TopLeftY + 165),
+                Name = "labelAgeTitle",
+                Size = new System.Drawing.Size(90, 26),
+                TabIndex = 76,
+                Text = "Age:",
+            };
+
+            r_LabelAgeValue = new Label
+            {
+                AutoSize = true,
+                Location = new System.Drawing.Point(i_TopLeftX + 284, i_TopLeftY + 165),
+                Name = "labelAgeValue",
+                Size = new System.Drawing.Size(60, 26),
+                TabIndex = 77,
+                Text = "20",
+            };
+
             SetVisibility(false);
         }
 
@@ -60,8 +105,14 @@ namespace BasicFacebookFeatures
         {
             LoadMainPictureAndNameToComponents(i_Friend.PictureNormalURL, i_Friend.Name);
 
-            r_LabelBirthdayValue.Text = i_Friend.Birthday.ToString();
+            r_LabelBirthdayValue.Text = i_Friend.Birthday;
             r_LabelGenderValue.Text = i_Friend.Gender.ToString();
+            r_LabelHomeTownValue.Text = i_Friend.Location.Name;
+            DateTime friendBirthDay = DateTime.ParseExact(
+                i_Friend.Birthday,
+                "MM/dd/yyyy",
+                System.Globalization.CultureInfo.InvariantCulture);
+            r_LabelAgeValue.Text = $"{Utillity.CalculateAge(friendBirthDay)} Years old";
 
             SetVisibility(true);
         }
@@ -72,6 +123,10 @@ namespace BasicFacebookFeatures
             i_TabPage.Controls.Add(r_LabelGenderTitle);
             i_TabPage.Controls.Add(r_LabelBirthdayValue);
             i_TabPage.Controls.Add(r_LabelBirthdayTitle);
+            i_TabPage.Controls.Add(r_LabelHomeTownValue);
+            i_TabPage.Controls.Add(r_LabelHomeTownTitle);
+            i_TabPage.Controls.Add(r_LabelAgeValue);
+            i_TabPage.Controls.Add(r_LabelAgeTitle);
 
             base.AddControls(i_TabPage);
         }
@@ -89,6 +144,10 @@ namespace BasicFacebookFeatures
             r_LabelGenderTitle.Visible = i_IsShouldBecomeVisible;
             r_LabelBirthdayValue.Visible = i_IsShouldBecomeVisible;
             r_LabelBirthdayTitle.Visible = i_IsShouldBecomeVisible;
+            r_LabelHomeTownValue.Visible = i_IsShouldBecomeVisible;
+            r_LabelHomeTownTitle.Visible = i_IsShouldBecomeVisible;
+            r_LabelAgeTitle.Visible = i_IsShouldBecomeVisible;
+            r_LabelAgeValue.Visible = i_IsShouldBecomeVisible;
 
             base.SetVisibility(i_IsShouldBecomeVisible);
         }

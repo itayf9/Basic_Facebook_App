@@ -96,7 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="utillities\Utillity.cs" />
-    <Compile Include="viewers\AlbumViewer.cs" />
+    <Compile Include="CommentGenerator.cs" />    <Compile Include="viewers\AlbumViewer.cs" />
     <Compile Include="utillities\Messages.cs" />
     <Compile Include="viewers\EventViewer.cs" />
     <Compile Include="enums\eProfileViewerIndex.cs" />

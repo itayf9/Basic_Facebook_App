@@ -21,6 +21,7 @@ namespace BasicFacebookFeatures
         private readonly List<IViewer> r_ProfileViewers;
         private readonly List<IViewer> r_NostalgiaViewers;
         private readonly User r_LoggedInUser;
+        private readonly CommentGenerator r_CommentGenerator;
 
         public FormMain(User i_LoggedInUser)
         {
@@ -28,6 +29,8 @@ namespace BasicFacebookFeatures
             r_ProfileViewers = new List<IViewer>();
             r_NostalgiaViewers = new List<IViewer>();
             InitializeComponent();
+            List<Button> listOfInitialAnswerButtons = new List<Button> { buttonAnswer1_1, buttonAnswer1_2 };
+            r_CommentGenerator = new CommentGenerator(textBoxQuestion, textBoxCommentOutput, buttonStart, buttonPostComment, labelCommentOutputExplainationCommentGenerator, flowLayoutPanelOptionButtons, listOfInitialAnswerButtons);
             FacebookService.s_CollectionLimit = 25;
             initializeProfileInformation();
             initializeViewers();
@@ -73,7 +76,7 @@ namespace BasicFacebookFeatures
                 "MM/dd/yyyy",
                 System.Globalization.CultureInfo.InvariantCulture);
 
-            labelAge.Text = Utillity.CalculateAge(userBirthDay);
+            labelAge.Text = $"{Utillity.CalculateAge(userBirthDay)} Years old";
             labelEmail.Text = r_LoggedInUser.Email;
             labelCity.Text = r_LoggedInUser.Location.Name;
             labelGender.Text = r_LoggedInUser.Gender.ToString();
@@ -399,7 +402,6 @@ namespace BasicFacebookFeatures
 
         private void buttonNostalgia_Click(object sender, EventArgs e)
         {
-
             if (comboBoxMediaType.Text == k_ContentCategoryPhotos)
             {
                 r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewerIndex].SetVisibility(false);
@@ -449,7 +451,7 @@ namespace BasicFacebookFeatures
                 Photo selectedPhoto = listOfPhotosFromSelectedAlbum[indexOfSelectedPhoto];
 
                 textBoxUploadDate.Visible = true;
-                textBoxUploadDate.Text = $"Created on {selectedPhoto.CreatedTime.ToString()}";
+                textBoxUploadDate.Text = $"Created on {selectedPhoto.CreatedTime}";
                 (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewerIndex] as PhotoViewer).loadRandomPhotoToComponents(selectedPhoto);
             }
             catch (NoDataAvailableException noDataAvailableException)
@@ -460,7 +462,6 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show(Messages.k_GeneralErrorMessage);
             }
-
         }
 
         private void showNostalgiaPost()
@@ -475,9 +476,27 @@ namespace BasicFacebookFeatures
             Post selectedPost = fetchedPosts[indexOfRandomPost];
 
             textBoxUploadDate.Visible = true;
-            textBoxUploadDate.Text = $"Created on {selectedPost.CreatedTime.ToString()}" ;
+            textBoxUploadDate.Text = $"Created on {selectedPost.CreatedTime}";
 
             (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewerIndex] as PostViewer).loadPostDetailsToComponents(selectedPost);
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            r_CommentGenerator.startNewCommentGenerator();
+        }
+
+        private void buttonPostComment_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Status postedStatus = r_LoggedInUser.PostStatus(textBoxCommentOutput.Text);
+                MessageBox.Show("Successfully Posted!");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(Messages.k_GeneralErrorMessage);
+            }
         }
     }
 }

@@ -36,6 +36,8 @@
             this.labelGenderIcon = new System.Windows.Forms.Label();
             this.labelCityIcon = new System.Windows.Forms.Label();
             this.labelAgeIcon = new System.Windows.Forms.Label();
+            this.labelEmailIcon = new System.Windows.Forms.Label();
+            this.labelNameIcon = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelSeparator = new System.Windows.Forms.Panel();
             this.labelGender = new System.Windows.Forms.Label();
@@ -60,16 +62,26 @@
             this.textBoxUploadDate = new System.Windows.Forms.TextBox();
             this.buttonNostalgia = new System.Windows.Forms.Button();
             this.comboBoxMediaType = new System.Windows.Forms.ComboBox();
+            this.tabPageCommentGenerator = new System.Windows.Forms.TabPage();
+            this.labelExplainationCommentGenerator = new System.Windows.Forms.Label();
+            this.flowLayoutPanelOptionButtons = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonAnswer1_1 = new System.Windows.Forms.Button();
+            this.buttonAnswer1_2 = new System.Windows.Forms.Button();
+            this.buttonPostComment = new System.Windows.Forms.Button();
+            this.textBoxCommentOutput = new System.Windows.Forms.TextBox();
+            this.textBoxQuestion = new System.Windows.Forms.TextBox();
+            this.buttonStart = new System.Windows.Forms.Button();
+            this.labelWelcomeCommentGenerator = new System.Windows.Forms.Label();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
-            this.tabPageCommentGenerator = new System.Windows.Forms.TabPage();
-            this.labelEmailIcon = new System.Windows.Forms.Label();
-            this.labelNameIcon = new System.Windows.Forms.Label();
+            this.labelCommentOutputExplainationCommentGenerator = new System.Windows.Forms.Label();
             this.tabControlApp.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.tabPageNostalgia.SuspendLayout();
+            this.tabPageCommentGenerator.SuspendLayout();
+            this.flowLayoutPanelOptionButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonLogout
@@ -157,6 +169,22 @@
             this.labelAgeIcon.Name = "labelAgeIcon";
             this.labelAgeIcon.Size = new System.Drawing.Size(37, 37);
             this.labelAgeIcon.TabIndex = 72;
+            // 
+            // labelEmailIcon
+            // 
+            this.labelEmailIcon.Image = global::BasicFacebookFeatures.Properties.Resources.envelope_solid;
+            this.labelEmailIcon.Location = new System.Drawing.Point(382, 37);
+            this.labelEmailIcon.Name = "labelEmailIcon";
+            this.labelEmailIcon.Size = new System.Drawing.Size(37, 37);
+            this.labelEmailIcon.TabIndex = 71;
+            // 
+            // labelNameIcon
+            // 
+            this.labelNameIcon.Image = global::BasicFacebookFeatures.Properties.Resources.user_solid;
+            this.labelNameIcon.Location = new System.Drawing.Point(380, 0);
+            this.labelNameIcon.Name = "labelNameIcon";
+            this.labelNameIcon.Size = new System.Drawing.Size(37, 37);
+            this.labelNameIcon.TabIndex = 70;
             // 
             // panel1
             // 
@@ -250,7 +278,7 @@
             this.listBoxContent.ItemHeight = 26;
             this.listBoxContent.Location = new System.Drawing.Point(243, 178);
             this.listBoxContent.Name = "listBoxContent";
-            this.listBoxContent.Size = new System.Drawing.Size(346, 264);
+            this.listBoxContent.Size = new System.Drawing.Size(346, 238);
             this.listBoxContent.TabIndex = 59;
             this.listBoxContent.SelectedIndexChanged += new System.EventHandler(this.listBoxContent_SelectedIndexChanged);
             // 
@@ -403,6 +431,117 @@
             this.comboBoxMediaType.TabIndex = 0;
             this.comboBoxMediaType.Text = "Photos";
             // 
+            // tabPageCommentGenerator
+            // 
+            this.tabPageCommentGenerator.Controls.Add(this.labelCommentOutputExplainationCommentGenerator);
+            this.tabPageCommentGenerator.Controls.Add(this.labelExplainationCommentGenerator);
+            this.tabPageCommentGenerator.Controls.Add(this.flowLayoutPanelOptionButtons);
+            this.tabPageCommentGenerator.Controls.Add(this.buttonPostComment);
+            this.tabPageCommentGenerator.Controls.Add(this.textBoxCommentOutput);
+            this.tabPageCommentGenerator.Controls.Add(this.textBoxQuestion);
+            this.tabPageCommentGenerator.Controls.Add(this.buttonStart);
+            this.tabPageCommentGenerator.Controls.Add(this.labelWelcomeCommentGenerator);
+            this.tabPageCommentGenerator.Location = new System.Drawing.Point(4, 35);
+            this.tabPageCommentGenerator.Name = "tabPageCommentGenerator";
+            this.tabPageCommentGenerator.Size = new System.Drawing.Size(1138, 555);
+            this.tabPageCommentGenerator.TabIndex = 2;
+            this.tabPageCommentGenerator.Text = "Comment Generator";
+            this.tabPageCommentGenerator.UseVisualStyleBackColor = true;
+            // 
+            // labelExplainationCommentGenerator
+            // 
+            this.labelExplainationCommentGenerator.AutoSize = true;
+            this.labelExplainationCommentGenerator.Location = new System.Drawing.Point(3, 44);
+            this.labelExplainationCommentGenerator.Name = "labelExplainationCommentGenerator";
+            this.labelExplainationCommentGenerator.Size = new System.Drawing.Size(996, 26);
+            this.labelExplainationCommentGenerator.TabIndex = 9;
+            this.labelExplainationCommentGenerator.Text = "Click on \"Start\", answer some questions and recieve a dedicated message you can p" +
+    "ost on Facebook.";
+            // 
+            // flowLayoutPanelOptionButtons
+            // 
+            this.flowLayoutPanelOptionButtons.AutoScroll = true;
+            this.flowLayoutPanelOptionButtons.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanelOptionButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanelOptionButtons.Controls.Add(this.buttonAnswer1_1);
+            this.flowLayoutPanelOptionButtons.Controls.Add(this.buttonAnswer1_2);
+            this.flowLayoutPanelOptionButtons.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelOptionButtons.Location = new System.Drawing.Point(219, 277);
+            this.flowLayoutPanelOptionButtons.Name = "flowLayoutPanelOptionButtons";
+            this.flowLayoutPanelOptionButtons.Size = new System.Drawing.Size(712, 78);
+            this.flowLayoutPanelOptionButtons.TabIndex = 8;
+            this.flowLayoutPanelOptionButtons.Visible = false;
+            // 
+            // buttonAnswer1_1
+            // 
+            this.buttonAnswer1_1.Location = new System.Drawing.Point(3, 3);
+            this.buttonAnswer1_1.Name = "buttonAnswer1_1";
+            this.buttonAnswer1_1.Size = new System.Drawing.Size(118, 36);
+            this.buttonAnswer1_1.TabIndex = 1;
+            this.buttonAnswer1_1.Text = "I\'m happy";
+            this.buttonAnswer1_1.UseVisualStyleBackColor = true;
+            // 
+            // buttonAnswer1_2
+            // 
+            this.buttonAnswer1_2.Location = new System.Drawing.Point(127, 3);
+            this.buttonAnswer1_2.Name = "buttonAnswer1_2";
+            this.buttonAnswer1_2.Size = new System.Drawing.Size(130, 36);
+            this.buttonAnswer1_2.TabIndex = 7;
+            this.buttonAnswer1_2.Text = "I\'m sad";
+            this.buttonAnswer1_2.UseVisualStyleBackColor = true;
+            // 
+            // buttonPostComment
+            // 
+            this.buttonPostComment.Enabled = false;
+            this.buttonPostComment.Location = new System.Drawing.Point(979, 466);
+            this.buttonPostComment.Name = "buttonPostComment";
+            this.buttonPostComment.Size = new System.Drawing.Size(156, 81);
+            this.buttonPostComment.TabIndex = 7;
+            this.buttonPostComment.Text = "Post to Facebook";
+            this.buttonPostComment.UseVisualStyleBackColor = true;
+            this.buttonPostComment.Click += new System.EventHandler(this.buttonPostComment_Click);
+            // 
+            // textBoxCommentOutput
+            // 
+            this.textBoxCommentOutput.Enabled = false;
+            this.textBoxCommentOutput.Location = new System.Drawing.Point(8, 466);
+            this.textBoxCommentOutput.Multiline = true;
+            this.textBoxCommentOutput.Name = "textBoxCommentOutput";
+            this.textBoxCommentOutput.ReadOnly = true;
+            this.textBoxCommentOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxCommentOutput.Size = new System.Drawing.Size(965, 81);
+            this.textBoxCommentOutput.TabIndex = 6;
+            // 
+            // textBoxQuestion
+            // 
+            this.textBoxQuestion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxQuestion.Location = new System.Drawing.Point(219, 215);
+            this.textBoxQuestion.Name = "textBoxQuestion";
+            this.textBoxQuestion.ReadOnly = true;
+            this.textBoxQuestion.Size = new System.Drawing.Size(712, 32);
+            this.textBoxQuestion.TabIndex = 2;
+            this.textBoxQuestion.Text = "What\'s On Your Mind ?";
+            this.textBoxQuestion.Visible = false;
+            // 
+            // buttonStart
+            // 
+            this.buttonStart.Location = new System.Drawing.Point(441, 95);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(308, 52);
+            this.buttonStart.TabIndex = 1;
+            this.buttonStart.Text = "Start";
+            this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            // 
+            // labelWelcomeCommentGenerator
+            // 
+            this.labelWelcomeCommentGenerator.AutoSize = true;
+            this.labelWelcomeCommentGenerator.Location = new System.Drawing.Point(3, 18);
+            this.labelWelcomeCommentGenerator.Name = "labelWelcomeCommentGenerator";
+            this.labelWelcomeCommentGenerator.Size = new System.Drawing.Size(399, 26);
+            this.labelWelcomeCommentGenerator.TabIndex = 0;
+            this.labelWelcomeCommentGenerator.Text = "Welcome To The Comment Generator !!";
+            // 
             // printDialog1
             // 
             this.printDialog1.UseEXDialog = true;
@@ -411,30 +550,15 @@
             // 
             this.printDialog2.UseEXDialog = true;
             // 
-            // tabPageCommentGenerator
+            // labelCommentOutputExplainationCommentGenerator
             // 
-            this.tabPageCommentGenerator.Location = new System.Drawing.Point(4, 35);
-            this.tabPageCommentGenerator.Name = "tabPageCommentGenerator";
-            this.tabPageCommentGenerator.Size = new System.Drawing.Size(1138, 555);
-            this.tabPageCommentGenerator.TabIndex = 2;
-            this.tabPageCommentGenerator.Text = "Comment Generator";
-            this.tabPageCommentGenerator.UseVisualStyleBackColor = true;
-            // 
-            // labelEmailIcon
-            // 
-            this.labelEmailIcon.Image = global::BasicFacebookFeatures.Properties.Resources.envelope_solid;
-            this.labelEmailIcon.Location = new System.Drawing.Point(382, 37);
-            this.labelEmailIcon.Name = "labelEmailIcon";
-            this.labelEmailIcon.Size = new System.Drawing.Size(37, 37);
-            this.labelEmailIcon.TabIndex = 71;
-            // 
-            // labelNameIcon
-            // 
-            this.labelNameIcon.Image = global::BasicFacebookFeatures.Properties.Resources.user_solid;
-            this.labelNameIcon.Location = new System.Drawing.Point(380, 0);
-            this.labelNameIcon.Name = "labelNameIcon";
-            this.labelNameIcon.Size = new System.Drawing.Size(37, 37);
-            this.labelNameIcon.TabIndex = 70;
+            this.labelCommentOutputExplainationCommentGenerator.AutoSize = true;
+            this.labelCommentOutputExplainationCommentGenerator.Location = new System.Drawing.Point(8, 437);
+            this.labelCommentOutputExplainationCommentGenerator.Name = "labelCommentOutputExplainationCommentGenerator";
+            this.labelCommentOutputExplainationCommentGenerator.Size = new System.Drawing.Size(159, 26);
+            this.labelCommentOutputExplainationCommentGenerator.TabIndex = 10;
+            this.labelCommentOutputExplainationCommentGenerator.Text = "The final result:";
+            this.labelCommentOutputExplainationCommentGenerator.Visible = false;
             // 
             // FormMain
             // 
@@ -456,6 +580,9 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.tabPageNostalgia.ResumeLayout(false);
             this.tabPageNostalgia.PerformLayout();
+            this.tabPageCommentGenerator.ResumeLayout(false);
+            this.tabPageCommentGenerator.PerformLayout();
+            this.flowLayoutPanelOptionButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -497,6 +624,16 @@
         private System.Windows.Forms.TabPage tabPageCommentGenerator;
         private System.Windows.Forms.Label labelEmailIcon;
         private System.Windows.Forms.Label labelNameIcon;
+        private System.Windows.Forms.Button buttonStart;
+        private System.Windows.Forms.Label labelWelcomeCommentGenerator;
+        private System.Windows.Forms.TextBox textBoxQuestion;
+        private System.Windows.Forms.TextBox textBoxCommentOutput;
+        private System.Windows.Forms.Button buttonPostComment;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelOptionButtons;
+        private System.Windows.Forms.Button buttonAnswer1_1;
+        private System.Windows.Forms.Button buttonAnswer1_2;
+        private System.Windows.Forms.Label labelExplainationCommentGenerator;
+        private System.Windows.Forms.Label labelCommentOutputExplainationCommentGenerator;
     }
 }
 
