@@ -34,7 +34,7 @@ namespace BasicFacebookFeatures.viewers
             r_PictureBoxRandomPhoto.Visible = i_IsShouldBecomeVisible;
         }
 
-        public void loadRandomPhotoToComponents(Photo i_SelectedPhoto)
+        public void LoadRandomPhotoToComponents(Photo i_SelectedPhoto)
         {
             r_PictureBoxRandomPhoto.Image = i_SelectedPhoto.ImageNormal;
         }

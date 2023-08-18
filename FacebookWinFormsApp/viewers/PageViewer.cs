@@ -35,7 +35,7 @@ namespace BasicFacebookFeatures
             SetVisibility(false);
         }
 
-        public void loadPageDetailsToComponents(Page i_Page)
+        public void LoadPageDetailsToComponents(Page i_Page)
         {
             LoadMainPictureAndNameToComponents(i_Page.PictureNormalURL, i_Page.Name);
 

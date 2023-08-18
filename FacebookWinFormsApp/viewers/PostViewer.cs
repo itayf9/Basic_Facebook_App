@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
@@ -14,19 +15,19 @@ namespace BasicFacebookFeatures
             r_LabelCaption = new Label
             {
                 AutoSize = true,
-                Location = new System.Drawing.Point(i_topLeftX, i_topLeftY),
+                Location = new Point(i_topLeftX, i_topLeftY),
                 Name = "labelCaption",
-                Size = new System.Drawing.Size(93, 26),
+                Size = new Size(93, 26),
                 TabIndex = 70,
                 Text = "Caption:",
             };
 
             r_TextBoxCaption = new TextBox
             {
-                Location = new System.Drawing.Point(i_topLeftX, i_topLeftY + 35),
+                Location = new Point(i_topLeftX, i_topLeftY + 35),
                 Multiline = true,
                 Name = "textBoxCaption",
-                Size = new System.Drawing.Size(520, 88),
+                Size = new Size(520, 88),
                 TabIndex = 71,
                 ReadOnly = true,
                 ScrollBars = ScrollBars.Vertical,
@@ -34,10 +35,10 @@ namespace BasicFacebookFeatures
 
             r_PictureBoxPost = new PictureBox
             {
-                Location = new System.Drawing.Point(i_topLeftX, i_topLeftY + 70 ),
+                Location = new Point(i_topLeftX, i_topLeftY + 70 ),
                 Name = "pictureBoxPost",
-                Size = new System.Drawing.Size(520, 243),
-                SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage,
+                Size = new Size(520, 243),
+                SizeMode = PictureBoxSizeMode.StretchImage,
                 TabIndex = 72,
                 TabStop = false,
             };
@@ -45,7 +46,7 @@ namespace BasicFacebookFeatures
             SetVisibility(false);
         }
 
-        public void loadPostDetailsToComponents(Post i_Post)
+        public void LoadPostDetailsToComponents(Post i_Post)
         {
             r_PictureBoxPost.Image = null;
 

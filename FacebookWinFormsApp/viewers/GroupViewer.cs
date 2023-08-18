@@ -60,7 +60,7 @@ namespace BasicFacebookFeatures
             base.HideControls();
         }
 
-        internal void LoadGroupDetailsToComponents(Group i_SelectedGroup)
+        public void LoadGroupDetailsToComponents(Group i_SelectedGroup)
         {
             LoadMainPictureAndNameToComponents(i_SelectedGroup.PictureNormalURL, i_SelectedGroup.Name);
             r_TextBoxDescription.Text = i_SelectedGroup.Description;

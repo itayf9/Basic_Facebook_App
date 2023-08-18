@@ -101,17 +101,14 @@ namespace BasicFacebookFeatures
             SetVisibility(false);
         }
 
-        public void loadFriendDetailsToComponents(User i_Friend)
+        public void LoadFriendDetailsToComponents(User i_Friend)
         {
             LoadMainPictureAndNameToComponents(i_Friend.PictureNormalURL, i_Friend.Name);
 
             r_LabelBirthdayValue.Text = i_Friend.Birthday;
             r_LabelGenderValue.Text = i_Friend.Gender.ToString();
             r_LabelHomeTownValue.Text = i_Friend.Location.Name;
-            DateTime friendBirthDay = DateTime.ParseExact(
-                i_Friend.Birthday,
-                "MM/dd/yyyy",
-                System.Globalization.CultureInfo.InvariantCulture);
+            DateTime friendBirthDay = Utillity.GetDateTimeObjectFromDateString(i_Friend.Birthday);
             r_LabelAgeValue.Text = $"{Utillity.CalculateAge(friendBirthDay)} Years old";
 
             SetVisibility(true);

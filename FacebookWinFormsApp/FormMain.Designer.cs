@@ -63,6 +63,7 @@
             this.buttonNostalgia = new System.Windows.Forms.Button();
             this.comboBoxMediaType = new System.Windows.Forms.ComboBox();
             this.tabPageCommentGenerator = new System.Windows.Forms.TabPage();
+            this.labelCommentOutputExplainationCommentGenerator = new System.Windows.Forms.Label();
             this.labelExplainationCommentGenerator = new System.Windows.Forms.Label();
             this.flowLayoutPanelOptionButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAnswer1_1 = new System.Windows.Forms.Button();
@@ -74,7 +75,6 @@
             this.labelWelcomeCommentGenerator = new System.Windows.Forms.Label();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
-            this.labelCommentOutputExplainationCommentGenerator = new System.Windows.Forms.Label();
             this.tabControlApp.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
@@ -421,6 +421,7 @@
             // 
             // comboBoxMediaType
             // 
+            this.comboBoxMediaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMediaType.FormattingEnabled = true;
             this.comboBoxMediaType.Items.AddRange(new object[] {
             "Photos",
@@ -429,7 +430,6 @@
             this.comboBoxMediaType.Name = "comboBoxMediaType";
             this.comboBoxMediaType.Size = new System.Drawing.Size(121, 34);
             this.comboBoxMediaType.TabIndex = 0;
-            this.comboBoxMediaType.Text = "Photos";
             // 
             // tabPageCommentGenerator
             // 
@@ -447,6 +447,16 @@
             this.tabPageCommentGenerator.TabIndex = 2;
             this.tabPageCommentGenerator.Text = "Comment Generator";
             this.tabPageCommentGenerator.UseVisualStyleBackColor = true;
+            // 
+            // labelCommentOutputExplainationCommentGenerator
+            // 
+            this.labelCommentOutputExplainationCommentGenerator.AutoSize = true;
+            this.labelCommentOutputExplainationCommentGenerator.Location = new System.Drawing.Point(8, 437);
+            this.labelCommentOutputExplainationCommentGenerator.Name = "labelCommentOutputExplainationCommentGenerator";
+            this.labelCommentOutputExplainationCommentGenerator.Size = new System.Drawing.Size(159, 26);
+            this.labelCommentOutputExplainationCommentGenerator.TabIndex = 10;
+            this.labelCommentOutputExplainationCommentGenerator.Text = "The final result:";
+            this.labelCommentOutputExplainationCommentGenerator.Visible = false;
             // 
             // labelExplainationCommentGenerator
             // 
@@ -549,16 +559,6 @@
             // printDialog2
             // 
             this.printDialog2.UseEXDialog = true;
-            // 
-            // labelCommentOutputExplainationCommentGenerator
-            // 
-            this.labelCommentOutputExplainationCommentGenerator.AutoSize = true;
-            this.labelCommentOutputExplainationCommentGenerator.Location = new System.Drawing.Point(8, 437);
-            this.labelCommentOutputExplainationCommentGenerator.Name = "labelCommentOutputExplainationCommentGenerator";
-            this.labelCommentOutputExplainationCommentGenerator.Size = new System.Drawing.Size(159, 26);
-            this.labelCommentOutputExplainationCommentGenerator.TabIndex = 10;
-            this.labelCommentOutputExplainationCommentGenerator.Text = "The final result:";
-            this.labelCommentOutputExplainationCommentGenerator.Visible = false;
             // 
             // FormMain
             // 

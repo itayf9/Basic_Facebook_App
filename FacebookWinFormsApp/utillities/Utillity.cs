@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace BasicFacebookFeatures
 {
-    internal class Utillity
+    internal static class Utillity
     {
+        public static DateTime GetDateTimeObjectFromDateString(string i_DateAsString)
+        {
+            return DateTime.ParseExact(
+                i_DateAsString,
+                "MM/dd/yyyy",
+                System.Globalization.CultureInfo.InvariantCulture);
+        }
+
         public static string CalculateAge(DateTime i_BirthdayDate)
         {
             DateTime today = DateTime.Today;

@@ -10,6 +10,7 @@ namespace BasicFacebookFeatures
         private const string k_AppID = "832742648143866";
         private const string k_SessionLoginButtonText = "Continue as {0}";
         private const string k_DefaultLoginButtonText = "Login";
+        private const string k_LoginErrorMessage = "Login Error !! Please Try Again.";
 
         private static readonly string[] sr_RequestedPermissions =
         {
@@ -60,6 +61,7 @@ namespace BasicFacebookFeatures
 
         private void setLoginFormComponents()
         {
+            const bool v_ToCheck = true;
             if (m_Session != null)
             {
                 checkBoxRememberMe.Checked = m_Session.IsRememberMe;
@@ -69,7 +71,7 @@ namespace BasicFacebookFeatures
             }
             else
             {
-                checkBoxRememberMe.Checked = false;
+                checkBoxRememberMe.Checked = !v_ToCheck;
                 buttonLogin.Text = k_DefaultLoginButtonText;
             }
         }
@@ -86,11 +88,11 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void loginWithSession(Session session)
+        private void loginWithSession(Session i_SessionToLoginWith)
         {
             try
             {
-                LoginResult loginResult = FacebookService.Connect(session.AccessToken);
+                LoginResult loginResult = FacebookService.Connect(i_SessionToLoginWith.AccessToken);
                 m_LoggedInUser = loginResult.LoggedInUser;
 
                 handleAppearenceOfLoginAndMainDialogs();
@@ -103,13 +105,15 @@ namespace BasicFacebookFeatures
 
         private void loginWithoutSession()
         {
+            const bool v_ToEnable = true;
+            const bool v_ToBeVisible = true;
             try
             {
                 LoginResult loginResult = FacebookService.Login(k_AppID, sr_RequestedPermissions);
 
                 if (!string.IsNullOrEmpty(loginResult.AccessToken))
                 {
-                    labelError.Visible = false;
+                    labelError.Visible = !v_ToBeVisible;
                     m_LoggedInUser = loginResult.LoggedInUser;
 
                     m_Session = new Session
@@ -124,12 +128,12 @@ namespace BasicFacebookFeatures
                 }
                 else if (loginResult.ErrorMessage.Equals(string.Empty))
                 {
-                    labelError.Visible = true;
-                    labelError.Text = "Login Error !! Please Try Again.";
+                    labelError.Visible = v_ToBeVisible;
+                    labelError.Text = k_LoginErrorMessage;
                 }
                 else
                 {
-                    labelError.Enabled = true;
+                    labelError.Enabled = v_ToEnable;
                     labelError.Text = loginResult.ErrorMessage;
                 }
             }

@@ -23,14 +23,14 @@ namespace BasicFacebookFeatures
                 HorizontalScrollbar = true,
             };
             r_ListBoxPictures.SelectedIndexChanged += new EventHandler(listBoxPictures_SelectedIndexChanged);
-            r_ListBoxPictures.DisplayMember = "CreatedTime";
+            r_ListBoxPictures.DisplayMember = FormMain.k_DisplayMemberCreatedTime;
 
             r_PictureBoxSelectedPicture = new PictureBox
             {
                 Location = new System.Drawing.Point(i_TopLeftX + 195, i_TopLeftY + 130),
                 Name = "pictureBoxSelectedPicture",
                 Size = new System.Drawing.Size(349, 301),
-                SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage,
+                SizeMode = PictureBoxSizeMode.StretchImage,
                 TabIndex = 73,
                 TabStop = false,
             };
@@ -48,7 +48,7 @@ namespace BasicFacebookFeatures
             get { return r_PictureBoxSelectedPicture; }
         }
 
-        internal void LoadAlbumDetailsToComponents(Album i_SelectedAlbum)
+        public void LoadAlbumDetailsToComponents(Album i_SelectedAlbum)
         {
             LoadMainPictureAndNameToComponents(i_SelectedAlbum.PictureAlbumURL, i_SelectedAlbum.Name);
             LoadPicturesToListBox(i_SelectedAlbum);
@@ -68,7 +68,7 @@ namespace BasicFacebookFeatures
 
                 if (r_ListBoxPictures.Items.Count == 0)
                 {
-                    throw new NoDataAvailableException("Photos");
+                    throw new NoDataAvailableException(FormMain.k_ContentCategoryPhotos);
                 }
 
                 SetVisibility(true);

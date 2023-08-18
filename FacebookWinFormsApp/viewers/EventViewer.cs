@@ -128,7 +128,7 @@ namespace BasicFacebookFeatures
             base.SetVisibility(i_IsShouldBecomeVisible);
         }
 
-        internal void loadEventDetailsToComponents(Event i_SelectedEvent)
+        public void LoadEventDetailsToComponents(Event i_SelectedEvent)
         {
             LoadMainPictureAndNameToComponents(i_SelectedEvent.PictureNormalURL, i_SelectedEvent.Name);
         }

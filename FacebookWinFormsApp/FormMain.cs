@@ -16,7 +16,9 @@ namespace BasicFacebookFeatures
         private const string k_ContentCategoryLikedPages = "Liked Pages";
         private const string k_ContentCategoryFriends = "Friends";
         private const string k_ContentCategoryPosts = "Posts";
-        private const string k_ContentCategoryPhotos = "Photos";
+        internal const string k_ContentCategoryPhotos = "Photos";
+        internal const string k_DisplayMemberCreatedTime = "CreatedTime";
+        private const string k_DisplayMemberName = "Name";
 
         private readonly List<IViewer> r_ProfileViewers;
         private readonly List<IViewer> r_NostalgiaViewers;
@@ -34,26 +36,37 @@ namespace BasicFacebookFeatures
             FacebookService.s_CollectionLimit = 25;
             initializeProfileInformation();
             initializeViewers();
+            comboBoxMediaType.SelectedItem = k_ContentCategoryPhotos;
         }
 
         private void initializeViewers()
         {
             int profileViewersTopLeftX = 606;
             int profileViewersTopLeftY = 178;
+            createProfileViewersInSpecificLocation(profileViewersTopLeftX, profileViewersTopLeftY);
+
+            int nostalgiaViewerTopLeftX = 344;
+            int nostalgiaViewerTopLeftY = 96;
+            createNostalgiaViewersInSpecificLocation(nostalgiaViewerTopLeftX, nostalgiaViewerTopLeftY);
+
+            addViewersComponentsToTabPage(r_ProfileViewers, tabPageProfile);
+            addViewersComponentsToTabPage(r_NostalgiaViewers, tabPageNostalgia);
+        }
+
+        private void createNostalgiaViewersInSpecificLocation(int nostalgiaViewerTopLeftX, int nostalgiaViewerTopLeftY)
+        {
+            r_NostalgiaViewers.Add(new PhotoViewer(nostalgiaViewerTopLeftX, nostalgiaViewerTopLeftY));
+            r_NostalgiaViewers.Add(new PostViewer(nostalgiaViewerTopLeftX, nostalgiaViewerTopLeftY));
+        }
+
+        private void createProfileViewersInSpecificLocation(int profileViewersTopLeftX, int profileViewersTopLeftY)
+        {
             r_ProfileViewers.Add(new AlbumViewer(profileViewersTopLeftX, profileViewersTopLeftY));
             r_ProfileViewers.Add(new GroupViewer(profileViewersTopLeftX, profileViewersTopLeftY));
             r_ProfileViewers.Add(new PostViewer(profileViewersTopLeftX, profileViewersTopLeftY));
             r_ProfileViewers.Add(new EventViewer(profileViewersTopLeftX, profileViewersTopLeftY));
             r_ProfileViewers.Add(new FriendViewer(profileViewersTopLeftX, profileViewersTopLeftY));
             r_ProfileViewers.Add(new PageViewer(profileViewersTopLeftX, profileViewersTopLeftY));
-
-            int nostalgiaViewerTopLeftX = 344;
-            int nostalgiaViewerTopLeftY = 96;
-            r_NostalgiaViewers.Add(new PhotoViewer(nostalgiaViewerTopLeftX, nostalgiaViewerTopLeftY));
-            r_NostalgiaViewers.Add(new PostViewer(nostalgiaViewerTopLeftX, nostalgiaViewerTopLeftY));
-
-            addViewersComponentsToTabPage(r_ProfileViewers, tabPageProfile);
-            addViewersComponentsToTabPage(r_NostalgiaViewers, tabPageNostalgia);
         }
 
         private void addViewersComponentsToTabPage(List<IViewer> i_Viewers, TabPage i_TabPage)
@@ -66,15 +79,14 @@ namespace BasicFacebookFeatures
 
         private void initializeProfileInformation()
         {
-            buttonLogout.Enabled = true;
+            const bool v_ToEnable = true;
+
+            buttonLogout.Enabled = v_ToEnable;
             labelName.Text = r_LoggedInUser.Name;
             pictureBoxProfile.ImageLocation = r_LoggedInUser.PictureNormalURL;
             labelBirthDay.Text = r_LoggedInUser.Birthday;
 
-            DateTime userBirthDay = DateTime.ParseExact(
-                r_LoggedInUser.Birthday,
-                "MM/dd/yyyy",
-                System.Globalization.CultureInfo.InvariantCulture);
+            DateTime userBirthDay = Utillity.GetDateTimeObjectFromDateString(r_LoggedInUser.Birthday);
 
             labelAge.Text = $"{Utillity.CalculateAge(userBirthDay)} Years old";
             labelEmail.Text = r_LoggedInUser.Email;
@@ -97,8 +109,8 @@ namespace BasicFacebookFeatures
         private void buttonPosts_Click(object sender, EventArgs e)
         {
             switchShownContent(k_ContentCategoryPosts);
-            listBoxContent.DisplayMember = "CreatedTime";
-            List<Post> fetchedPosts = fetchPostsToList();
+            listBoxContent.DisplayMember = k_DisplayMemberCreatedTime;
+            List<Post> fetchedPosts = fetchPostsIntoList();
             foreach (Post post in fetchedPosts)
             {
                 listBoxContent.Items.Add(post);
@@ -108,8 +120,9 @@ namespace BasicFacebookFeatures
         private void buttonAlbums_Click(object sender, EventArgs e)
         {
             switchShownContent(k_ContentCategoryAlbums);
-            listBoxContent.DisplayMember = "Name";
-            foreach (Album album in fetchAlbumsIntoList())
+            listBoxContent.DisplayMember = k_DisplayMemberName;
+            List<Album> fetchedAlbums = fetchAlbumsIntoList();
+            foreach (Album album in fetchedAlbums)
             {
                 listBoxContent.Items.Add(album);
             }
@@ -118,40 +131,40 @@ namespace BasicFacebookFeatures
         private void buttonGroups_Click(object sender, EventArgs e)
         {
             switchShownContent(k_ContentCategoryGroups);
-            listBoxContent.DisplayMember = "Name";
-            fetchGroups();
+            listBoxContent.DisplayMember = k_DisplayMemberName;
+            fetchGroupsAndAddThemToListBox();
         }
 
         private void buttonEvents_Click(object sender, EventArgs e)
         {
             switchShownContent(k_ContentCategoryEvents);
-            listBoxContent.DisplayMember = "Name";
-            fetchEvents();
+            listBoxContent.DisplayMember = k_DisplayMemberName;
+            fetchEventsAndAddThemToListBox();
         }
 
         private void buttonFavoriteTeams_Click(object sender, EventArgs e)
         {
             switchShownContent(k_ContentCategoryFaviriteTeams);
-            listBoxContent.DisplayMember = "Name";
-            fetchFavoriteTeams();
+            listBoxContent.DisplayMember = k_DisplayMemberName;
+            fetchFavoriteTeamsAndAddThemToListBox();
         }
 
         private void buttonLikedPages_Click(object sender, EventArgs e)
         {
             switchShownContent(k_ContentCategoryLikedPages);
-            listBoxContent.DisplayMember = "Name";
-            fetchLikedPages();
+            listBoxContent.DisplayMember = k_DisplayMemberName;
+            fetchLikedPagesAndAddThemToListBox();
         }
 
         private void buttonFriends_Click(object sender, EventArgs e)
         {
             switchShownContent(k_ContentCategoryFriends);
-            listBoxContent.DisplayMember = "Name";
+            listBoxContent.DisplayMember = k_DisplayMemberName;
 
-            fetchFriends();
+            fetchFriendsAndAddThemToListBox();
         }
 
-        private void fetchFriends()
+        private void fetchFriendsAndAddThemToListBox()
         {
             try
             {
@@ -171,7 +184,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private List<Post> fetchPostsToList()
+        private List<Post> fetchPostsIntoList()
         {
             List<Post> listOfFetchedPosts = new List<Post>();
 
@@ -227,7 +240,7 @@ namespace BasicFacebookFeatures
             return listOfFetchedAlbums;
         }
 
-        private void fetchGroups()
+        private void fetchGroupsAndAddThemToListBox()
         {
             try
             {
@@ -251,7 +264,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void fetchEvents()
+        private void fetchEventsAndAddThemToListBox()
         {
             try
             {
@@ -275,7 +288,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void fetchFavoriteTeams()
+        private void fetchFavoriteTeamsAndAddThemToListBox()
         {
             try
             {
@@ -299,7 +312,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void fetchLikedPages()
+        private void fetchLikedPagesAndAddThemToListBox()
         {
             try
             {
@@ -372,22 +385,22 @@ namespace BasicFacebookFeatures
 
         private void loadEventDetails(Event i_SelectedEvent)
         {
-            (r_ProfileViewers[(int)eProfileViewerIndex.EventViewerIndex] as EventViewer).loadEventDetailsToComponents(i_SelectedEvent);
+            (r_ProfileViewers[(int)eProfileViewerIndex.EventViewerIndex] as EventViewer).LoadEventDetailsToComponents(i_SelectedEvent);
         }
 
         private void loadPageDetails(Page i_SelectedPage)
         {
-            (r_ProfileViewers[(int)eProfileViewerIndex.PageViewerIndex] as PageViewer).loadPageDetailsToComponents(i_SelectedPage);
+            (r_ProfileViewers[(int)eProfileViewerIndex.PageViewerIndex] as PageViewer).LoadPageDetailsToComponents(i_SelectedPage);
         }
 
         private void loadFriendDetails(User i_SelectedFriend)
         {
-            (r_ProfileViewers[(int)eProfileViewerIndex.FriendViewerIndex] as FriendViewer).loadFriendDetailsToComponents(i_SelectedFriend);
+            (r_ProfileViewers[(int)eProfileViewerIndex.FriendViewerIndex] as FriendViewer).LoadFriendDetailsToComponents(i_SelectedFriend);
         }
 
         private void loadPostDetails(Post i_SelectedPost)
         {
-            (r_ProfileViewers[(int)eProfileViewerIndex.PostViewerIndex] as PostViewer).loadPostDetailsToComponents(i_SelectedPost);
+            (r_ProfileViewers[(int)eProfileViewerIndex.PostViewerIndex] as PostViewer).LoadPostDetailsToComponents(i_SelectedPost);
         }
 
         private void loadGroupDetails(Group i_SelectedGroup)
@@ -402,21 +415,23 @@ namespace BasicFacebookFeatures
 
         private void buttonNostalgia_Click(object sender, EventArgs e)
         {
+            const bool v_ToBeVisible = true;
             if (comboBoxMediaType.Text == k_ContentCategoryPhotos)
             {
-                r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewerIndex].SetVisibility(false);
+                r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewerIndex].SetVisibility(!v_ToBeVisible);
                 showNostalgiaPhoto();
             }
             else if (comboBoxMediaType.Text == k_ContentCategoryPosts)
             {
-                r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewerIndex].SetVisibility(false);
+                r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewerIndex].SetVisibility(!v_ToBeVisible);
                 showNostalgiaPost();
             }
         }
 
         private void showNostalgiaPhoto()
         {
-            r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewerIndex].SetVisibility(true);
+            const bool v_ToBeVisible = true;
+            r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewerIndex].SetVisibility(v_ToBeVisible);
 
             Random randomGenerator = new Random();
 
@@ -450,9 +465,9 @@ namespace BasicFacebookFeatures
                 int indexOfSelectedPhoto = randomGenerator.Next(listOfPhotosFromSelectedAlbum.Count);
                 Photo selectedPhoto = listOfPhotosFromSelectedAlbum[indexOfSelectedPhoto];
 
-                textBoxUploadDate.Visible = true;
+                textBoxUploadDate.Visible = v_ToBeVisible;
                 textBoxUploadDate.Text = $"Created on {selectedPhoto.CreatedTime}";
-                (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewerIndex] as PhotoViewer).loadRandomPhotoToComponents(selectedPhoto);
+                (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewerIndex] as PhotoViewer).LoadRandomPhotoToComponents(selectedPhoto);
             }
             catch (NoDataAvailableException noDataAvailableException)
             {
@@ -466,24 +481,26 @@ namespace BasicFacebookFeatures
 
         private void showNostalgiaPost()
         {
-            r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewerIndex].SetVisibility(true);
+            const bool v_ToBeVisible = true;
 
-            List<Post> fetchedPosts = fetchPostsToList();
+            r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewerIndex].SetVisibility(v_ToBeVisible);
+
+            List<Post> fetchedPosts = fetchPostsIntoList();
 
             Random randomGenerator = new Random();
 
             int indexOfRandomPost = randomGenerator.Next(fetchedPosts.Count);
             Post selectedPost = fetchedPosts[indexOfRandomPost];
 
-            textBoxUploadDate.Visible = true;
+            textBoxUploadDate.Visible = v_ToBeVisible;
             textBoxUploadDate.Text = $"Created on {selectedPost.CreatedTime}";
 
-            (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewerIndex] as PostViewer).loadPostDetailsToComponents(selectedPost);
+            (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewerIndex] as PostViewer).LoadPostDetailsToComponents(selectedPost);
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            r_CommentGenerator.startNewCommentGenerator();
+            r_CommentGenerator.StartNewCommentGenerator();
         }
 
         private void buttonPostComment_Click(object sender, EventArgs e)
@@ -491,7 +508,7 @@ namespace BasicFacebookFeatures
             try
             {
                 Status postedStatus = r_LoggedInUser.PostStatus(textBoxCommentOutput.Text);
-                MessageBox.Show("Successfully Posted!");
+                MessageBox.Show(Messages.k_SuccessfulPostMessage);
             }
             catch (Exception exception)
             {

@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace BasicFacebookFeatures
 {
@@ -12,9 +13,9 @@ namespace BasicFacebookFeatures
         {
             r_PictureBoxMainPicture = new PictureBox
             {
-                Location = new System.Drawing.Point(i_TopLeftX + 9, i_TopLeftY + 9),
+                Location = new Point(i_TopLeftX + 9, i_TopLeftY + 9),
                 Name = "pictureBoxSelectedContent",
-                Size = new System.Drawing.Size(110, 110),
+                Size = new Size(110, 110),
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 TabIndex = 61,
                 TabStop = false,
@@ -23,22 +24,22 @@ namespace BasicFacebookFeatures
             r_LabelName = new Label
             {
                 AutoSize = false,
-                Location = new System.Drawing.Point(i_TopLeftX + 120, i_TopLeftY + 9),
+                Location = new Point(i_TopLeftX + 120, i_TopLeftY + 9),
                 Name = "labelFullName",
-                Size = new System.Drawing.Size(320, 110),
-                Font = new System.Drawing.Font("Microsoft Sans Serif", 20, System.Drawing.FontStyle.Bold),
+                Size = new Size(320, 110),
+                Font = new Font("Microsoft Sans Serif", 20, FontStyle.Bold),
                 TabIndex = 70,
-                BackColor = System.Drawing.Color.White,
+                BackColor = Color.White,
             };
 
             r_PanelPictureAndNameArea = new Panel
             {
-                BackColor = System.Drawing.Color.White,
-                Location = new System.Drawing.Point(i_TopLeftX, i_TopLeftY),
+                BackColor = Color.White,
+                Location = new Point(i_TopLeftX, i_TopLeftY),
                 Name = "panelPictureAndNameBackground",
-                Size = new System.Drawing.Size(500, 128),
+                Size = new Size(500, 128),
                 TabIndex = 71,
-                BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle,
+                BorderStyle = BorderStyle.FixedSingle,
             };
             r_PanelPictureAndNameArea.Controls.Add(r_PictureBoxMainPicture);
             r_PanelPictureAndNameArea.Controls.Add(r_LabelName);
