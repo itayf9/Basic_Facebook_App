@@ -8,40 +8,99 @@ using System.Windows.Forms;
 
 namespace BasicFacebookFeatures
 {
-    internal class CommentGenerator
+    internal sealed class CommentGenerator
     {
+        private static CommentGenerator s_Instance = null;
+        private static object s_CommentGeneratorLock = new object();
+
+        public static CommentGenerator Instance
+        {
+            get
+            {
+                if (s_Instance == null)
+                {
+                    lock (s_CommentGeneratorLock)
+                    {
+                        if (s_Instance == null)
+                        {
+                            s_Instance = new CommentGenerator();
+                        }
+                    }
+                }
+
+                return s_Instance;
+            }
+        }
+
         private const string k_AnswerButtonPrefix = "buttonAnswer";
         private const string k_RestartCommentGenerator = "Restart";
         private const string k_InitialQuestion = "What's on your mind?";
 
-        private readonly TextBox r_TextBoxQuestions;
-        private readonly TextBox r_TextBoxCommentOutput;
-        private readonly Button r_ButtonStart;
-        private readonly Button r_ButtonPostComment;
-        private readonly List<Button> r_ListOfInitialAnswerButtons;
-        private readonly Label r_LabelCommentOutputExplaination;
-        private readonly FlowLayoutPanel r_FlowLayoutPanelAnswerButtons;
+        private TextBox m_TextBoxQuestions;
+        private TextBox m_TextBoxCommentOutput;
+        private Button m_ButtonStart;
+        private Button m_ButtonPostComment;
+        private List<Button> m_ListOfInitialAnswerButtons;
+        private Label m_LabelCommentOutputExplaination;
+        private FlowLayoutPanel m_FlowLayoutPanelAnswerButtons;
         private readonly Dictionary<string, HashSet<Button>> r_DictionaryQuestionIdToPossibleAnswerButtons;
         private readonly Dictionary<string, string> r_DictionaryQuestionIdToQuestionDetails;
 
-        public CommentGenerator(TextBox i_TextBoxQuestions, TextBox i_TextBoxCommentOutput, Button i_ButtonStart, Button i_ButtonPostComment, Label i_LabelOutputCommentExplaination, FlowLayoutPanel i_FlowLayoutPanelAnswerButtons, List<Button> i_ListOfInitialAnswerButtons)
+        private CommentGenerator()
         {
-            this.r_TextBoxQuestions = i_TextBoxQuestions;
+/*            this.r_TextBoxQuestions = i_TextBoxQuestions;
             this.r_TextBoxCommentOutput = i_TextBoxCommentOutput;
             this.r_ButtonStart = i_ButtonStart;
             this.r_ButtonPostComment = i_ButtonPostComment;
             this.r_LabelCommentOutputExplaination = i_LabelOutputCommentExplaination;
             this.r_FlowLayoutPanelAnswerButtons = i_FlowLayoutPanelAnswerButtons;
-            this.r_ListOfInitialAnswerButtons = i_ListOfInitialAnswerButtons;
+            this.r_ListOfInitialAnswerButtons = i_ListOfInitialAnswerButtons;*/
             this.r_DictionaryQuestionIdToPossibleAnswerButtons = new Dictionary<string, HashSet<Button>>();
             this.r_DictionaryQuestionIdToQuestionDetails = new Dictionary<string, string>();
 
-            foreach (Button answerButton in r_ListOfInitialAnswerButtons)
-            {
-                answerButton.Click += new EventHandler(this.answerButton_Click);
-            }
-
             initializeQuestionsAndAnswers();
+        }
+
+        public TextBox TextBoxQuestions
+        {
+            set { m_TextBoxQuestions = value; }
+        }
+
+        public TextBox TextBoxCommentOutput
+        {
+            set { m_TextBoxCommentOutput = value; }
+        }
+
+        public Button ButtonStart
+        {
+            set { m_ButtonStart = value; }
+        }
+
+        public Button ButtonPostComment
+        {
+            set { m_ButtonPostComment = value; }
+        }
+
+        public List<Button> ListOfInitialAnswerButtons
+        {
+            set
+            {
+                m_ListOfInitialAnswerButtons = value;
+                foreach (Button answerButton in m_ListOfInitialAnswerButtons)
+                {
+                    answerButton.Click += new EventHandler(this.answerButton_Click);
+                }
+            }
+        }
+
+        public Label LabelCommentOutputExplaination
+        {
+            set { m_LabelCommentOutputExplaination = value; }
+        }
+
+        public FlowLayoutPanel FlowLayoutPanelAnswerButtons
+        {
+            set { m_FlowLayoutPanelAnswerButtons = value; }
         }
 
         private void initializeQuestionsAndAnswers()
@@ -126,31 +185,31 @@ namespace BasicFacebookFeatures
         {
             const bool v_ToEnable = true;
             const bool v_ToShow = true;
-            showQuestionAndAnswerArea(v_ToShow, k_InitialQuestion, r_ListOfInitialAnswerButtons);
-            r_ButtonStart.Text = k_RestartCommentGenerator;
+            showQuestionAndAnswerArea(v_ToShow, k_InitialQuestion, m_ListOfInitialAnswerButtons);
+            m_ButtonStart.Text = k_RestartCommentGenerator;
             enableCommentOutputArea(!v_ToEnable);
         }
 
         private void enableCommentOutputArea(bool i_IsNeedToEnable, string commentOutput = null)
         {
-            r_TextBoxCommentOutput.Enabled = i_IsNeedToEnable;
-            r_LabelCommentOutputExplaination.Visible = i_IsNeedToEnable;
-            r_ButtonPostComment.Enabled = i_IsNeedToEnable;
-            r_TextBoxCommentOutput.Text = i_IsNeedToEnable ? commentOutput : string.Empty;
+            m_TextBoxCommentOutput.Enabled = i_IsNeedToEnable;
+            m_LabelCommentOutputExplaination.Visible = i_IsNeedToEnable;
+            m_ButtonPostComment.Enabled = i_IsNeedToEnable;
+            m_TextBoxCommentOutput.Text = i_IsNeedToEnable ? commentOutput : string.Empty;
         }
 
         private void showQuestionAndAnswerArea(bool i_IsNeedToEnable, string i_Question = null, List<Button> i_AnswerButton = null)
         {
-            r_TextBoxQuestions.Visible = i_IsNeedToEnable;
-            r_FlowLayoutPanelAnswerButtons.Visible = i_IsNeedToEnable;
-            r_TextBoxQuestions.Text = i_IsNeedToEnable ? i_Question : string.Empty;
+            m_TextBoxQuestions.Visible = i_IsNeedToEnable;
+            m_FlowLayoutPanelAnswerButtons.Visible = i_IsNeedToEnable;
+            m_TextBoxQuestions.Text = i_IsNeedToEnable ? i_Question : string.Empty;
 
-            r_FlowLayoutPanelAnswerButtons.Controls.Clear();
+            m_FlowLayoutPanelAnswerButtons.Controls.Clear();
             if (i_IsNeedToEnable)
             {
                 foreach (Button answerButton in i_AnswerButton)
                 {
-                    r_FlowLayoutPanelAnswerButtons.Controls.Add(answerButton);
+                    m_FlowLayoutPanelAnswerButtons.Controls.Add(answerButton);
                 }
             }
         }
