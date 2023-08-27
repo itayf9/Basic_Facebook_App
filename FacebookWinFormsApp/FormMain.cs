@@ -12,7 +12,7 @@ namespace BasicFacebookFeatures
         private const string k_ContentCategoryAlbums = "Albums";
         private const string k_ContentCategoryGroups = "Groups";
         private const string k_ContentCategoryEvents = "Events";
-        private const string k_ContentCategoryFaviriteTeams = "Favofrite Teams";
+        private const string k_ContentCategoryFavoriteTeams = "Favofrite Teams";
         private const string k_ContentCategoryLikedPages = "Liked Pages";
         private const string k_ContentCategoryFriends = "Friends";
         private const string k_ContentCategoryPosts = "Posts";
@@ -53,20 +53,20 @@ namespace BasicFacebookFeatures
             addViewersComponentsToTabPage(r_NostalgiaViewers, tabPageNostalgia);
         }
 
-        private void createNostalgiaViewersInSpecificLocation(int nostalgiaViewerTopLeftX, int nostalgiaViewerTopLeftY)
+        private void createNostalgiaViewersInSpecificLocation(int i_NostalgiaViewerTopLeftX, int i_NostalgiaViewerTopLeftY)
         {
-            r_NostalgiaViewers.Add(new PhotoViewer(nostalgiaViewerTopLeftX, nostalgiaViewerTopLeftY));
-            r_NostalgiaViewers.Add(new PostViewer(nostalgiaViewerTopLeftX, nostalgiaViewerTopLeftY));
+            r_NostalgiaViewers.Add(new PhotoViewer(i_NostalgiaViewerTopLeftX, i_NostalgiaViewerTopLeftY));
+            r_NostalgiaViewers.Add(new PostViewer(i_NostalgiaViewerTopLeftX, i_NostalgiaViewerTopLeftY));
         }
 
-        private void createProfileViewersInSpecificLocation(int profileViewersTopLeftX, int profileViewersTopLeftY)
+        private void createProfileViewersInSpecificLocation(int i_ProfileViewersTopLeftX, int i_ProfileViewersTopLeftY)
         {
-            r_ProfileViewers.Add(new AlbumViewer(profileViewersTopLeftX, profileViewersTopLeftY));
-            r_ProfileViewers.Add(new GroupViewer(profileViewersTopLeftX, profileViewersTopLeftY));
-            r_ProfileViewers.Add(new PostViewer(profileViewersTopLeftX, profileViewersTopLeftY));
-            r_ProfileViewers.Add(new EventViewer(profileViewersTopLeftX, profileViewersTopLeftY));
-            r_ProfileViewers.Add(new FriendViewer(profileViewersTopLeftX, profileViewersTopLeftY));
-            r_ProfileViewers.Add(new PageViewer(profileViewersTopLeftX, profileViewersTopLeftY));
+            r_ProfileViewers.Add(new AlbumViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
+            r_ProfileViewers.Add(new GroupViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
+            r_ProfileViewers.Add(new PostViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
+            r_ProfileViewers.Add(new EventViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
+            r_ProfileViewers.Add(new FriendViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
+            r_ProfileViewers.Add(new PageViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
         }
 
         private void addViewersComponentsToTabPage(List<IViewer> i_Viewers, TabPage i_TabPage)
@@ -144,7 +144,7 @@ namespace BasicFacebookFeatures
 
         private void buttonFavoriteTeams_Click(object sender, EventArgs e)
         {
-            switchShownContent(k_ContentCategoryFaviriteTeams);
+            switchShownContent(k_ContentCategoryFavoriteTeams);
             listBoxContent.DisplayMember = k_DisplayMemberName;
             fetchFavoriteTeamsAndAddThemToListBox();
         }
@@ -299,7 +299,7 @@ namespace BasicFacebookFeatures
 
                 if (listBoxContent.Items.Count == 0)
                 {
-                    throw new NoDataAvailableException(k_ContentCategoryFaviriteTeams);
+                    throw new NoDataAvailableException(k_ContentCategoryFavoriteTeams);
                 }
             }
             catch (NoDataAvailableException noDataAvailableException)
