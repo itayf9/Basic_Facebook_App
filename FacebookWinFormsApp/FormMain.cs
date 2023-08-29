@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.viewers;
 using FacebookWrapper;
@@ -22,6 +23,9 @@ namespace BasicFacebookFeatures
 
         private readonly List<IViewer> r_ProfileViewers;
         private readonly List<IViewer> r_NostalgiaViewers;
+        private readonly List<Button> r_FetchButtons;
+        private const bool k_ToEnable = true;
+        private bool m_IsLoadingData;
         private readonly User r_LoggedInUser;
 
         public FormMain(User i_LoggedInUser)
@@ -29,13 +33,26 @@ namespace BasicFacebookFeatures
             r_LoggedInUser = i_LoggedInUser;
             r_ProfileViewers = new List<IViewer>();
             r_NostalgiaViewers = new List<IViewer>();
+            r_FetchButtons = new List<Button>();
             InitializeComponent();
             List<Button> listOfInitialAnswerButtons = new List<Button> { buttonAnswer1_1, buttonAnswer1_2 };
             initializeCommentGenerator(listOfInitialAnswerButtons);
             FacebookService.s_CollectionLimit = 25;
             initializeProfileInformation();
             initializeViewers();
+            initializeFetchButtons();
             comboBoxMediaType.SelectedItem = k_ContentCategoryPhotos;
+        }
+
+        private void initializeFetchButtons()
+        {
+            r_FetchButtons.Add(buttonAlbums);
+            r_FetchButtons.Add(buttonEvents);
+            r_FetchButtons.Add(buttonFriends);
+            r_FetchButtons.Add(buttonGroups);
+            r_FetchButtons.Add(buttonPosts);
+            r_FetchButtons.Add(buttonFavoriteTeams);
+            r_FetchButtons.Add(buttonLikedPages);
         }
 
         private void initializeCommentGenerator(List<Button> i_ListOfInitialAnswerButtons)
@@ -105,6 +122,17 @@ namespace BasicFacebookFeatures
             labelGender.Text = r_LoggedInUser.Gender.ToString();
         }
 
+        private void toggleOtherButtons(Button i_ButtonNotToToggle, bool i_IsEnabled)
+        {
+            foreach (Button button in r_FetchButtons)
+            {
+                if (button != i_ButtonNotToToggle)
+                {
+                    button.Enabled = i_IsEnabled;
+                }
+            }
+        }
+
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             FacebookService.LogoutWithUI();
@@ -119,80 +147,331 @@ namespace BasicFacebookFeatures
 
         private void buttonPosts_Click(object sender, EventArgs e)
         {
-            switchShownContent(k_ContentCategoryPosts);
-            listBoxContent.DisplayMember = k_DisplayMemberCreatedTime;
-            List<Post> fetchedPosts = fetchPostsIntoList();
-            foreach (Post post in fetchedPosts)
+            if (!m_IsLoadingData)
             {
-                listBoxContent.Items.Add(post);
+                toggleOtherButtons(sender as Button, !k_ToEnable);
+
+                m_IsLoadingData = true;
+
+                switchShownContent(k_ContentCategoryPosts);
+                listBoxContent.DisplayMember = k_DisplayMemberCreatedTime;
+
+                Thread thread = new Thread(() =>
+                    {
+                        try
+                        {
+                            List<Post> fetchedPosts = fetchPostsIntoList();
+
+                            Invoke(new Action(() =>
+                                {
+                                    listBoxContent.Items.Clear();
+                                    foreach (Post post in fetchedPosts)
+                                    {
+                                        listBoxContent.Items.Add(post);
+                                    }
+                                }));
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error fetching posts: " + ex.Message);
+                        }
+                        finally
+                        {
+                            m_IsLoadingData = false;
+                            toggleOtherButtons(sender as Button, k_ToEnable);
+                        }
+                    });
+
+                thread.Start();
             }
         }
 
         private void buttonAlbums_Click(object sender, EventArgs e)
         {
+            if (m_IsLoadingData)
+            {
+                return;
+            }
+
+            toggleOtherButtons(sender as Button, !k_ToEnable);
+
+            m_IsLoadingData = true;
+
             switchShownContent(k_ContentCategoryAlbums);
             listBoxContent.DisplayMember = k_DisplayMemberName;
-            List<Album> fetchedAlbums = fetchAlbumsIntoList();
-            foreach (Album album in fetchedAlbums)
-            {
-                listBoxContent.Items.Add(album);
-            }
+
+            Thread thread = new Thread(() =>
+                {
+                    try
+                    {
+                        List<Album> fetchedAlbums = fetchAlbumsIntoList();
+
+                        Invoke(new Action(() =>
+                            {
+                                listBoxContent.Items.Clear();
+                                foreach (Album album in fetchedAlbums)
+                                {
+                                    listBoxContent.Items.Add(album);
+                                }
+                            }));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error fetching albums: " + ex.Message);
+                    }
+                    finally
+                    {
+                        m_IsLoadingData = false;
+                        toggleOtherButtons(sender as Button, k_ToEnable);
+                    }
+                });
+
+            thread.Start();
         }
+
 
         private void buttonGroups_Click(object sender, EventArgs e)
         {
+            if (m_IsLoadingData)
+            {
+                return;
+            }
+
+            toggleOtherButtons(sender as Button, !k_ToEnable);
+
+            m_IsLoadingData = true;
+
             switchShownContent(k_ContentCategoryGroups);
             listBoxContent.DisplayMember = k_DisplayMemberName;
-            fetchGroupsAndAddThemToListBox();
+
+            Thread thread = new Thread(() =>
+                {
+                    try
+                    {
+                        List<Group> fetchedGroups = fetchGroupsAndReturnList();
+
+                        Invoke(new Action(() =>
+                            {
+                                listBoxContent.Items.Clear();
+                                foreach (Group group in fetchedGroups)
+                                {
+                                    listBoxContent.Items.Add(group);
+                                }
+                            }));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error fetching groups: " + ex.Message);
+                    }
+                    finally
+                    {
+                        m_IsLoadingData = false;
+                        toggleOtherButtons(sender as Button, k_ToEnable);
+                    }
+                });
+
+            thread.Start();
         }
+
 
         private void buttonEvents_Click(object sender, EventArgs e)
         {
+            if (m_IsLoadingData)
+            {
+                return; // Prevent starting a new operation while one is already running
+            }
+
+            toggleOtherButtons(sender as Button, !k_ToEnable);
+
+            m_IsLoadingData = true;
+
             switchShownContent(k_ContentCategoryEvents);
             listBoxContent.DisplayMember = k_DisplayMemberName;
-            fetchEventsAndAddThemToListBox();
+
+            Thread thread = new Thread(() =>
+                {
+                    try
+                    {
+                        List<Event> fetchedEvents = fetchEventsAndReturnList();
+
+                        Invoke(new Action(() =>
+                            {
+                                listBoxContent.Items.Clear();
+                                foreach (Event facebookEvent in fetchedEvents)
+                                {
+                                    listBoxContent.Items.Add(facebookEvent);
+                                }
+                            }));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error fetching events: " + ex.Message);
+                    }
+                    finally
+                    {
+                        m_IsLoadingData = false;
+                        toggleOtherButtons(sender as Button, k_ToEnable);
+                    }
+                });
+
+            thread.Start();
         }
 
         private void buttonFavoriteTeams_Click(object sender, EventArgs e)
         {
+            if (m_IsLoadingData)
+            {
+                return; // Prevent starting a new operation while one is already running
+            }
+
+            toggleOtherButtons(sender as Button, !k_ToEnable);
+
+            m_IsLoadingData = true;
+
             switchShownContent(k_ContentCategoryFavoriteTeams);
             listBoxContent.DisplayMember = k_DisplayMemberName;
-            fetchFavoriteTeamsAndAddThemToListBox();
+
+            Thread thread = new Thread(() =>
+                {
+                    try
+                    {
+                        List<Page> fetchedFavoriteTeams = fetchFavoriteTeamsAndReturnList();
+
+                        Invoke(new Action(() =>
+                            {
+                                listBoxContent.Items.Clear();
+                                foreach (Page team in fetchedFavoriteTeams)
+                                {
+                                    listBoxContent.Items.Add(team);
+                                }
+                            }));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error fetching favorite teams: " + ex.Message);
+                    }
+                    finally
+                    {
+                        m_IsLoadingData = false;
+                        toggleOtherButtons(sender as Button, k_ToEnable);
+                    }
+                });
+
+            thread.Start();
         }
 
         private void buttonLikedPages_Click(object sender, EventArgs e)
         {
+            if (m_IsLoadingData)
+            {
+                return; // Prevent starting a new operation while one is already running
+            }
+
+            toggleOtherButtons(sender as Button, !k_ToEnable);
+
+            m_IsLoadingData = true;
+
             switchShownContent(k_ContentCategoryLikedPages);
             listBoxContent.DisplayMember = k_DisplayMemberName;
-            fetchLikedPagesAndAddThemToListBox();
+
+            Thread thread = new Thread(() =>
+                {
+                    try
+                    {
+                        List<Page> fetchedLikedPages = fetchLikedPagesAndReturnList();
+
+                        Invoke(new Action(() =>
+                            {
+                                listBoxContent.Items.Clear();
+                                foreach (Page page in fetchedLikedPages)
+                                {
+                                    listBoxContent.Items.Add(page);
+                                }
+                            }));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error fetching liked pages: " + ex.Message);
+                    }
+                    finally
+                    {
+                        m_IsLoadingData = false;
+                        toggleOtherButtons(sender as Button, k_ToEnable);
+                    }
+                });
+
+            thread.Start();
         }
 
         private void buttonFriends_Click(object sender, EventArgs e)
         {
+            if (m_IsLoadingData)
+            {
+                return; // Prevent starting a new operation while one is already running
+            }
+
+            toggleOtherButtons(sender as Button, !k_ToEnable);
+
+            m_IsLoadingData = true;
+
             switchShownContent(k_ContentCategoryFriends);
             listBoxContent.DisplayMember = k_DisplayMemberName;
 
-            fetchFriendsAndAddThemToListBox();
+            Thread thread = new Thread(() =>
+                {
+                    try
+                    {
+                        List<User> fetchedFriends = fetchFriendsAndReturnList();
+
+                        Invoke(new Action(() =>
+                            {
+                                listBoxContent.Items.Clear();
+                                foreach (User friend in fetchedFriends)
+                                {
+                                    listBoxContent.Items.Add(friend);
+                                }
+                            }));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error fetching friends: " + ex.Message);
+                    }
+                    finally
+                    {
+                        m_IsLoadingData = false;
+                        toggleOtherButtons(sender as Button, k_ToEnable);
+                    }
+                });
+
+            thread.Start();
         }
 
-        private void fetchFriendsAndAddThemToListBox()
+        private List<User> fetchFriendsAndReturnList()
         {
+            List<User> fetchedFriends = new List<User>();
+
             try
             {
                 foreach (User friend in r_LoggedInUser.Friends)
                 {
-                    listBoxContent.Items.Add(friend);
+                    fetchedFriends.Add(friend);
                 }
 
-                if (listBoxContent.Items.Count == 0)
+                if (fetchedFriends.Count == 0)
                 {
                     throw new NoDataAvailableException(k_ContentCategoryFriends);
                 }
+            }
+            catch (NoDataAvailableException noDataAvailableException)
+            {
+                MessageBox.Show(noDataAvailableException.Message);
             }
             catch (Exception)
             {
                 MessageBox.Show(Messages.k_GeneralErrorMessage);
             }
+
+            return fetchedFriends;
         }
 
         private List<Post> fetchPostsIntoList()
@@ -251,16 +530,18 @@ namespace BasicFacebookFeatures
             return listOfFetchedAlbums;
         }
 
-        private void fetchGroupsAndAddThemToListBox()
+        private List<Group> fetchGroupsAndReturnList()
         {
+            List<Group> fetchedGroups = new List<Group>();
+
             try
             {
                 foreach (Group group in r_LoggedInUser.Groups)
                 {
-                    listBoxContent.Items.Add(group);
+                    fetchedGroups.Add(group);
                 }
 
-                if (listBoxContent.Items.Count == 0)
+                if (fetchedGroups.Count == 0)
                 {
                     throw new NoDataAvailableException(k_ContentCategoryGroups);
                 }
@@ -273,18 +554,22 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show(Messages.k_GeneralErrorMessage);
             }
+
+            return fetchedGroups;
         }
 
-        private void fetchEventsAndAddThemToListBox()
+        private List<Event> fetchEventsAndReturnList()
         {
+            List<Event> fetchedEvents = new List<Event>();
+
             try
             {
                 foreach (Event facebookEvent in r_LoggedInUser.Events)
                 {
-                    listBoxContent.Items.Add(facebookEvent);
+                    fetchedEvents.Add(facebookEvent);
                 }
 
-                if (listBoxContent.Items.Count == 0)
+                if (fetchedEvents.Count == 0)
                 {
                     throw new NoDataAvailableException(k_ContentCategoryEvents);
                 }
@@ -297,18 +582,22 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show(Messages.k_GeneralErrorMessage);
             }
+
+            return fetchedEvents;
         }
 
-        private void fetchFavoriteTeamsAndAddThemToListBox()
+        private List<Page> fetchFavoriteTeamsAndReturnList()
         {
+            List<Page> fetchedFavoriteTeams = new List<Page>();
+
             try
             {
                 foreach (Page team in r_LoggedInUser.FavofriteTeams)
                 {
-                    listBoxContent.Items.Add(team);
+                    fetchedFavoriteTeams.Add(team);
                 }
 
-                if (listBoxContent.Items.Count == 0)
+                if (fetchedFavoriteTeams.Count == 0)
                 {
                     throw new NoDataAvailableException(k_ContentCategoryFavoriteTeams);
                 }
@@ -321,18 +610,22 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show(Messages.k_GeneralErrorMessage);
             }
+
+            return fetchedFavoriteTeams;
         }
 
-        private void fetchLikedPagesAndAddThemToListBox()
+        private List<Page> fetchLikedPagesAndReturnList()
         {
+            List<Page> fetchedLikedPages = new List<Page>();
+
             try
             {
                 foreach (Page page in r_LoggedInUser.LikedPages)
                 {
-                    listBoxContent.Items.Add(page);
+                    fetchedLikedPages.Add(page);
                 }
 
-                if (listBoxContent.Items.Count == 0)
+                if (fetchedLikedPages.Count == 0)
                 {
                     throw new NoDataAvailableException(k_ContentCategoryLikedPages);
                 }
@@ -345,6 +638,8 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show(Messages.k_GeneralErrorMessage);
             }
+
+            return fetchedLikedPages;
         }
 
         private void switchShownContent(string i_ContentCategoryName)
