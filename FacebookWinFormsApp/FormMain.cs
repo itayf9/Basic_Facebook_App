@@ -23,7 +23,6 @@ namespace BasicFacebookFeatures
         private readonly List<IViewer> r_ProfileViewers;
         private readonly List<IViewer> r_NostalgiaViewers;
         private readonly User r_LoggedInUser;
-        private readonly CommentGenerator r_CommentGenerator;
 
         public FormMain(User i_LoggedInUser)
         {
@@ -32,11 +31,23 @@ namespace BasicFacebookFeatures
             r_NostalgiaViewers = new List<IViewer>();
             InitializeComponent();
             List<Button> listOfInitialAnswerButtons = new List<Button> { buttonAnswer1_1, buttonAnswer1_2 };
-            r_CommentGenerator = new CommentGenerator(textBoxQuestion, textBoxCommentOutput, buttonStart, buttonPostComment, labelCommentOutputExplainationCommentGenerator, flowLayoutPanelOptionButtons, listOfInitialAnswerButtons);
+            initializeCommentGenerator(listOfInitialAnswerButtons);
             FacebookService.s_CollectionLimit = 25;
             initializeProfileInformation();
             initializeViewers();
             comboBoxMediaType.SelectedItem = k_ContentCategoryPhotos;
+        }
+
+        private void initializeCommentGenerator(List<Button> i_ListOfInitialAnswerButtons)
+        {
+            CommentGenerator commentGenerator = CommentGenerator.Instance;
+            commentGenerator.TextBoxQuestions = textBoxQuestion;
+            commentGenerator.TextBoxCommentOutput = textBoxCommentOutput;
+            commentGenerator.ButtonStart = buttonStart;
+            commentGenerator.ButtonPostComment = buttonPostComment;
+            commentGenerator.LabelCommentOutputExplaination = labelCommentOutputExplainationCommentGenerator;
+            commentGenerator.FlowLayoutPanelAnswerButtons = flowLayoutPanelOptionButtons;
+            commentGenerator.ListOfInitialAnswerButtons = i_ListOfInitialAnswerButtons;
         }
 
         private void initializeViewers()
@@ -500,7 +511,7 @@ namespace BasicFacebookFeatures
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            r_CommentGenerator.StartNewCommentGenerator();
+            CommentGenerator.Instance.StartNewCommentGenerator();
         }
 
         private void buttonPostComment_Click(object sender, EventArgs e)
