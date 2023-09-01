@@ -2,7 +2,7 @@
 {
     internal enum eNostalgiaViewerIndex
     {
-        PhotoViewerIndex = 0,
-        PostViewerIndex = 1,
+        PhotoViewer = 0,
+        PostViewer = 1,
     }
 }

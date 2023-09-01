@@ -95,6 +95,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="enums\eViewerType.cs" />
     <Compile Include="utillities\Utillity.cs" />
     <Compile Include="CommentGenerator.cs" />
     <Compile Include="viewers\AlbumViewer.cs" />
@@ -117,6 +118,7 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="exceptions\NoDataAvailableException.cs" />
+    <Compile Include="viewers\ViewerFactory.cs" />
     <Compile Include="viewers\PageViewer.cs" />
     <Compile Include="viewers\PhotoViewer.cs" />
     <Compile Include="viewers\PictureAndNameObjectViewer.cs" />
@@ -161,7 +163,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="assets\envelope-solid.ico" />
     <None Include="assets\city-solid.ico" />
