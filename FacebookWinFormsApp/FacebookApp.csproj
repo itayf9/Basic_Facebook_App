@@ -95,6 +95,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="enums\eViewerType.cs" />
     <Compile Include="utillities\Utillity.cs" />
     <Compile Include="CommentGenerator.cs" />
     <Compile Include="viewers\AlbumViewer.cs" />
@@ -107,13 +108,6 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="viewers\factories\AlbumViewerFactory.cs" />
-    <Compile Include="viewers\factories\EventViewerFactory.cs" />
-    <Compile Include="viewers\factories\FriendViewerFactory.cs" />
-    <Compile Include="viewers\factories\GroupViewerFactory.cs" />
-    <Compile Include="viewers\factories\IViewerFactory.cs" />
-    <Compile Include="viewers\factories\PageViewerFactory.cs" />
-    <Compile Include="viewers\factories\PostViewerFactory.cs" />
     <Compile Include="viewers\FriendViewer.cs" />
     <Compile Include="viewers\GroupViewer.cs" />
     <Compile Include="viewers\IViewer.cs" />
@@ -124,6 +118,7 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="exceptions\NoDataAvailableException.cs" />
+    <Compile Include="viewers\ViewerFactory.cs" />
     <Compile Include="viewers\PageViewer.cs" />
     <Compile Include="viewers\PhotoViewer.cs" />
     <Compile Include="viewers\PictureAndNameObjectViewer.cs" />

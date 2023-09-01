@@ -2,11 +2,11 @@
 {
     internal enum eProfileViewerIndex
     {
-        AlbumViewerIndex = 0,
-        GroupViewerIndex = 1,
-        PostViewerIndex = 2,
-        EventViewerIndex = 3,
-        FriendViewerIndex = 4,
-        PageViewerIndex = 5,
+        AlbumViewer = 0,
+        GroupViewer = 1,
+        PostViewer = 2,
+        EventViewer = 3,
+        FriendViewer = 4,
+        PageViewer = 5,
     }
 }
