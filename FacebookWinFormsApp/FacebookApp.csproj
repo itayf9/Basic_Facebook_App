@@ -107,6 +107,13 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="viewers\factories\AlbumViewerFactory.cs" />
+    <Compile Include="viewers\factories\EventViewerFactory.cs" />
+    <Compile Include="viewers\factories\FriendViewerFactory.cs" />
+    <Compile Include="viewers\factories\GroupViewerFactory.cs" />
+    <Compile Include="viewers\factories\IViewerFactory.cs" />
+    <Compile Include="viewers\factories\PageViewerFactory.cs" />
+    <Compile Include="viewers\factories\PostViewerFactory.cs" />
     <Compile Include="viewers\FriendViewer.cs" />
     <Compile Include="viewers\GroupViewer.cs" />
     <Compile Include="viewers\IViewer.cs" />
@@ -161,7 +168,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="assets\envelope-solid.ico" />
     <None Include="assets\city-solid.ico" />

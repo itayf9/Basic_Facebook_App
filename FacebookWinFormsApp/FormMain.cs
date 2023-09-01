@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.viewers;
+using BasicFacebookFeatures.viewers.factories;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 
@@ -21,6 +22,7 @@ namespace BasicFacebookFeatures
         internal const string k_DisplayMemberCreatedTime = "CreatedTime";
         private const string k_DisplayMemberName = "Name";
 
+        private readonly List<IViewerFactory> r_ViewerFactories;
         private readonly List<IViewer> r_ProfileViewers;
         private readonly List<IViewer> r_NostalgiaViewers;
         private readonly List<Button> r_FetchButtons;
@@ -31,17 +33,51 @@ namespace BasicFacebookFeatures
         public FormMain(User i_LoggedInUser)
         {
             r_LoggedInUser = i_LoggedInUser;
+            r_ViewerFactories = new List<IViewerFactory>();
             r_ProfileViewers = new List<IViewer>();
             r_NostalgiaViewers = new List<IViewer>();
             r_FetchButtons = new List<Button>();
             InitializeComponent();
-            List<Button> listOfInitialAnswerButtons = new List<Button> { buttonAnswer1_1, buttonAnswer1_2 };
-            initializeCommentGenerator(listOfInitialAnswerButtons);
-            FacebookService.s_CollectionLimit = 25;
+            initializeAll();
+            
+            
+        }
+
+        private void initializeAll()
+        {
+            initializeFactories();
+            initCommentGenerator();
+            setFacebookServiceConfiguration();
             initializeProfileInformation();
             initializeViewers();
             initializeFetchButtons();
+            setDefaultMediaType();
+        }
+
+        private void initializeFactories()
+        {
+            r_ViewerFactories.Add(new AlbumViewerFactory());
+            r_ViewerFactories.Add(new GroupViewerFactory());
+            r_ViewerFactories.Add(new PostViewerFactory());
+            r_ViewerFactories.Add(new EventViewerFactory());
+            r_ViewerFactories.Add(new FriendViewerFactory());
+            r_ViewerFactories.Add(new PageViewerFactory());
+        }
+
+        private void setDefaultMediaType()
+        {
             comboBoxMediaType.SelectedItem = k_ContentCategoryPhotos;
+        }
+
+        private void setFacebookServiceConfiguration()
+        {
+            FacebookService.s_CollectionLimit = 25;
+        }
+
+        private void initCommentGenerator()
+        {
+            List<Button> listOfInitialAnswerButtons = new List<Button> { buttonAnswer1_1, buttonAnswer1_2 };
+            initializeCommentGenerator(listOfInitialAnswerButtons);
         }
 
         private void initializeFetchButtons()
@@ -89,12 +125,10 @@ namespace BasicFacebookFeatures
 
         private void createProfileViewersInSpecificLocation(int i_ProfileViewersTopLeftX, int i_ProfileViewersTopLeftY)
         {
-            r_ProfileViewers.Add(new AlbumViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
-            r_ProfileViewers.Add(new GroupViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
-            r_ProfileViewers.Add(new PostViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
-            r_ProfileViewers.Add(new EventViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
-            r_ProfileViewers.Add(new FriendViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
-            r_ProfileViewers.Add(new PageViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
+            foreach (IViewerFactory factory in r_ViewerFactories)
+            {
+                r_ProfileViewers.Add(factory.CreateViewer(i_ProfileViewersTopLeftX, i_ProfileViewersTopLeftY));
+            }
         }
 
         private void addViewersComponentsToTabPage(List<IViewer> i_Viewers, TabPage i_TabPage)
