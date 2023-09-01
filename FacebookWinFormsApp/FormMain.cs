@@ -107,8 +107,8 @@ namespace BasicFacebookFeatures
 
         private void createNostalgiaViewersInSpecificLocation(int i_NostalgiaViewerTopLeftX, int i_NostalgiaViewerTopLeftY)
         {
-            r_ProfileViewers.Add(ViewerFactory.Create(eViewerType.PhotoViewer, i_NostalgiaViewerTopLeftX, i_NostalgiaViewerTopLeftY));
-            r_ProfileViewers.Add(ViewerFactory.Create(eViewerType.PostViewer, i_NostalgiaViewerTopLeftX, i_NostalgiaViewerTopLeftY));
+            r_NostalgiaViewers.Add(ViewerFactory.Create(eViewerType.PhotoViewer, i_NostalgiaViewerTopLeftX, i_NostalgiaViewerTopLeftY));
+            r_NostalgiaViewers.Add(ViewerFactory.Create(eViewerType.PostViewer, i_NostalgiaViewerTopLeftX, i_NostalgiaViewerTopLeftY));
         }
 
         private void createProfileViewersInSpecificLocation(int i_ProfileViewersTopLeftX, int i_ProfileViewersTopLeftY)
@@ -152,7 +152,7 @@ namespace BasicFacebookFeatures
             {
                 if (button != i_ButtonNotToToggle)
                 {
-                    button.Enabled = i_IsEnabled;
+                    button.Invoke(new Action(() => button.Enabled = i_IsEnabled));
                 }
             }
         }
