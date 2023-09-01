@@ -48,13 +48,6 @@ namespace BasicFacebookFeatures
 
         private CommentGenerator()
         {
-/*            this.r_TextBoxQuestions = i_TextBoxQuestions;
-            this.r_TextBoxCommentOutput = i_TextBoxCommentOutput;
-            this.r_ButtonStart = i_ButtonStart;
-            this.r_ButtonPostComment = i_ButtonPostComment;
-            this.r_LabelCommentOutputExplaination = i_LabelOutputCommentExplaination;
-            this.r_FlowLayoutPanelAnswerButtons = i_FlowLayoutPanelAnswerButtons;
-            this.r_ListOfInitialAnswerButtons = i_ListOfInitialAnswerButtons;*/
             this.r_DictionaryQuestionIdToPossibleAnswerButtons = new Dictionary<string, HashSet<Button>>();
             this.r_DictionaryQuestionIdToQuestionDetails = new Dictionary<string, string>();
 
