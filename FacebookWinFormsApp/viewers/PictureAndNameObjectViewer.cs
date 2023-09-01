@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace BasicFacebookFeatures
+namespace BasicFacebookFeatures.viewers
 {
     internal abstract class PictureAndNameObjectViewer : IViewer
     {

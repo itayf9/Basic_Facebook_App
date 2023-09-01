@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
+using BasicFacebookFeatures.enums;
+using BasicFacebookFeatures.exceptions;
+using BasicFacebookFeatures.sessions;
+using BasicFacebookFeatures.utillities;
 using BasicFacebookFeatures.viewers;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
@@ -134,9 +138,9 @@ namespace BasicFacebookFeatures
             pictureBoxProfile.ImageLocation = r_LoggedInUser.PictureNormalURL;
             labelBirthDay.Text = r_LoggedInUser.Birthday;
 
-            DateTime userBirthDay = Utillity.GetDateTimeObjectFromDateString(r_LoggedInUser.Birthday);
+            DateTimeProxy userBirthDay = DateTimeProxy.GetDateTimeObjectFromDateString(r_LoggedInUser.Birthday);
 
-            labelAge.Text = $"{Utillity.CalculateAge(userBirthDay)} Years old";
+            labelAge.Text = userBirthDay.ToString();
             labelEmail.Text = r_LoggedInUser.Email;
             labelCity.Text = r_LoggedInUser.Location.Name;
             labelGender.Text = r_LoggedInUser.Gender.ToString();

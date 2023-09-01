@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="enums\eViewerType.cs" />
+    <Compile Include="utillities\DateTimeProxy.cs" />
     <Compile Include="utillities\Utillity.cs" />
     <Compile Include="CommentGenerator.cs" />
     <Compile Include="viewers\AlbumViewer.cs" />

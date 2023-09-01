@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
+using BasicFacebookFeatures.exceptions;
+using BasicFacebookFeatures.utillities;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures
+namespace BasicFacebookFeatures.viewers
 {
     internal class AlbumViewer : PictureAndNameObjectViewer
     {

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
 
-namespace BasicFacebookFeatures
+namespace BasicFacebookFeatures.sessions
 {
     public class Session
     {

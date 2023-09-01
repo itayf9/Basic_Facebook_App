@@ -1,7 +1,8 @@
 ﻿using System.Windows.Forms;
+using BasicFacebookFeatures.utillities;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures
+namespace BasicFacebookFeatures.viewers
 {
     internal class PageViewer : PictureAndNameObjectViewer
     {

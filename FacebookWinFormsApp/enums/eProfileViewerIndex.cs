@@ -1,4 +1,4 @@
-﻿namespace BasicFacebookFeatures
+﻿namespace BasicFacebookFeatures.enums
 {
     internal enum eProfileViewerIndex
     {

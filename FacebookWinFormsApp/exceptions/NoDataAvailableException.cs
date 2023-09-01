@@ -1,6 +1,7 @@
 ﻿using System;
+using BasicFacebookFeatures.utillities;
 
-namespace BasicFacebookFeatures
+namespace BasicFacebookFeatures.exceptions
 {
     internal class NoDataAvailableException : Exception
     {

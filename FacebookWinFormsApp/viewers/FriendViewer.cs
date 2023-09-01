@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
+using BasicFacebookFeatures.utillities;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures
+namespace BasicFacebookFeatures.viewers
 {
     internal class FriendViewer : PictureAndNameObjectViewer
     {
@@ -108,8 +109,8 @@ namespace BasicFacebookFeatures
             r_LabelBirthdayValue.Text = i_Friend.Birthday;
             r_LabelGenderValue.Text = i_Friend.Gender.ToString();
             r_LabelHomeTownValue.Text = i_Friend.Location.Name;
-            DateTime friendBirthDay = Utillity.GetDateTimeObjectFromDateString(i_Friend.Birthday);
-            r_LabelAgeValue.Text = $"{Utillity.CalculateAge(friendBirthDay)} Years old";
+            DateTimeProxy friendBirthDay = DateTimeProxy.GetDateTimeObjectFromDateString(i_Friend.Birthday);
+            r_LabelAgeValue.Text = friendBirthDay.ToString();
 
             SetVisibility(true);
         }

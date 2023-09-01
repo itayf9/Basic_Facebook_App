@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures
+namespace BasicFacebookFeatures.viewers
 {
     internal class GroupViewer : PictureAndNameObjectViewer
     {

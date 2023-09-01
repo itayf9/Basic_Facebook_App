@@ -1,4 +1,4 @@
-﻿namespace BasicFacebookFeatures
+﻿namespace BasicFacebookFeatures.utillities
 {
     internal static class Messages
     {

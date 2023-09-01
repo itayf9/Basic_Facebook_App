@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using BasicFacebookFeatures.sessions;
+using BasicFacebookFeatures.utillities;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 

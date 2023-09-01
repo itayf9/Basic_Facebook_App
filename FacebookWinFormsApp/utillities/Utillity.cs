@@ -4,19 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BasicFacebookFeatures
+namespace BasicFacebookFeatures.utillities
 {
     internal static class Utillity
     {
-        public static DateTime GetDateTimeObjectFromDateString(string i_DateAsString)
-        {
-            return DateTime.ParseExact(
-                i_DateAsString,
-                "MM/dd/yyyy",
-                System.Globalization.CultureInfo.InvariantCulture);
-        }
-
-        public static string CalculateAge(DateTime i_BirthdayDate)
+        public static int CalculateAge(DateTime i_BirthdayDate)
         {
             DateTime today = DateTime.Today;
             int age = today.Year - i_BirthdayDate.Year;
@@ -26,7 +18,7 @@ namespace BasicFacebookFeatures
                 age--;
             }
 
-            return age.ToString();
+            return age;
         }
     }
 }
