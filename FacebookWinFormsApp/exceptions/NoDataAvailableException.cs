@@ -1,5 +1,5 @@
 ﻿using System;
-using BasicFacebookFeatures.utillities;
+using BasicFacebookFeatures.utilities;
 
 namespace BasicFacebookFeatures.exceptions
 {

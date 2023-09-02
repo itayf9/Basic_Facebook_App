@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BasicFacebookFeatures.utillities
+namespace BasicFacebookFeatures.utilities
 {
     public class DateTimeProxy
     {
@@ -11,7 +11,7 @@ namespace BasicFacebookFeatures.utillities
         private DateTimeProxy(DateTime i_DateTime)
         {
             r_DateTime = i_DateTime;
-            numberOfYearsFromDate = Utillity.CalculateAge(i_DateTime);
+            numberOfYearsFromDate = Utility.CalculateAge(i_DateTime);
         }
 
 

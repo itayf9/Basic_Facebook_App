@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using BasicFacebookFeatures.utillities;
+using BasicFacebookFeatures.utilities;
 using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures.viewers

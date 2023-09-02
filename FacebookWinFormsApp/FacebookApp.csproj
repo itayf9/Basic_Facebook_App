@@ -96,11 +96,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="enums\eViewerType.cs" />
-    <Compile Include="utillities\DateTimeProxy.cs" />
-    <Compile Include="utillities\Utillity.cs" />
+    <Compile Include="utilities\DateTimeProxy.cs" />
+    <Compile Include="utilities\Utility.cs" />
     <Compile Include="CommentGenerator.cs" />
     <Compile Include="viewers\AlbumViewer.cs" />
-    <Compile Include="utillities\Messages.cs" />
+    <Compile Include="utilities\Messages.cs" />
     <Compile Include="viewers\EventViewer.cs" />
     <Compile Include="enums\eProfileViewerIndex.cs" />
     <Compile Include="FormMain.cs">

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BasicFacebookFeatures.utillities
+namespace BasicFacebookFeatures.utilities
 {
-    internal static class Utillity
+    internal static class Utility
     {
         public static int CalculateAge(DateTime i_BirthdayDate)
         {
