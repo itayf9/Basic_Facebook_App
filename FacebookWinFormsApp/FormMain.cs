@@ -207,8 +207,13 @@ namespace BasicFacebookFeatures
         private void setLoadingState(Button i_SenderButton, bool i_ToEnable)
         {
             toggleOtherButtons(i_SenderButton, i_ToEnable);
-            labelLoading.Invoke(new Action(() => labelLoading.Visible = !i_ToEnable));
-            m_IsLoadingData = !i_ToEnable;
+            setLoadingLabel(!i_ToEnable);
+        }
+
+        private void setLoadingLabel(bool i_ToEnable)
+        {
+            labelLoading.Invoke(new Action(() => labelLoading.Visible = i_ToEnable));
+            m_IsLoadingData = i_ToEnable;
         }
 
         private void buttonAlbums_Click(object sender, EventArgs e)
@@ -724,7 +729,10 @@ namespace BasicFacebookFeatures
 
         private void fetchAlbumPictures(Album i_SelectedAlbum)
         {
+            bool v_IsLoading = true;
+            setLoadingLabel(v_IsLoading);
             (r_ProfileViewers[(int)eProfileViewerIndex.AlbumViewer] as AlbumViewer).LoadAlbumDetailsToComponents(i_SelectedAlbum);
+            setLoadingLabel(!v_IsLoading);
         }
 
         private void buttonNostalgia_Click(object sender, EventArgs e)
