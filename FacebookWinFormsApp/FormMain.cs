@@ -24,6 +24,8 @@ namespace BasicFacebookFeatures
         internal const string k_ContentCategoryPhotos = "Photos";
         internal const string k_DisplayMemberCreatedTime = "CreatedTime";
         private const string k_DisplayMemberName = "Name";
+        private const string k_DisableEditProfile = "Disable Edit";
+        private const string k_EditProfile = "Edit Profile";
         private const bool k_ToEnableButtons = true;
 
         private readonly List<IViewer> r_ProfileViewers;
@@ -31,6 +33,7 @@ namespace BasicFacebookFeatures
         private readonly List<Button> r_FetchButtons;
         private readonly User r_LoggedInUser;
         private bool m_IsLoadingData;
+
 
         public FormMain(User i_LoggedInUser)
         {
@@ -132,18 +135,12 @@ namespace BasicFacebookFeatures
         private void initializeProfileInformation()
         {
             const bool v_ToEnable = true;
-
+            userBindingSource.DataSource = r_LoggedInUser;
             buttonLogout.Enabled = v_ToEnable;
-            labelName.Text = r_LoggedInUser.Name;
-            pictureBoxProfile.ImageLocation = r_LoggedInUser.PictureNormalURL;
-            labelBirthDay.Text = r_LoggedInUser.Birthday;
-
             DateTimeProxy userBirthDay = DateTimeProxy.GetDateTimeObjectFromDateString(r_LoggedInUser.Birthday);
-
             labelAge.Text = userBirthDay.ToString();
-            labelEmail.Text = r_LoggedInUser.Email;
-            labelCity.Text = r_LoggedInUser.Location.Name;
-            labelGender.Text = r_LoggedInUser.Gender.ToString();
+            textBoxCity.Text = r_LoggedInUser.Location.Name;
+            textBoxGender.Text = r_LoggedInUser.Gender.ToString();
         }
 
         private void toggleOtherButtons(Button i_ButtonNotToToggle, bool i_IsEnabled)
@@ -256,7 +253,6 @@ namespace BasicFacebookFeatures
             thread.Start();
         }
 
-
         private void buttonGroups_Click(object sender, EventArgs e)
         {
             if (m_IsLoadingData)
@@ -297,7 +293,6 @@ namespace BasicFacebookFeatures
 
             thread.Start();
         }
-
 
         private void buttonEvents_Click(object sender, EventArgs e)
         {
@@ -833,6 +828,28 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show(Messages.k_GeneralErrorMessage);
             }
+        }
+
+        private void buttonEditProfile_Click(object sender, EventArgs e)
+        {
+            bool v_IsEditMode = true;
+            if (buttonEditProfile.Text == k_EditProfile)
+            {
+                setReadOnlyProfileControls(!v_IsEditMode);
+                buttonEditProfile.Text = k_DisableEditProfile;
+            }
+            else
+            {
+                setReadOnlyProfileControls(v_IsEditMode);
+                buttonEditProfile.Text = k_EditProfile;
+            }
+        }
+
+        private void setReadOnlyProfileControls(bool i_IsEditMode)
+        {
+            nameTextBox.ReadOnly = i_IsEditMode;
+            emailTextBox.ReadOnly = i_IsEditMode;
+            birthdayTextBox.ReadOnly = i_IsEditMode;
         }
     }
 }

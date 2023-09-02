@@ -151,6 +151,7 @@
     <None Include="ClassDiagram.cd" />
     <Compile Include="enums\eNostalgiaViewerIndex.cs" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\FacebookWrapper.ObjectModel.User.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
