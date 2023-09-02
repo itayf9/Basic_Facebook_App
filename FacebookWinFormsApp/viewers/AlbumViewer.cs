@@ -110,7 +110,11 @@ namespace BasicFacebookFeatures.viewers
 
         private void listBoxPictures_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PictureBoxSelectedPicture.Image = ((sender as ListBox).SelectedItem as Photo).ImageNormal;
+            ListBox listBoxPictures = sender as ListBox;
+            if (listBoxPictures.SelectedItem is Photo)
+            {
+                PictureBoxSelectedPicture.Image = (listBoxPictures.SelectedItem as Photo).ImageNormal;
+            }
         }
     }
 }
