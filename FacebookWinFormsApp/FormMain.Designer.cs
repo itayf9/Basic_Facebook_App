@@ -32,6 +32,7 @@
             this.buttonLogout = new System.Windows.Forms.Button();
             this.tabControlApp = new System.Windows.Forms.TabControl();
             this.tabPageProfile = new System.Windows.Forms.TabPage();
+            this.labelLoading = new System.Windows.Forms.Label();
             this.labelBirthDayIcon = new System.Windows.Forms.Label();
             this.labelGenderIcon = new System.Windows.Forms.Label();
             this.labelCityIcon = new System.Windows.Forms.Label();
@@ -111,6 +112,7 @@
             // 
             // tabPageProfile
             // 
+            this.tabPageProfile.Controls.Add(this.labelLoading);
             this.tabPageProfile.Controls.Add(this.labelBirthDayIcon);
             this.tabPageProfile.Controls.Add(this.labelGenderIcon);
             this.tabPageProfile.Controls.Add(this.labelCityIcon);
@@ -130,17 +132,26 @@
             this.tabPageProfile.Controls.Add(this.flowLayoutPanel1);
             this.tabPageProfile.Controls.Add(this.labelName);
             this.tabPageProfile.Controls.Add(this.buttonLogout);
-            this.tabPageProfile.Location = new System.Drawing.Point(4, 35);
+            this.tabPageProfile.Location = new System.Drawing.Point(4, 27);
             this.tabPageProfile.Name = "tabPageProfile";
             this.tabPageProfile.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProfile.Size = new System.Drawing.Size(1138, 555);
+            this.tabPageProfile.Size = new System.Drawing.Size(1138, 563);
             this.tabPageProfile.TabIndex = 0;
             this.tabPageProfile.Text = "Profile";
             this.tabPageProfile.UseVisualStyleBackColor = true;
             // 
+            // labelLoading
+            // 
+            this.labelLoading.AutoSize = true;
+            this.labelLoading.Location = new System.Drawing.Point(933, 47);
+            this.labelLoading.Name = "labelLoading";
+            this.labelLoading.Size = new System.Drawing.Size(72, 18);
+            this.labelLoading.TabIndex = 76;
+            this.labelLoading.Text = "Loading...";
+            this.labelLoading.Visible = false;
+            // 
             // labelBirthDayIcon
             // 
-            this.labelBirthDayIcon.Image = global::BasicFacebookFeatures.Properties.Resources.cake_candles_solid;
             this.labelBirthDayIcon.Location = new System.Drawing.Point(640, 74);
             this.labelBirthDayIcon.Name = "labelBirthDayIcon";
             this.labelBirthDayIcon.Size = new System.Drawing.Size(37, 37);
@@ -148,7 +159,6 @@
             // 
             // labelGenderIcon
             // 
-            this.labelGenderIcon.Image = global::BasicFacebookFeatures.Properties.Resources.person_half_dress_solid;
             this.labelGenderIcon.Location = new System.Drawing.Point(640, 37);
             this.labelGenderIcon.Name = "labelGenderIcon";
             this.labelGenderIcon.Size = new System.Drawing.Size(37, 37);
@@ -156,7 +166,6 @@
             // 
             // labelCityIcon
             // 
-            this.labelCityIcon.Image = global::BasicFacebookFeatures.Properties.Resources.city_solid;
             this.labelCityIcon.Location = new System.Drawing.Point(640, 3);
             this.labelCityIcon.Name = "labelCityIcon";
             this.labelCityIcon.Size = new System.Drawing.Size(37, 34);
@@ -164,7 +173,6 @@
             // 
             // labelAgeIcon
             // 
-            this.labelAgeIcon.Image = global::BasicFacebookFeatures.Properties.Resources.calendar_days_regular;
             this.labelAgeIcon.Location = new System.Drawing.Point(383, 74);
             this.labelAgeIcon.Name = "labelAgeIcon";
             this.labelAgeIcon.Size = new System.Drawing.Size(37, 37);
@@ -172,7 +180,6 @@
             // 
             // labelEmailIcon
             // 
-            this.labelEmailIcon.Image = global::BasicFacebookFeatures.Properties.Resources.envelope_solid;
             this.labelEmailIcon.Location = new System.Drawing.Point(382, 37);
             this.labelEmailIcon.Name = "labelEmailIcon";
             this.labelEmailIcon.Size = new System.Drawing.Size(37, 37);
@@ -180,7 +187,6 @@
             // 
             // labelNameIcon
             // 
-            this.labelNameIcon.Image = global::BasicFacebookFeatures.Properties.Resources.user_solid;
             this.labelNameIcon.Location = new System.Drawing.Point(380, 0);
             this.labelNameIcon.Name = "labelNameIcon";
             this.labelNameIcon.Size = new System.Drawing.Size(37, 37);
@@ -207,7 +213,7 @@
             this.labelGender.AutoSize = true;
             this.labelGender.Location = new System.Drawing.Point(694, 47);
             this.labelGender.Name = "labelGender";
-            this.labelGender.Size = new System.Drawing.Size(90, 26);
+            this.labelGender.Size = new System.Drawing.Size(61, 18);
             this.labelGender.TabIndex = 67;
             this.labelGender.Text = "Gender:";
             // 
@@ -217,7 +223,7 @@
             this.labelCity.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelCity.Location = new System.Drawing.Point(694, 11);
             this.labelCity.Name = "labelCity";
-            this.labelCity.Size = new System.Drawing.Size(56, 26);
+            this.labelCity.Size = new System.Drawing.Size(37, 18);
             this.labelCity.TabIndex = 66;
             this.labelCity.Text = "City:";
             this.labelCity.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -228,7 +234,7 @@
             this.labelBirthDay.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelBirthDay.Location = new System.Drawing.Point(694, 84);
             this.labelBirthDay.Name = "labelBirthDay";
-            this.labelBirthDay.Size = new System.Drawing.Size(102, 26);
+            this.labelBirthDay.Size = new System.Drawing.Size(68, 18);
             this.labelBirthDay.TabIndex = 64;
             this.labelBirthDay.Text = "BirthDay:";
             this.labelBirthDay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -238,7 +244,7 @@
             this.labelAge.AutoSize = true;
             this.labelAge.Location = new System.Drawing.Point(421, 84);
             this.labelAge.Name = "labelAge";
-            this.labelAge.Size = new System.Drawing.Size(57, 26);
+            this.labelAge.Size = new System.Drawing.Size(37, 18);
             this.labelAge.TabIndex = 63;
             this.labelAge.Text = "Age:";
             // 
@@ -249,7 +255,7 @@
             this.labelEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelEmail.Location = new System.Drawing.Point(425, 47);
             this.labelEmail.Name = "labelEmail";
-            this.labelEmail.Size = new System.Drawing.Size(74, 26);
+            this.labelEmail.Size = new System.Drawing.Size(49, 18);
             this.labelEmail.TabIndex = 62;
             this.labelEmail.Text = "Email:";
             this.labelEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -259,7 +265,7 @@
             this.labelViewTitle.AutoSize = true;
             this.labelViewTitle.Location = new System.Drawing.Point(238, 149);
             this.labelViewTitle.Name = "labelViewTitle";
-            this.labelViewTitle.Size = new System.Drawing.Size(73, 26);
+            this.labelViewTitle.Size = new System.Drawing.Size(51, 18);
             this.labelViewTitle.TabIndex = 60;
             this.labelViewTitle.Text = "Posts:";
             // 
@@ -275,7 +281,7 @@
             // listBoxContent
             // 
             this.listBoxContent.FormattingEnabled = true;
-            this.listBoxContent.ItemHeight = 26;
+            this.listBoxContent.ItemHeight = 18;
             this.listBoxContent.Location = new System.Drawing.Point(243, 178);
             this.listBoxContent.Name = "listBoxContent";
             this.listBoxContent.Size = new System.Drawing.Size(346, 238);
@@ -284,8 +290,7 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left)));
             this.flowLayoutPanel1.Controls.Add(this.buttonPosts);
             this.flowLayoutPanel1.Controls.Add(this.buttonFriends);
             this.flowLayoutPanel1.Controls.Add(this.buttonAlbums);
@@ -295,7 +300,7 @@
             this.flowLayoutPanel1.Controls.Add(this.buttonLikedPages);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(9, 92);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 415);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 423);
             this.flowLayoutPanel1.TabIndex = 58;
             // 
             // buttonPosts
@@ -373,7 +378,7 @@
             this.labelName.AutoSize = true;
             this.labelName.Location = new System.Drawing.Point(425, 9);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(112, 26);
+            this.labelName.Size = new System.Drawing.Size(75, 18);
             this.labelName.TabIndex = 57;
             this.labelName.Text = "Full Name";
             // 
@@ -383,10 +388,10 @@
             this.tabPageNostalgia.Controls.Add(this.textBoxUploadDate);
             this.tabPageNostalgia.Controls.Add(this.buttonNostalgia);
             this.tabPageNostalgia.Controls.Add(this.comboBoxMediaType);
-            this.tabPageNostalgia.Location = new System.Drawing.Point(4, 35);
+            this.tabPageNostalgia.Location = new System.Drawing.Point(4, 27);
             this.tabPageNostalgia.Name = "tabPageNostalgia";
             this.tabPageNostalgia.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageNostalgia.Size = new System.Drawing.Size(1138, 555);
+            this.tabPageNostalgia.Size = new System.Drawing.Size(1138, 563);
             this.tabPageNostalgia.TabIndex = 1;
             this.tabPageNostalgia.Text = "Nostalgia";
             this.tabPageNostalgia.UseVisualStyleBackColor = true;
@@ -396,7 +401,7 @@
             this.labelNostaldiaExplaination.AutoSize = true;
             this.labelNostaldiaExplaination.Location = new System.Drawing.Point(6, 7);
             this.labelNostaldiaExplaination.Name = "labelNostaldiaExplaination";
-            this.labelNostaldiaExplaination.Size = new System.Drawing.Size(715, 26);
+            this.labelNostaldiaExplaination.Size = new System.Drawing.Size(483, 18);
             this.labelNostaldiaExplaination.TabIndex = 4;
             this.labelNostaldiaExplaination.Text = "Select the kind of nostalgia that you want and click the \"nostalgia\" button.";
             // 
@@ -405,7 +410,7 @@
             this.textBoxUploadDate.Location = new System.Drawing.Point(344, 58);
             this.textBoxUploadDate.Name = "textBoxUploadDate";
             this.textBoxUploadDate.ReadOnly = true;
-            this.textBoxUploadDate.Size = new System.Drawing.Size(323, 32);
+            this.textBoxUploadDate.Size = new System.Drawing.Size(323, 24);
             this.textBoxUploadDate.TabIndex = 3;
             this.textBoxUploadDate.Visible = false;
             // 
@@ -423,12 +428,10 @@
             // 
             this.comboBoxMediaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMediaType.FormattingEnabled = true;
-            this.comboBoxMediaType.Items.AddRange(new object[] {
-            "Photos",
-            "Posts"});
+            this.comboBoxMediaType.Items.AddRange(new object[] { "Photos", "Posts" });
             this.comboBoxMediaType.Location = new System.Drawing.Point(8, 36);
             this.comboBoxMediaType.Name = "comboBoxMediaType";
-            this.comboBoxMediaType.Size = new System.Drawing.Size(121, 34);
+            this.comboBoxMediaType.Size = new System.Drawing.Size(121, 26);
             this.comboBoxMediaType.TabIndex = 0;
             // 
             // tabPageCommentGenerator
@@ -441,9 +444,9 @@
             this.tabPageCommentGenerator.Controls.Add(this.textBoxQuestion);
             this.tabPageCommentGenerator.Controls.Add(this.buttonStart);
             this.tabPageCommentGenerator.Controls.Add(this.labelWelcomeCommentGenerator);
-            this.tabPageCommentGenerator.Location = new System.Drawing.Point(4, 35);
+            this.tabPageCommentGenerator.Location = new System.Drawing.Point(4, 27);
             this.tabPageCommentGenerator.Name = "tabPageCommentGenerator";
-            this.tabPageCommentGenerator.Size = new System.Drawing.Size(1138, 555);
+            this.tabPageCommentGenerator.Size = new System.Drawing.Size(1138, 563);
             this.tabPageCommentGenerator.TabIndex = 2;
             this.tabPageCommentGenerator.Text = "Comment Generator";
             this.tabPageCommentGenerator.UseVisualStyleBackColor = true;
@@ -453,7 +456,7 @@
             this.labelCommentOutputExplainationCommentGenerator.AutoSize = true;
             this.labelCommentOutputExplainationCommentGenerator.Location = new System.Drawing.Point(8, 437);
             this.labelCommentOutputExplainationCommentGenerator.Name = "labelCommentOutputExplainationCommentGenerator";
-            this.labelCommentOutputExplainationCommentGenerator.Size = new System.Drawing.Size(159, 26);
+            this.labelCommentOutputExplainationCommentGenerator.Size = new System.Drawing.Size(107, 18);
             this.labelCommentOutputExplainationCommentGenerator.TabIndex = 10;
             this.labelCommentOutputExplainationCommentGenerator.Text = "The final result:";
             this.labelCommentOutputExplainationCommentGenerator.Visible = false;
@@ -463,10 +466,9 @@
             this.labelExplainationCommentGenerator.AutoSize = true;
             this.labelExplainationCommentGenerator.Location = new System.Drawing.Point(3, 44);
             this.labelExplainationCommentGenerator.Name = "labelExplainationCommentGenerator";
-            this.labelExplainationCommentGenerator.Size = new System.Drawing.Size(996, 26);
+            this.labelExplainationCommentGenerator.Size = new System.Drawing.Size(681, 18);
             this.labelExplainationCommentGenerator.TabIndex = 9;
-            this.labelExplainationCommentGenerator.Text = "Click on \"Start\", answer some questions and recieve a dedicated message you can p" +
-    "ost on Facebook.";
+            this.labelExplainationCommentGenerator.Text = "Click on \"Start\", answer some questions and recieve a dedicated message you can p" + "ost on Facebook.";
             // 
             // flowLayoutPanelOptionButtons
             // 
@@ -528,7 +530,7 @@
             this.textBoxQuestion.Location = new System.Drawing.Point(219, 215);
             this.textBoxQuestion.Name = "textBoxQuestion";
             this.textBoxQuestion.ReadOnly = true;
-            this.textBoxQuestion.Size = new System.Drawing.Size(712, 32);
+            this.textBoxQuestion.Size = new System.Drawing.Size(712, 24);
             this.textBoxQuestion.TabIndex = 2;
             this.textBoxQuestion.Text = "What\'s On Your Mind ?";
             this.textBoxQuestion.Visible = false;
@@ -548,7 +550,7 @@
             this.labelWelcomeCommentGenerator.AutoSize = true;
             this.labelWelcomeCommentGenerator.Location = new System.Drawing.Point(3, 18);
             this.labelWelcomeCommentGenerator.Name = "labelWelcomeCommentGenerator";
-            this.labelWelcomeCommentGenerator.Size = new System.Drawing.Size(399, 26);
+            this.labelWelcomeCommentGenerator.Size = new System.Drawing.Size(274, 18);
             this.labelWelcomeCommentGenerator.TabIndex = 0;
             this.labelWelcomeCommentGenerator.Text = "Welcome To The Comment Generator !!";
             // 
@@ -562,7 +564,7 @@
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1146, 594);
             this.Controls.Add(this.tabControlApp);
@@ -584,10 +586,11 @@
             this.tabPageCommentGenerator.PerformLayout();
             this.flowLayoutPanelOptionButtons.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
-		#endregion
+        private System.Windows.Forms.Label labelLoading;
+
+        #endregion
 		private System.Windows.Forms.Button buttonLogout;
 		private System.Windows.Forms.TabControl tabControlApp;
 		private System.Windows.Forms.TabPage tabPageProfile;

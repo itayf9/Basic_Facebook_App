@@ -24,7 +24,7 @@ namespace BasicFacebookFeatures
         internal const string k_ContentCategoryPhotos = "Photos";
         internal const string k_DisplayMemberCreatedTime = "CreatedTime";
         private const string k_DisplayMemberName = "Name";
-        private const bool k_ToEnable = true;
+        private const bool k_ToEnableButtons = true;
 
         private readonly List<IViewer> r_ProfileViewers;
         private readonly List<IViewer> r_NostalgiaViewers;
@@ -173,9 +173,7 @@ namespace BasicFacebookFeatures
         {
             if (!m_IsLoadingData)
             {
-                toggleOtherButtons(sender as Button, !k_ToEnable);
-
-                m_IsLoadingData = true;
+                setLoadingState(sender as Button, !k_ToEnableButtons);
 
                 switchShownContent(k_ContentCategoryPosts);
                 listBoxContent.DisplayMember = k_DisplayMemberCreatedTime;
@@ -201,13 +199,19 @@ namespace BasicFacebookFeatures
                         }
                         finally
                         {
-                            m_IsLoadingData = false;
-                            toggleOtherButtons(sender as Button, k_ToEnable);
+                            setLoadingState(sender as Button, k_ToEnableButtons);
                         }
                     });
 
                 thread.Start();
             }
+        }
+
+        private void setLoadingState(Button i_SenderButton, bool i_ToEnable)
+        {
+            toggleOtherButtons(i_SenderButton, i_ToEnable);
+            labelLoading.Invoke(new Action(() => labelLoading.Visible = !i_ToEnable));
+            m_IsLoadingData = !i_ToEnable;
         }
 
         private void buttonAlbums_Click(object sender, EventArgs e)
@@ -217,9 +221,8 @@ namespace BasicFacebookFeatures
                 return;
             }
 
-            toggleOtherButtons(sender as Button, !k_ToEnable);
+            setLoadingState(sender as Button, !k_ToEnableButtons);
 
-            m_IsLoadingData = true;
 
             switchShownContent(k_ContentCategoryAlbums);
             listBoxContent.DisplayMember = k_DisplayMemberName;
@@ -245,8 +248,8 @@ namespace BasicFacebookFeatures
                     }
                     finally
                     {
-                        m_IsLoadingData = false;
-                        toggleOtherButtons(sender as Button, k_ToEnable);
+                        setLoadingState(sender as Button, k_ToEnableButtons);
+
                     }
                 });
 
@@ -261,9 +264,7 @@ namespace BasicFacebookFeatures
                 return;
             }
 
-            toggleOtherButtons(sender as Button, !k_ToEnable);
-
-            m_IsLoadingData = true;
+            setLoadingState(sender as Button, !k_ToEnableButtons);
 
             switchShownContent(k_ContentCategoryGroups);
             listBoxContent.DisplayMember = k_DisplayMemberName;
@@ -289,8 +290,8 @@ namespace BasicFacebookFeatures
                     }
                     finally
                     {
-                        m_IsLoadingData = false;
-                        toggleOtherButtons(sender as Button, k_ToEnable);
+                        setLoadingState(sender as Button, k_ToEnableButtons);
+
                     }
                 });
 
@@ -305,9 +306,7 @@ namespace BasicFacebookFeatures
                 return; // Prevent starting a new operation while one is already running
             }
 
-            toggleOtherButtons(sender as Button, !k_ToEnable);
-
-            m_IsLoadingData = true;
+            setLoadingState(sender as Button, !k_ToEnableButtons);
 
             switchShownContent(k_ContentCategoryEvents);
             listBoxContent.DisplayMember = k_DisplayMemberName;
@@ -333,8 +332,7 @@ namespace BasicFacebookFeatures
                     }
                     finally
                     {
-                        m_IsLoadingData = false;
-                        toggleOtherButtons(sender as Button, k_ToEnable);
+                        setLoadingState(sender as Button, k_ToEnableButtons);
                     }
                 });
 
@@ -348,9 +346,7 @@ namespace BasicFacebookFeatures
                 return; // Prevent starting a new operation while one is already running
             }
 
-            toggleOtherButtons(sender as Button, !k_ToEnable);
-
-            m_IsLoadingData = true;
+            setLoadingState(sender as Button, !k_ToEnableButtons);
 
             switchShownContent(k_ContentCategoryFavoriteTeams);
             listBoxContent.DisplayMember = k_DisplayMemberName;
@@ -376,8 +372,7 @@ namespace BasicFacebookFeatures
                     }
                     finally
                     {
-                        m_IsLoadingData = false;
-                        toggleOtherButtons(sender as Button, k_ToEnable);
+                        setLoadingState(sender as Button, k_ToEnableButtons);
                     }
                 });
 
@@ -391,9 +386,7 @@ namespace BasicFacebookFeatures
                 return; // Prevent starting a new operation while one is already running
             }
 
-            toggleOtherButtons(sender as Button, !k_ToEnable);
-
-            m_IsLoadingData = true;
+            setLoadingState(sender as Button, !k_ToEnableButtons);
 
             switchShownContent(k_ContentCategoryLikedPages);
             listBoxContent.DisplayMember = k_DisplayMemberName;
@@ -419,8 +412,7 @@ namespace BasicFacebookFeatures
                     }
                     finally
                     {
-                        m_IsLoadingData = false;
-                        toggleOtherButtons(sender as Button, k_ToEnable);
+                        setLoadingState(sender as Button, k_ToEnableButtons);
                     }
                 });
 
@@ -434,9 +426,7 @@ namespace BasicFacebookFeatures
                 return; // Prevent starting a new operation while one is already running
             }
 
-            toggleOtherButtons(sender as Button, !k_ToEnable);
-
-            m_IsLoadingData = true;
+            setLoadingState(sender as Button, !k_ToEnableButtons);
 
             switchShownContent(k_ContentCategoryFriends);
             listBoxContent.DisplayMember = k_DisplayMemberName;
@@ -462,8 +452,7 @@ namespace BasicFacebookFeatures
                     }
                     finally
                     {
-                        m_IsLoadingData = false;
-                        toggleOtherButtons(sender as Button, k_ToEnable);
+                        setLoadingState(sender as Button, k_ToEnableButtons);
                     }
                 });
 
