@@ -143,15 +143,17 @@
             // labelLoading
             // 
             this.labelLoading.AutoSize = true;
+            this.labelLoading.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelLoading.Location = new System.Drawing.Point(933, 47);
             this.labelLoading.Name = "labelLoading";
-            this.labelLoading.Size = new System.Drawing.Size(72, 18);
+            this.labelLoading.Size = new System.Drawing.Size(134, 31);
             this.labelLoading.TabIndex = 76;
             this.labelLoading.Text = "Loading...";
             this.labelLoading.Visible = false;
             // 
             // labelBirthDayIcon
             // 
+            this.labelBirthDayIcon.Image = global::BasicFacebookFeatures.Properties.Resources.cake_candles_solid;
             this.labelBirthDayIcon.Location = new System.Drawing.Point(640, 74);
             this.labelBirthDayIcon.Name = "labelBirthDayIcon";
             this.labelBirthDayIcon.Size = new System.Drawing.Size(37, 37);
@@ -159,6 +161,7 @@
             // 
             // labelGenderIcon
             // 
+            this.labelGenderIcon.Image = global::BasicFacebookFeatures.Properties.Resources.person_half_dress_solid;
             this.labelGenderIcon.Location = new System.Drawing.Point(640, 37);
             this.labelGenderIcon.Name = "labelGenderIcon";
             this.labelGenderIcon.Size = new System.Drawing.Size(37, 37);
@@ -166,6 +169,7 @@
             // 
             // labelCityIcon
             // 
+            this.labelCityIcon.Image = global::BasicFacebookFeatures.Properties.Resources.city_solid;
             this.labelCityIcon.Location = new System.Drawing.Point(640, 3);
             this.labelCityIcon.Name = "labelCityIcon";
             this.labelCityIcon.Size = new System.Drawing.Size(37, 34);
@@ -173,6 +177,7 @@
             // 
             // labelAgeIcon
             // 
+            this.labelAgeIcon.Image = global::BasicFacebookFeatures.Properties.Resources.calendar_days_regular;
             this.labelAgeIcon.Location = new System.Drawing.Point(383, 74);
             this.labelAgeIcon.Name = "labelAgeIcon";
             this.labelAgeIcon.Size = new System.Drawing.Size(37, 37);
@@ -180,6 +185,7 @@
             // 
             // labelEmailIcon
             // 
+            this.labelEmailIcon.Image = global::BasicFacebookFeatures.Properties.Resources.envelope_solid;
             this.labelEmailIcon.Location = new System.Drawing.Point(382, 37);
             this.labelEmailIcon.Name = "labelEmailIcon";
             this.labelEmailIcon.Size = new System.Drawing.Size(37, 37);
@@ -187,6 +193,7 @@
             // 
             // labelNameIcon
             // 
+            this.labelNameIcon.Image = global::BasicFacebookFeatures.Properties.Resources.user_solid;
             this.labelNameIcon.Location = new System.Drawing.Point(380, 0);
             this.labelNameIcon.Name = "labelNameIcon";
             this.labelNameIcon.Size = new System.Drawing.Size(37, 37);
@@ -290,7 +297,8 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left)));
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.flowLayoutPanel1.Controls.Add(this.buttonPosts);
             this.flowLayoutPanel1.Controls.Add(this.buttonFriends);
             this.flowLayoutPanel1.Controls.Add(this.buttonAlbums);
@@ -428,7 +436,9 @@
             // 
             this.comboBoxMediaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMediaType.FormattingEnabled = true;
-            this.comboBoxMediaType.Items.AddRange(new object[] { "Photos", "Posts" });
+            this.comboBoxMediaType.Items.AddRange(new object[] {
+            "Photos",
+            "Posts"});
             this.comboBoxMediaType.Location = new System.Drawing.Point(8, 36);
             this.comboBoxMediaType.Name = "comboBoxMediaType";
             this.comboBoxMediaType.Size = new System.Drawing.Size(121, 26);
@@ -468,7 +478,8 @@
             this.labelExplainationCommentGenerator.Name = "labelExplainationCommentGenerator";
             this.labelExplainationCommentGenerator.Size = new System.Drawing.Size(681, 18);
             this.labelExplainationCommentGenerator.TabIndex = 9;
-            this.labelExplainationCommentGenerator.Text = "Click on \"Start\", answer some questions and recieve a dedicated message you can p" + "ost on Facebook.";
+            this.labelExplainationCommentGenerator.Text = "Click on \"Start\", answer some questions and recieve a dedicated message you can p" +
+    "ost on Facebook.";
             // 
             // flowLayoutPanelOptionButtons
             // 
@@ -586,6 +597,7 @@
             this.tabPageCommentGenerator.PerformLayout();
             this.flowLayoutPanelOptionButtons.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
 
         private System.Windows.Forms.Label labelLoading;
