@@ -43,7 +43,6 @@ namespace BasicFacebookFeatures.viewers
             };
             r_PanelPictureAndNameArea.Controls.Add(r_PictureBoxMainPicture);
             r_PanelPictureAndNameArea.Controls.Add(r_LabelName);
-
         }
 
         public PictureBox PictureBoxMainPicture

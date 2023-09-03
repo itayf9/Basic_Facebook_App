@@ -10,8 +10,31 @@ namespace BasicFacebookFeatures
 {
     internal sealed class CommentGenerator
     {
+        private const string k_AnswerButtonPrefix = "buttonAnswer";
+        private const string k_RestartCommentGenerator = "Restart";
+        private const string k_InitialQuestion = "What's on your mind?";
+
         private static CommentGenerator s_Instance = null;
         private static object s_CommentGeneratorLock = new object();
+
+        private readonly Dictionary<string, HashSet<Button>> r_DictionaryQuestionIdToPossibleAnswerButtons;
+        private readonly Dictionary<string, string> r_DictionaryQuestionIdToQuestionDetails;
+
+        private TextBox m_TextBoxQuestions;
+        private TextBox m_TextBoxCommentOutput;
+        private Button m_ButtonStart;
+        private Button m_ButtonPostComment;
+        private List<Button> m_ListOfInitialAnswerButtons;
+        private Label m_LabelCommentOutputExplaination;
+        private FlowLayoutPanel m_FlowLayoutPanelAnswerButtons;
+
+        private CommentGenerator()
+        {
+            this.r_DictionaryQuestionIdToPossibleAnswerButtons = new Dictionary<string, HashSet<Button>>();
+            this.r_DictionaryQuestionIdToQuestionDetails = new Dictionary<string, string>();
+
+            initializeQuestionsAndAnswers();
+        }
 
         public static CommentGenerator Instance
         {
@@ -30,28 +53,6 @@ namespace BasicFacebookFeatures
 
                 return s_Instance;
             }
-        }
-
-        private const string k_AnswerButtonPrefix = "buttonAnswer";
-        private const string k_RestartCommentGenerator = "Restart";
-        private const string k_InitialQuestion = "What's on your mind?";
-
-        private TextBox m_TextBoxQuestions;
-        private TextBox m_TextBoxCommentOutput;
-        private Button m_ButtonStart;
-        private Button m_ButtonPostComment;
-        private List<Button> m_ListOfInitialAnswerButtons;
-        private Label m_LabelCommentOutputExplaination;
-        private FlowLayoutPanel m_FlowLayoutPanelAnswerButtons;
-        private readonly Dictionary<string, HashSet<Button>> r_DictionaryQuestionIdToPossibleAnswerButtons;
-        private readonly Dictionary<string, string> r_DictionaryQuestionIdToQuestionDetails;
-
-        private CommentGenerator()
-        {
-            this.r_DictionaryQuestionIdToPossibleAnswerButtons = new Dictionary<string, HashSet<Button>>();
-            this.r_DictionaryQuestionIdToQuestionDetails = new Dictionary<string, string>();
-
-            initializeQuestionsAndAnswers();
         }
 
         public TextBox TextBoxQuestions
@@ -133,7 +134,7 @@ namespace BasicFacebookFeatures
                 answerButtonsForQuestion = new HashSet<Button>();
                 for (int i = 0; i < i_Answers.Length; i++)
                 {
-                    answerButtonsForQuestion.Add(createAnswerButton($"{k_AnswerButtonPrefix}{i_QuestionId}_{i+1}", i_Answers[i]));
+                    answerButtonsForQuestion.Add(createAnswerButton($"{k_AnswerButtonPrefix}{i_QuestionId}_{i + 1}", i_Answers[i]));
                 }
             }
 

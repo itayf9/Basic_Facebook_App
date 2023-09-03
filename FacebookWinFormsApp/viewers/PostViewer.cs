@@ -35,7 +35,7 @@ namespace BasicFacebookFeatures.viewers
 
             r_PictureBoxPost = new PictureBox
             {
-                Location = new Point(i_topLeftX, i_topLeftY + 70 ),
+                Location = new Point(i_topLeftX, i_topLeftY + 70),
                 Name = "pictureBoxPost",
                 Size = new Size(520, 243),
                 SizeMode = PictureBoxSizeMode.StretchImage,

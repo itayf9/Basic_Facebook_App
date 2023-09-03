@@ -34,7 +34,6 @@ namespace BasicFacebookFeatures
         private readonly User r_LoggedInUser;
         private bool m_IsLoadingData;
 
-
         public FormMain(User i_LoggedInUser)
         {
             r_LoggedInUser = i_LoggedInUser;
@@ -224,8 +223,6 @@ namespace BasicFacebookFeatures
             }
 
             setLoadingState(sender as Button, !k_ToEnableButtons);
-
-
             switchShownContent(k_ContentCategoryAlbums);
             listBoxContent.DisplayMember = k_DisplayMemberName;
 
@@ -251,7 +248,6 @@ namespace BasicFacebookFeatures
                     finally
                     {
                         setLoadingState(sender as Button, k_ToEnableButtons);
-
                     }
                 });
 
@@ -292,7 +288,6 @@ namespace BasicFacebookFeatures
                     finally
                     {
                         setLoadingState(sender as Button, k_ToEnableButtons);
-
                     }
                 });
 
@@ -832,7 +827,7 @@ namespace BasicFacebookFeatures
                 Status postedStatus = r_LoggedInUser.PostStatus(textBoxCommentOutput.Text);
                 MessageBox.Show(Messages.k_SuccessfulPostMessage);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 MessageBox.Show(Messages.k_GeneralErrorMessage);
             }

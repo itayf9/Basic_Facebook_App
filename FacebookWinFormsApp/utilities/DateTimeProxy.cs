@@ -14,7 +14,6 @@ namespace BasicFacebookFeatures.utilities
             numberOfYearsFromDate = Utility.CalculateAge(i_DateTime);
         }
 
-
         public static DateTimeProxy GetDateTimeObjectFromDateString(string i_DateAsString)
         {
             return new DateTimeProxy(
