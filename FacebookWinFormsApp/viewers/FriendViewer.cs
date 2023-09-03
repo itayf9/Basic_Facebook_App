@@ -109,9 +109,9 @@ namespace BasicFacebookFeatures.viewers
             r_LabelBirthdayValue.Text = i_Friend.Birthday;
             r_LabelGenderValue.Text = i_Friend.Gender.ToString();
             r_LabelHomeTownValue.Text = i_Friend.Location.Name;
-            DateTimeProxy friendBirthDay = DateTimeProxy.GetDateTimeObjectFromDateString(i_Friend.Birthday);
-            r_LabelAgeValue.Text = friendBirthDay.ToString();
-
+            IDateFormatAgeCalculator dateTimeAdapter = new DateTimeAdapter();
+            dateTimeAdapter.SetDateFromDateString(i_Friend.Birthday);
+            r_LabelAgeValue.Text = dateTimeAdapter.ToString();
             SetVisibility(true);
         }
 
