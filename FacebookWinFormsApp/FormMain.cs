@@ -143,7 +143,6 @@ namespace BasicFacebookFeatures
             textBoxGender.Text = r_LoggedInUser.Gender.ToString();
         }
 
-
         private void toggleOtherButtons(Button i_ButtonNotToToggle, bool i_IsEnabled)
         {
             foreach (Button button in r_FetchButtons)
