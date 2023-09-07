@@ -830,7 +830,6 @@ namespace BasicFacebookFeatures
             if (DateTime.TryParse(birthdayTextBox.Text, out updatedDateTime))
             {
                 buttonEditProfile.Enabled = v_ToEnable;
-                birthdayTextBox.BackColor = SystemColors.Window;
                 birthdayTextBox.ForeColor = Color.Green;
             }
             else
