@@ -80,7 +80,6 @@
             this.labelWelcomeCommentGenerator = new System.Windows.Forms.Label();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
-            this.commentGeneratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControlApp.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
             this.panelProfile.SuspendLayout();
@@ -90,7 +89,6 @@
             this.tabPageNostalgia.SuspendLayout();
             this.tabPageCommentGenerator.SuspendLayout();
             this.flowLayoutPanelOptionButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.commentGeneratorBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogout
@@ -599,10 +597,6 @@
             // 
             this.printDialog2.UseEXDialog = true;
             // 
-            // commentGeneratorBindingSource
-            // 
-            this.commentGeneratorBindingSource.DataSource = typeof(BasicFacebookFeatures.CommentGenerator);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -629,7 +623,6 @@
             this.tabPageCommentGenerator.ResumeLayout(false);
             this.tabPageCommentGenerator.PerformLayout();
             this.flowLayoutPanelOptionButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.commentGeneratorBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -686,7 +679,6 @@
         private System.Windows.Forms.PictureBox imageNormalPictureBox;
         private System.Windows.Forms.TextBox textBoxGender;
         private System.Windows.Forms.TextBox textBoxCity;
-        private System.Windows.Forms.BindingSource commentGeneratorBindingSource;
     }
 }
 
