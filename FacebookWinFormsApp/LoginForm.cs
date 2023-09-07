@@ -71,7 +71,7 @@ namespace BasicFacebookFeatures
 
             buttonLogin.Text = isSessionExists ?
                 string.Format(k_SessionLoginButtonText, m_Session.LoggedInUserName) :
-                    k_DefaultLoginButtonText;
+                k_DefaultLoginButtonText;
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)

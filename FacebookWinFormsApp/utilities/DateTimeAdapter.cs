@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace BasicFacebookFeatures.utilities
 {
-    public class DateTimeAdapter : IDateFormatAgeCalculator
+    internal class DateTimeAdapter : IDateFormatAgeCalculator
     {
         private DateTime m_DateTime;
 
