@@ -28,10 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelError = new System.Windows.Forms.Label();
             this.checkBoxRememberMe = new System.Windows.Forms.CheckBox();
+            this.sessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.labelLoggedInUserNameValue = new System.Windows.Forms.Label();
+            this.labelLoggedInUserNameTitle = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.sessionBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogin
@@ -61,21 +66,45 @@
             // checkBoxRememberMe
             // 
             this.checkBoxRememberMe.AutoSize = true;
-            this.checkBoxRememberMe.Location = new System.Drawing.Point(56, 218);
-            this.checkBoxRememberMe.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.checkBoxRememberMe.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.sessionBindingSource, "IsRememberMe", true));
+            this.checkBoxRememberMe.Location = new System.Drawing.Point(56, 217);
             this.checkBoxRememberMe.Name = "checkBoxRememberMe";
             this.checkBoxRememberMe.Size = new System.Drawing.Size(140, 24);
-            this.checkBoxRememberMe.TabIndex = 2;
-            this.checkBoxRememberMe.Text = "Remember me";
+            this.checkBoxRememberMe.TabIndex = 5;
+            this.checkBoxRememberMe.Text = "Remember Me";
             this.checkBoxRememberMe.UseVisualStyleBackColor = true;
-            this.checkBoxRememberMe.CheckedChanged += new System.EventHandler(this.checkBoxRememberMe_CheckedChanged);
+            // 
+            // sessionBindingSource
+            // 
+            this.sessionBindingSource.DataSource = typeof(BasicFacebookFeatures.sessions.Session);
+            // 
+            // labelLoggedInUserNameValue
+            // 
+            this.labelLoggedInUserNameValue.AutoSize = true;
+            this.labelLoggedInUserNameValue.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.sessionBindingSource, "LoggedInUserName", true));
+            this.labelLoggedInUserNameValue.Location = new System.Drawing.Point(227, 72);
+            this.labelLoggedInUserNameValue.Name = "labelLoggedInUserNameValue";
+            this.labelLoggedInUserNameValue.Size = new System.Drawing.Size(84, 20);
+            this.labelLoggedInUserNameValue.TabIndex = 7;
+            this.labelLoggedInUserNameValue.Text = "user name";
+            // 
+            // labelLoggedInUserNameTitle
+            // 
+            this.labelLoggedInUserNameTitle.AutoSize = true;
+            this.labelLoggedInUserNameTitle.Location = new System.Drawing.Point(55, 71);
+            this.labelLoggedInUserNameTitle.Name = "labelLoggedInUserNameTitle";
+            this.labelLoggedInUserNameTitle.Size = new System.Drawing.Size(162, 20);
+            this.labelLoggedInUserNameTitle.TabIndex = 8;
+            this.labelLoggedInUserNameTitle.Text = "Logged in user name:";
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(522, 371);
+            this.ClientSize = new System.Drawing.Size(540, 397);
+            this.Controls.Add(this.labelLoggedInUserNameTitle);
             this.Controls.Add(this.checkBoxRememberMe);
+            this.Controls.Add(this.labelLoggedInUserNameValue);
             this.Controls.Add(this.labelError);
             this.Controls.Add(this.buttonLogin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -84,6 +113,7 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            ((System.ComponentModel.ISupportInitialize)(this.sessionBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -93,6 +123,9 @@
 
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.BindingSource sessionBindingSource;
         private System.Windows.Forms.CheckBox checkBoxRememberMe;
+        private System.Windows.Forms.Label labelLoggedInUserNameValue;
+        private System.Windows.Forms.Label labelLoggedInUserNameTitle;
     }
 }

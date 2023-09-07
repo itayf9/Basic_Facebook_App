@@ -28,10 +28,13 @@ namespace BasicFacebookFeatures
         private Label m_LabelCommentOutputExplaination;
         private FlowLayoutPanel m_FlowLayoutPanelAnswerButtons;
 
+        private string m_CommentOutput;
+
         private CommentGenerator()
         {
             this.r_DictionaryQuestionIdToPossibleAnswerButtons = new Dictionary<string, HashSet<Button>>();
             this.r_DictionaryQuestionIdToQuestionDetails = new Dictionary<string, string>();
+            this.m_CommentOutput = string.Empty;
 
             initializeQuestionsAndAnswers();
         }
@@ -73,6 +76,12 @@ namespace BasicFacebookFeatures
         public Button ButtonPostComment
         {
             set { m_ButtonPostComment = value; }
+        }
+
+        public string CommentOutput
+        {
+            get { return m_CommentOutput; }
+            set { m_CommentOutput = value; }
         }
 
         public List<Button> ListOfInitialAnswerButtons
@@ -147,11 +156,11 @@ namespace BasicFacebookFeatures
             const bool v_ToShow = true;
             string questionID = (sender as Button).Name.Substring(k_AnswerButtonPrefix.Length);
             string nextQuestionDetails = r_DictionaryQuestionIdToQuestionDetails[questionID];
-            string commentOutput = r_DictionaryQuestionIdToQuestionDetails[questionID];
+            string candidateCommentOutput = r_DictionaryQuestionIdToQuestionDetails[questionID];
 
             if (r_DictionaryQuestionIdToPossibleAnswerButtons[questionID] == null)
             {
-                enableCommentOutputArea(v_ToEnable, commentOutput);
+                enableCommentOutputArea(v_ToEnable, candidateCommentOutput);
                 showQuestionAndAnswerArea(!v_ToShow);
             }
             else
@@ -189,7 +198,7 @@ namespace BasicFacebookFeatures
             m_TextBoxCommentOutput.Enabled = i_IsNeedToEnable;
             m_LabelCommentOutputExplaination.Visible = i_IsNeedToEnable;
             m_ButtonPostComment.Enabled = i_IsNeedToEnable;
-            m_TextBoxCommentOutput.Text = i_IsNeedToEnable ? commentOutput : string.Empty;
+            this.m_CommentOutput = i_IsNeedToEnable ? commentOutput : string.Empty;
         }
 
         private void showQuestionAndAnswerArea(bool i_IsNeedToEnable, string i_Question = null, List<Button> i_AnswerButton = null)
