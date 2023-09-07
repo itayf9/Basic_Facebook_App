@@ -69,7 +69,7 @@ namespace BasicFacebookFeatures
             labelLoggedInUserNameTitle.Visible = isSessionExists;
             labelLoggedInUserNameValue.Visible = isSessionExists;
 
-            buttonLogin.Text = isSessionExists && m_Session.IsRememberMe ?
+            buttonLogin.Text = isSessionExists ?
                 string.Format(k_SessionLoginButtonText, m_Session.LoggedInUserName) :
                     k_DefaultLoginButtonText;
         }

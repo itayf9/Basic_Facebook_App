@@ -204,6 +204,7 @@
             this.birthdayTextBox.ReadOnly = true;
             this.birthdayTextBox.Size = new System.Drawing.Size(172, 32);
             this.birthdayTextBox.TabIndex = 76;
+            this.birthdayTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.birthdayTextBox_Validating);
             // 
             // emailTextBox
             // 

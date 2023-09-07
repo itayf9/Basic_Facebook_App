@@ -136,11 +136,16 @@ namespace BasicFacebookFeatures
             const bool v_ToEnable = true;
             userBindingSource.DataSource = r_LoggedInUser;
             buttonLogout.Enabled = v_ToEnable;
+            updateUserAge();
+            textBoxCity.Text = r_LoggedInUser.Location.Name;
+            textBoxGender.Text = r_LoggedInUser.Gender.ToString();
+        }
+
+        private void updateUserAge()
+        {
             IDateFormatAgeCalculator dateTimeAdapter = new DateTimeAdapter();
             dateTimeAdapter.SetDateFromDateString(r_LoggedInUser.Birthday);
             labelAge.Text = dateTimeAdapter.ToString();
-            textBoxCity.Text = r_LoggedInUser.Location.Name;
-            textBoxGender.Text = r_LoggedInUser.Gender.ToString();
         }
 
         private void toggleOtherButtons(Button i_ButtonNotToToggle, bool i_IsEnabled)
@@ -854,6 +859,20 @@ namespace BasicFacebookFeatures
             nameTextBox.ReadOnly = i_IsEditMode;
             emailTextBox.ReadOnly = i_IsEditMode;
             birthdayTextBox.ReadOnly = i_IsEditMode;
+        }
+
+        private void birthdayTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DateTime updatedDateTime;
+            if (DateTime.TryParse(birthdayTextBox.Text, out updatedDateTime))
+            {
+                updateUserAge();
+            }
+            else
+            {
+                e.Cancel = true;
+                //birthdayTextBox.Focus();
+            }
         }
     }
 }
