@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.enums;
@@ -849,6 +850,7 @@ namespace BasicFacebookFeatures
             }
             else
             {
+                updateUserAge();
                 setReadOnlyProfileControls(v_IsEditMode);
                 buttonEditProfile.Text = k_EditProfile;
             }
@@ -861,18 +863,38 @@ namespace BasicFacebookFeatures
             birthdayTextBox.ReadOnly = i_IsEditMode;
         }
 
-        private void birthdayTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void birthdayTextBox_TextChanged(object sender, EventArgs e)
         {
             DateTime updatedDateTime;
             if (DateTime.TryParse(birthdayTextBox.Text, out updatedDateTime))
             {
-                updateUserAge();
+                buttonEditProfile.Enabled = true;
+                birthdayTextBox.BackColor = SystemColors.Window;
+                birthdayTextBox.ForeColor = Color.Green;
             }
             else
             {
-                e.Cancel = true;
-                //birthdayTextBox.Focus();
+                buttonEditProfile.Enabled = false;
+                birthdayTextBox.Focus();
+                birthdayTextBox.ForeColor = Color.Red;
             }
         }
+
+
+        private void emailTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string email = emailTextBox.Text;
+
+            if (email.Contains("@"))
+            {
+                emailTextBox.ForeColor = Color.Green;
+            }
+            else
+            {
+                emailTextBox.ForeColor = Color.Red;
+                emailTextBox.Focus();
+            }
+        }
+
     }
 }
