@@ -1,6 +1,6 @@
 ﻿namespace BasicFacebookFeatures.enums
 {
-    public enum eViewerType
+    internal enum eViewerType
     {
         AlbumViewer,
         GroupViewer,

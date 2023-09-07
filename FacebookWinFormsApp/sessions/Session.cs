@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Xml.Serialization;
 
 namespace BasicFacebookFeatures.sessions
@@ -36,6 +37,16 @@ namespace BasicFacebookFeatures.sessions
         public static void DeleteSession()
         {
             File.Delete(k_SessionFileName);
+        }
+
+        public static bool IsEmptySession(Session i_SessionToCheck)
+        {
+            const bool v_IsRememberMe = true;
+
+            return i_SessionToCheck == null ||
+                (i_SessionToCheck.m_AccessToken == string.Empty
+                && i_SessionToCheck.m_IsRememberMe == !v_IsRememberMe
+                && i_SessionToCheck.m_LoggedInUserName == string.Empty);
         }
 
         public void SaveToFile()

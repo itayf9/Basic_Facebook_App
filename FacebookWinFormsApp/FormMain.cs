@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.enums;
@@ -136,11 +137,16 @@ namespace BasicFacebookFeatures
             const bool v_ToEnable = true;
             userBindingSource.DataSource = r_LoggedInUser;
             buttonLogout.Enabled = v_ToEnable;
+            updateUserAge();
+            textBoxCity.Text = r_LoggedInUser.Location.Name;
+            textBoxGender.Text = r_LoggedInUser.Gender.ToString();
+        }
+
+        private void updateUserAge()
+        {
             IDateFormatAgeCalculator dateTimeAdapter = new DateTimeAdapter();
             dateTimeAdapter.SetDateFromDateString(r_LoggedInUser.Birthday);
             labelAge.Text = dateTimeAdapter.ToString();
-            textBoxCity.Text = r_LoggedInUser.Location.Name;
-            textBoxGender.Text = r_LoggedInUser.Gender.ToString();
         }
 
         private void toggleOtherButtons(Button i_ButtonNotToToggle, bool i_IsEnabled)
@@ -190,10 +196,6 @@ namespace BasicFacebookFeatures
                                     }
                                 }));
                         }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error fetching posts: " + ex.Message);
-                        }
                         finally
                         {
                             setLoadingState(sender as Button, k_ToEnableButtons);
@@ -218,33 +220,26 @@ namespace BasicFacebookFeatures
 
         private void buttonAlbums_Click(object sender, EventArgs e)
         {
-            if (m_IsLoadingData)
+            if (!m_IsLoadingData)
             {
-                return;
-            }
+                setLoadingState(sender as Button, !k_ToEnableButtons);
+                switchShownContent(k_ContentCategoryAlbums);
+                listBoxContent.DisplayMember = k_DisplayMemberName;
 
-            setLoadingState(sender as Button, !k_ToEnableButtons);
-            switchShownContent(k_ContentCategoryAlbums);
-            listBoxContent.DisplayMember = k_DisplayMemberName;
-
-            Thread thread = new Thread(() =>
+                Thread thread = new Thread(() =>
                 {
                     try
                     {
                         List<Album> fetchedAlbums = fetchAlbumsIntoList();
 
                         Invoke(new Action(() =>
+                        {
+                            listBoxContent.Items.Clear();
+                            foreach (Album album in fetchedAlbums)
                             {
-                                listBoxContent.Items.Clear();
-                                foreach (Album album in fetchedAlbums)
-                                {
-                                    listBoxContent.Items.Add(album);
-                                }
-                            }));
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error fetching albums: " + ex.Message);
+                                listBoxContent.Items.Add(album);
+                            }
+                        }));
                     }
                     finally
                     {
@@ -252,39 +247,33 @@ namespace BasicFacebookFeatures
                     }
                 });
 
-            thread.Start();
+                thread.Start();
+            }
         }
 
         private void buttonGroups_Click(object sender, EventArgs e)
         {
-            if (m_IsLoadingData)
+            if (!m_IsLoadingData)
             {
-                return;
-            }
+                setLoadingState(sender as Button, !k_ToEnableButtons);
 
-            setLoadingState(sender as Button, !k_ToEnableButtons);
+                switchShownContent(k_ContentCategoryGroups);
+                listBoxContent.DisplayMember = k_DisplayMemberName;
 
-            switchShownContent(k_ContentCategoryGroups);
-            listBoxContent.DisplayMember = k_DisplayMemberName;
-
-            Thread thread = new Thread(() =>
+                Thread thread = new Thread(() =>
                 {
                     try
                     {
                         List<Group> fetchedGroups = fetchGroupsAndReturnList();
 
                         Invoke(new Action(() =>
+                        {
+                            listBoxContent.Items.Clear();
+                            foreach (Group group in fetchedGroups)
                             {
-                                listBoxContent.Items.Clear();
-                                foreach (Group group in fetchedGroups)
-                                {
-                                    listBoxContent.Items.Add(group);
-                                }
-                            }));
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error fetching groups: " + ex.Message);
+                                listBoxContent.Items.Add(group);
+                            }
+                        }));
                     }
                     finally
                     {
@@ -292,39 +281,33 @@ namespace BasicFacebookFeatures
                     }
                 });
 
-            thread.Start();
+                thread.Start();
+            }
         }
 
         private void buttonEvents_Click(object sender, EventArgs e)
         {
-            if (m_IsLoadingData)
+            if (!m_IsLoadingData)
             {
-                return; // Prevent starting a new operation while one is already running
-            }
+                setLoadingState(sender as Button, !k_ToEnableButtons);
 
-            setLoadingState(sender as Button, !k_ToEnableButtons);
+                switchShownContent(k_ContentCategoryEvents);
+                listBoxContent.DisplayMember = k_DisplayMemberName;
 
-            switchShownContent(k_ContentCategoryEvents);
-            listBoxContent.DisplayMember = k_DisplayMemberName;
-
-            Thread thread = new Thread(() =>
+                Thread thread = new Thread(() =>
                 {
                     try
                     {
                         List<Event> fetchedEvents = fetchEventsAndReturnList();
 
                         Invoke(new Action(() =>
+                        {
+                            listBoxContent.Items.Clear();
+                            foreach (Event facebookEvent in fetchedEvents)
                             {
-                                listBoxContent.Items.Clear();
-                                foreach (Event facebookEvent in fetchedEvents)
-                                {
-                                    listBoxContent.Items.Add(facebookEvent);
-                                }
-                            }));
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error fetching events: " + ex.Message);
+                                listBoxContent.Items.Add(facebookEvent);
+                            }
+                        }));
                     }
                     finally
                     {
@@ -332,39 +315,33 @@ namespace BasicFacebookFeatures
                     }
                 });
 
-            thread.Start();
+                thread.Start();
+            }
         }
 
         private void buttonFavoriteTeams_Click(object sender, EventArgs e)
         {
-            if (m_IsLoadingData)
+            if (!m_IsLoadingData)
             {
-                return; // Prevent starting a new operation while one is already running
-            }
+                setLoadingState(sender as Button, !k_ToEnableButtons);
 
-            setLoadingState(sender as Button, !k_ToEnableButtons);
+                switchShownContent(k_ContentCategoryFavoriteTeams);
+                listBoxContent.DisplayMember = k_DisplayMemberName;
 
-            switchShownContent(k_ContentCategoryFavoriteTeams);
-            listBoxContent.DisplayMember = k_DisplayMemberName;
-
-            Thread thread = new Thread(() =>
+                Thread thread = new Thread(() =>
                 {
                     try
                     {
                         List<Page> fetchedFavoriteTeams = fetchFavoriteTeamsAndReturnList();
 
                         Invoke(new Action(() =>
+                        {
+                            listBoxContent.Items.Clear();
+                            foreach (Page team in fetchedFavoriteTeams)
                             {
-                                listBoxContent.Items.Clear();
-                                foreach (Page team in fetchedFavoriteTeams)
-                                {
-                                    listBoxContent.Items.Add(team);
-                                }
-                            }));
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error fetching favorite teams: " + ex.Message);
+                                listBoxContent.Items.Add(team);
+                            }
+                        }));
                     }
                     finally
                     {
@@ -372,39 +349,33 @@ namespace BasicFacebookFeatures
                     }
                 });
 
-            thread.Start();
+                thread.Start();
+            }
         }
 
         private void buttonLikedPages_Click(object sender, EventArgs e)
         {
-            if (m_IsLoadingData)
+            if (!m_IsLoadingData)
             {
-                return; // Prevent starting a new operation while one is already running
-            }
+                setLoadingState(sender as Button, !k_ToEnableButtons);
 
-            setLoadingState(sender as Button, !k_ToEnableButtons);
+                switchShownContent(k_ContentCategoryLikedPages);
+                listBoxContent.DisplayMember = k_DisplayMemberName;
 
-            switchShownContent(k_ContentCategoryLikedPages);
-            listBoxContent.DisplayMember = k_DisplayMemberName;
-
-            Thread thread = new Thread(() =>
+                Thread thread = new Thread(() =>
                 {
                     try
                     {
                         List<Page> fetchedLikedPages = fetchLikedPagesAndReturnList();
 
                         Invoke(new Action(() =>
+                        {
+                            listBoxContent.Items.Clear();
+                            foreach (Page page in fetchedLikedPages)
                             {
-                                listBoxContent.Items.Clear();
-                                foreach (Page page in fetchedLikedPages)
-                                {
-                                    listBoxContent.Items.Add(page);
-                                }
-                            }));
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error fetching liked pages: " + ex.Message);
+                                listBoxContent.Items.Add(page);
+                            }
+                        }));
                     }
                     finally
                     {
@@ -412,39 +383,33 @@ namespace BasicFacebookFeatures
                     }
                 });
 
-            thread.Start();
+                thread.Start();
+            }
         }
 
         private void buttonFriends_Click(object sender, EventArgs e)
         {
-            if (m_IsLoadingData)
+            if (!m_IsLoadingData)
             {
-                return; // Prevent starting a new operation while one is already running
-            }
+                setLoadingState(sender as Button, !k_ToEnableButtons);
 
-            setLoadingState(sender as Button, !k_ToEnableButtons);
+                switchShownContent(k_ContentCategoryFriends);
+                listBoxContent.DisplayMember = k_DisplayMemberName;
 
-            switchShownContent(k_ContentCategoryFriends);
-            listBoxContent.DisplayMember = k_DisplayMemberName;
-
-            Thread thread = new Thread(() =>
+                Thread thread = new Thread(() =>
                 {
                     try
                     {
                         List<User> fetchedFriends = fetchFriendsAndReturnList();
 
                         Invoke(new Action(() =>
+                        {
+                            listBoxContent.Items.Clear();
+                            foreach (User friend in fetchedFriends)
                             {
-                                listBoxContent.Items.Clear();
-                                foreach (User friend in fetchedFriends)
-                                {
-                                    listBoxContent.Items.Add(friend);
-                                }
-                            }));
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error fetching friends: " + ex.Message);
+                                listBoxContent.Items.Add(friend);
+                            }
+                        }));
                     }
                     finally
                     {
@@ -452,7 +417,8 @@ namespace BasicFacebookFeatures
                     }
                 });
 
-            thread.Start();
+                thread.Start();
+            }
         }
 
         private List<User> fetchFriendsAndReturnList()
@@ -844,6 +810,7 @@ namespace BasicFacebookFeatures
             }
             else
             {
+                updateUserAge();
                 setReadOnlyProfileControls(v_IsEditMode);
                 buttonEditProfile.Text = k_EditProfile;
             }
@@ -854,6 +821,39 @@ namespace BasicFacebookFeatures
             nameTextBox.ReadOnly = i_IsEditMode;
             emailTextBox.ReadOnly = i_IsEditMode;
             birthdayTextBox.ReadOnly = i_IsEditMode;
+        }
+
+        private void birthdayTextBox_TextChanged(object sender, EventArgs e)
+        {
+            const bool v_ToEnable = true;
+            DateTime updatedDateTime;
+            if (DateTime.TryParse(birthdayTextBox.Text, out updatedDateTime))
+            {
+                buttonEditProfile.Enabled = v_ToEnable;
+                birthdayTextBox.ForeColor = Color.Green;
+            }
+            else
+            {
+                buttonEditProfile.Enabled = !v_ToEnable;
+                birthdayTextBox.Focus();
+                birthdayTextBox.ForeColor = Color.Red;
+            }
+        }
+
+        private void emailTextBox_TextChanged(object sender, EventArgs e)
+        {
+            const string k_EmailRequiredSymbol = "@";
+            string userEmail = emailTextBox.Text;
+
+            if (userEmail.Contains(k_EmailRequiredSymbol))
+            {
+                emailTextBox.ForeColor = Color.Green;
+            }
+            else
+            {
+                emailTextBox.ForeColor = Color.Red;
+                emailTextBox.Focus();
+            }
         }
     }
 }

@@ -3,8 +3,10 @@ using BasicFacebookFeatures.enums;
 
 namespace BasicFacebookFeatures.viewers
 {
-    public static class ViewerFactory
+    internal static class ViewerFactory
     {
+        private const string k_InvalidViewerTypeErrorMessage = "Invalid viewer type.";
+
         public static IViewer Create(eViewerType i_ViewerType, int i_TopLeftX, int i_TopLeftY)
         {
             IViewer createdViewer;
@@ -40,7 +42,7 @@ namespace BasicFacebookFeatures.viewers
                     break;
 
                 default:
-                    throw new ArgumentException("Invalid viewer type.");
+                    throw new ArgumentException(k_InvalidViewerTypeErrorMessage);
             }
 
             return createdViewer;
