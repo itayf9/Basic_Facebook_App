@@ -68,7 +68,14 @@ namespace BasicFacebookFeatures
         private void initCommentGenerator()
         {
             List<Button> listOfInitialAnswerButtons = new List<Button> { buttonAnswer1_1, buttonAnswer1_2 };
-            initializeCommentGenerator(listOfInitialAnswerButtons);
+            CommentGenerator commentGenerator = CommentGenerator.Instance;
+            commentGenerator.TextBoxQuestions = textBoxQuestion;
+            commentGenerator.TextBoxCommentOutput = textBoxCommentOutput;
+            commentGenerator.ButtonStart = buttonStart;
+            commentGenerator.ButtonPostComment = buttonPostComment;
+            commentGenerator.LabelCommentOutputExplaination = labelCommentOutputExplainationCommentGenerator;
+            commentGenerator.FlowLayoutPanelAnswerButtons = flowLayoutPanelOptionButtons;
+            commentGenerator.ListOfInitialAnswerButtons = listOfInitialAnswerButtons;
         }
 
         private void initializeFetchButtons()
@@ -80,18 +87,6 @@ namespace BasicFacebookFeatures
             r_FetchButtons.Add(buttonPosts);
             r_FetchButtons.Add(buttonFavoriteTeams);
             r_FetchButtons.Add(buttonLikedPages);
-        }
-
-        private void initializeCommentGenerator(List<Button> i_ListOfInitialAnswerButtons)
-        {
-            CommentGenerator commentGenerator = CommentGenerator.Instance;
-            commentGenerator.TextBoxQuestions = textBoxQuestion;
-            commentGenerator.TextBoxCommentOutput = textBoxCommentOutput;
-            commentGenerator.ButtonStart = buttonStart;
-            commentGenerator.ButtonPostComment = buttonPostComment;
-            commentGenerator.LabelCommentOutputExplaination = labelCommentOutputExplainationCommentGenerator;
-            commentGenerator.FlowLayoutPanelAnswerButtons = flowLayoutPanelOptionButtons;
-            commentGenerator.ListOfInitialAnswerButtons = i_ListOfInitialAnswerButtons;
         }
 
         private void initializeViewers()
