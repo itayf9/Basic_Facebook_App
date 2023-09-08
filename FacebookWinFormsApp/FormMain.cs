@@ -42,7 +42,7 @@ namespace BasicFacebookFeatures
             r_NostalgiaViewers = new List<IViewer>();
             r_FetchButtons = new List<Button>();
             InitializeComponent();
-            initializeAll();
+            initializeAllFacebookApplication();
         }
 
         private static void setFacebookServiceConfiguration()
@@ -50,7 +50,7 @@ namespace BasicFacebookFeatures
             FacebookService.s_CollectionLimit = 25;
         }
 
-        private void initializeAll()
+        private void initializeAllFacebookApplication()
         {
             initCommentGenerator();
             setFacebookServiceConfiguration();
