@@ -28,13 +28,10 @@ namespace BasicFacebookFeatures
         private Label m_LabelCommentOutputExplaination;
         private FlowLayoutPanel m_FlowLayoutPanelAnswerButtons;
 
-        private string m_CommentOutput;
-
         private CommentGenerator()
         {
             this.r_DictionaryQuestionIdToPossibleAnswerButtons = new Dictionary<string, HashSet<Button>>();
             this.r_DictionaryQuestionIdToQuestionDetails = new Dictionary<string, string>();
-            this.m_CommentOutput = string.Empty;
 
             initializeQuestionsAndAnswers();
         }
@@ -76,12 +73,6 @@ namespace BasicFacebookFeatures
         public Button ButtonPostComment
         {
             set { m_ButtonPostComment = value; }
-        }
-
-        public string CommentOutput
-        {
-            get { return m_CommentOutput; }
-            set { m_CommentOutput = value; }
         }
 
         public List<Button> ListOfInitialAnswerButtons
@@ -193,12 +184,12 @@ namespace BasicFacebookFeatures
             enableCommentOutputArea(!v_ToEnable);
         }
 
-        private void enableCommentOutputArea(bool i_IsNeedToEnable, string commentOutput = null)
+        private void enableCommentOutputArea(bool i_IsNeedToEnable, string i_CommentOutput = null)
         {
             m_TextBoxCommentOutput.Enabled = i_IsNeedToEnable;
             m_LabelCommentOutputExplaination.Visible = i_IsNeedToEnable;
             m_ButtonPostComment.Enabled = i_IsNeedToEnable;
-            this.m_CommentOutput = i_IsNeedToEnable ? commentOutput : string.Empty;
+            m_TextBoxCommentOutput.Text = i_IsNeedToEnable ? i_CommentOutput : string.Empty;
         }
 
         private void showQuestionAndAnswerArea(bool i_IsNeedToEnable, string i_Question = null, List<Button> i_AnswerButton = null)
