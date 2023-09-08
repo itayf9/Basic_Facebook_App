@@ -184,7 +184,7 @@ namespace BasicFacebookFeatures
             return answerButton;
         }
 
-        public void StartNewCommentGenerator()
+        public void StartNewCommentGenerationDialog()
         {
             const bool v_ToEnable = true;
             const bool v_ToShow = true;

@@ -779,7 +779,7 @@ namespace BasicFacebookFeatures
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            CommentGenerator.Instance.StartNewCommentGenerator();
+            CommentGenerator.Instance.StartNewCommentGenerationDialog();
         }
 
         private void buttonPostComment_Click(object sender, EventArgs e)
