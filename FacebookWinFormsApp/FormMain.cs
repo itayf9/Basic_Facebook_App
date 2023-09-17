@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.enums;
 using BasicFacebookFeatures.exceptions;
+using BasicFacebookFeatures.random_strategy;
 using BasicFacebookFeatures.sessions;
 using BasicFacebookFeatures.utilities;
 using BasicFacebookFeatures.viewers;
@@ -29,11 +30,12 @@ namespace BasicFacebookFeatures
         private const string k_EditProfile = "Edit Profile";
         private const bool k_ToEnableButtons = true;
 
+        private IRandomStrategy m_RandomStrategy;
+        private bool m_IsLoadingData;
         private readonly List<IViewer> r_ProfileViewers;
         private readonly List<IViewer> r_NostalgiaViewers;
         private readonly List<Button> r_FetchButtons;
         private readonly User r_LoggedInUser;
-        private bool m_IsLoadingData;
 
         public FormMain(User i_LoggedInUser)
         {
@@ -58,6 +60,7 @@ namespace BasicFacebookFeatures
             initializeViewers();
             initializeFetchButtons();
             setDefaultMediaType();
+            SetRandomStrategy();
         }
 
         private void setDefaultMediaType()
@@ -694,17 +697,19 @@ namespace BasicFacebookFeatures
 
         private void buttonNostalgia_Click(object sender, EventArgs e)
         {
-            const bool v_ToBeVisible = true;
-            if (comboBoxMediaType.Text == k_ContentCategoryPhotos)
-            {
-                r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewer].SetVisibility(!v_ToBeVisible);
-                showNostalgiaPhoto();
-            }
-            else if (comboBoxMediaType.Text == k_ContentCategoryPosts)
-            {
-                r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewer].SetVisibility(!v_ToBeVisible);
-                showNostalgiaPost();
-            }
+            // const bool v_ToBeVisible = true;
+            // if (comboBoxMediaType.Text == k_ContentCategoryPhotos)
+            // {
+            //    r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewer].SetVisibility(!v_ToBeVisible);
+            //    showNostalgiaPhoto();
+            // }
+            // else if (comboBoxMediaType.Text == k_ContentCategoryPosts)
+            // {
+            //    r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewer].SetVisibility(!v_ToBeVisible);
+            //    showNostalgiaPost();
+            // }
+            SetRandomStrategy();
+            m_RandomStrategy.ShowRandomContent(r_LoggedInUser);
         }
 
         private void showNostalgiaPhoto()
@@ -775,6 +780,18 @@ namespace BasicFacebookFeatures
             textBoxUploadDate.Text = $"Created on {selectedPost.CreatedTime}";
 
             (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewer] as PostViewer).LoadPostDetailsToComponents(selectedPost);
+        }
+
+        private void SetRandomStrategy()
+        {
+            if (comboBoxMediaType.Text == k_ContentCategoryPhotos)
+            {
+                m_RandomStrategy = new PhotoRandomStrategy(r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewer] as PhotoViewer, textBoxUploadDate);
+            }
+            else if (comboBoxMediaType.Text == k_ContentCategoryPosts)
+            {
+                m_RandomStrategy = new PostRandomStrategy(r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewer] as PostViewer, textBoxUploadDate);
+            }
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
