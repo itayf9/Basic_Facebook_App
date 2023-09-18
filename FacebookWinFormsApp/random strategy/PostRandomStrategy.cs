@@ -10,9 +10,9 @@ namespace BasicFacebookFeatures.random_strategy
         private readonly PostViewer r_PostViewer;
         private readonly TextBox r_TextBoxUploadDate;
 
-        public PostRandomStrategy(PostViewer i_PhotoViewer, TextBox i_TextBoxUploadDate)
+        public PostRandomStrategy(PostViewer i_PostViewer, TextBox i_TextBoxUploadDate)
         {
-            this.r_PostViewer = i_PhotoViewer;
+            this.r_PostViewer = i_PostViewer;
             this.r_TextBoxUploadDate = i_TextBoxUploadDate;
         }
 

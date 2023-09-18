@@ -697,89 +697,23 @@ namespace BasicFacebookFeatures
 
         private void buttonNostalgia_Click(object sender, EventArgs e)
         {
-            // const bool v_ToBeVisible = true;
-            // if (comboBoxMediaType.Text == k_ContentCategoryPhotos)
-            // {
-            //    r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewer].SetVisibility(!v_ToBeVisible);
-            //    showNostalgiaPhoto();
-            // }
-            // else if (comboBoxMediaType.Text == k_ContentCategoryPosts)
-            // {
-            //    r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewer].SetVisibility(!v_ToBeVisible);
-            //    showNostalgiaPost();
-            // }
             SetRandomStrategy();
+            hideNostalgiaViewers();
             m_RandomStrategy.ShowRandomContent(r_LoggedInUser);
         }
 
-        private void showNostalgiaPhoto()
-        {
-            const bool v_ToBeVisible = true;
-            r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewer].SetVisibility(v_ToBeVisible);
-
-            Random randomGenerator = new Random();
-
-            List<Album> fetchedAlbums = fetchAlbumsIntoList();
-            List<Album> filteredNonEmptyAlbums = new List<Album>();
-            foreach (Album album in fetchedAlbums)
-            {
-                if (album.Count != 0)
-                {
-                    filteredNonEmptyAlbums.Add(album);
-                }
-            }
-
-            try
-            {
-                if (filteredNonEmptyAlbums.Count == 0)
-                {
-                    throw new NoDataAvailableException(k_ContentCategoryAlbums);
-                }
-
-                int indexOfRandomAlbum = randomGenerator.Next(filteredNonEmptyAlbums.Count);
-                Album selectedAlbum = filteredNonEmptyAlbums[indexOfRandomAlbum];
-
-                FacebookObjectCollection<Photo> listOfPhotosFromSelectedAlbum = selectedAlbum.Photos;
-
-                if (listOfPhotosFromSelectedAlbum.Count == 0)
-                {
-                    throw new NoDataAvailableException(k_ContentCategoryPhotos);
-                }
-
-                int indexOfSelectedPhoto = randomGenerator.Next(listOfPhotosFromSelectedAlbum.Count);
-                Photo selectedPhoto = listOfPhotosFromSelectedAlbum[indexOfSelectedPhoto];
-
-                textBoxUploadDate.Visible = v_ToBeVisible;
-                textBoxUploadDate.Text = $"Created on {selectedPhoto.CreatedTime}";
-                (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewer] as PhotoViewer).LoadRandomPhotoToComponents(selectedPhoto);
-            }
-            catch (NoDataAvailableException noDataAvailableException)
-            {
-                MessageBox.Show(noDataAvailableException.Message);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Messages.k_GeneralErrorMessage);
-            }
-        }
-
-        private void showNostalgiaPost()
+        private void hideNostalgiaViewers()
         {
             const bool v_ToBeVisible = true;
 
-            r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewer].SetVisibility(v_ToBeVisible);
-
-            List<Post> fetchedPosts = fetchPostsIntoList();
-
-            Random randomGenerator = new Random();
-
-            int indexOfRandomPost = randomGenerator.Next(fetchedPosts.Count);
-            Post selectedPost = fetchedPosts[indexOfRandomPost];
-
-            textBoxUploadDate.Visible = v_ToBeVisible;
-            textBoxUploadDate.Text = $"Created on {selectedPost.CreatedTime}";
-
-            (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewer] as PostViewer).LoadPostDetailsToComponents(selectedPost);
+            if (comboBoxMediaType.Text == k_ContentCategoryPhotos)
+            {
+                r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewer].SetVisibility(!v_ToBeVisible);
+            }
+            else if (comboBoxMediaType.Text == k_ContentCategoryPosts)
+            {
+                r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewer].SetVisibility(!v_ToBeVisible);
+            }
         }
 
         private void SetRandomStrategy()
