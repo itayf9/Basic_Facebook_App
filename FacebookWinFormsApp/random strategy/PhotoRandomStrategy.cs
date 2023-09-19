@@ -30,16 +30,17 @@ namespace BasicFacebookFeatures.random_strategy
             Random randomGenerator = new Random();
 
             List<Album> filteredNonEmptyAlbums = new List<Album>();
-            foreach (Album album in i_User.Albums)
-            {
-                if (album.Count != 0)
-                {
-                    filteredNonEmptyAlbums.Add(album);
-                }
-            }
 
             try
             {
+                foreach (Album album in i_User.Albums)
+                {
+                    if (album.Count != 0)
+                    {
+                        filteredNonEmptyAlbums.Add(album);
+                    }
+                }
+
                 if (filteredNonEmptyAlbums.Count == 0)
                 {
                     throw new NoDataAvailableException(k_ContentCategoryAlbums);
