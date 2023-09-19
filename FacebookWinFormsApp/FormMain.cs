@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using BasicFacebookFeatures.commands;
 using BasicFacebookFeatures.enums;
 using BasicFacebookFeatures.exceptions;
 using BasicFacebookFeatures.random_strategy;
@@ -30,12 +31,13 @@ namespace BasicFacebookFeatures
         private const string k_EditProfile = "Edit Profile";
         private const bool k_ToEnableButtons = true;
 
-        private IRandomStrategy m_RandomStrategy;
-        private bool m_IsLoadingData;
         private readonly List<IViewer> r_ProfileViewers;
         private readonly List<IViewer> r_NostalgiaViewers;
         private readonly List<Button> r_FetchButtons;
         private readonly User r_LoggedInUser;
+
+        private IRandomStrategy m_RandomStrategy;
+        private bool m_IsLoadingData;
 
         public FormMain(User i_LoggedInUser)
         {
@@ -83,6 +85,50 @@ namespace BasicFacebookFeatures
 
         private void initializeFetchButtons()
         {
+            Size fetchButtonsSize = new Size(197, 48);
+            Button buttonAlbums = new CommandButton
+            {
+                Size = fetchButtonsSize,
+                Text = "Albums",
+                FetchCommand = new FetchAlbumsCommand { FormMain = this },
+            };
+            Button buttonEvents = new CommandButton
+            {
+                Size = fetchButtonsSize,
+                Text = "Events",
+                FetchCommand = new FetchEventsCommand { FormMain = this },
+            };
+            Button buttonFriends = new CommandButton
+            {
+                Size = fetchButtonsSize,
+                Text = "Friends",
+                FetchCommand = new FetchFriendsCommand { FormMain = this },
+            };
+            Button buttonGroups = new CommandButton
+            {
+                Size = new Size(197, 48),
+                Text = "Groups",
+                FetchCommand = new FetchGroupsCommand { FormMain = this },
+            };
+            Button buttonPosts = new CommandButton
+            {
+                Size = fetchButtonsSize,
+                Text = "Posts",
+                FetchCommand = new FetchPostsCommand { FormMain = this },
+            };
+            Button buttonFavoriteTeams = new CommandButton
+            {
+                Size = fetchButtonsSize,
+                Text = "Favorite Teams",
+                FetchCommand = new FetchFavoriteTeamsCommand { FormMain = this },
+            };
+            Button buttonLikedPages = new CommandButton
+            {
+                Size = fetchButtonsSize,
+                Text = "Liked Pages",
+                FetchCommand = new FetchLikedPagesCommand { FormMain = this },
+            };
+
             r_FetchButtons.Add(buttonAlbums);
             r_FetchButtons.Add(buttonEvents);
             r_FetchButtons.Add(buttonFriends);
@@ -90,6 +136,11 @@ namespace BasicFacebookFeatures
             r_FetchButtons.Add(buttonPosts);
             r_FetchButtons.Add(buttonFavoriteTeams);
             r_FetchButtons.Add(buttonLikedPages);
+
+            foreach (Button commandButton in r_FetchButtons)
+            {
+                flowLayoutPanel1.Controls.Add(commandButton);
+            }
         }
 
         private void initializeViewers()
@@ -147,14 +198,11 @@ namespace BasicFacebookFeatures
             labelAge.Text = dateTimeAdapter.ToString();
         }
 
-        private void toggleOtherButtons(Button i_ButtonNotToToggle, bool i_IsEnabled)
+        private void toggleButtons(bool i_IsEnabled)
         {
             foreach (Button button in r_FetchButtons)
             {
-                if (button != i_ButtonNotToToggle)
-                {
-                    button.Invoke(new Action(() => button.Enabled = i_IsEnabled));
-                }
+                button.Invoke(new Action(() => button.Enabled = i_IsEnabled));
             }
         }
 
@@ -170,43 +218,43 @@ namespace BasicFacebookFeatures
             this.Close();
         }
 
-        private void buttonPosts_Click(object sender, EventArgs e)
+        private void fetchAndDisplayPosts()
         {
             if (!m_IsLoadingData)
             {
-                setLoadingState(sender as Button, !k_ToEnableButtons);
+                setLoadingState(!k_ToEnableButtons);
 
                 switchShownContent(k_ContentCategoryPosts);
                 listBoxContent.DisplayMember = k_DisplayMemberCreatedTime;
 
                 Thread thread = new Thread(() =>
+                {
+                    try
                     {
-                        try
-                        {
-                            List<Post> fetchedPosts = fetchPostsIntoList();
+                        List<Post> fetchedPosts = fetchPostsIntoList();
 
-                            Invoke(new Action(() =>
-                                {
-                                    listBoxContent.Items.Clear();
-                                    foreach (Post post in fetchedPosts)
-                                    {
-                                        listBoxContent.Items.Add(post);
-                                    }
-                                }));
-                        }
-                        finally
+                        Invoke(new Action(() =>
                         {
-                            setLoadingState(sender as Button, k_ToEnableButtons);
-                        }
-                    });
+                            listBoxContent.Items.Clear();
+                            foreach (Post post in fetchedPosts)
+                            {
+                                listBoxContent.Items.Add(post);
+                            }
+                        }));
+                    }
+                    finally
+                    {
+                        setLoadingState(k_ToEnableButtons);
+                    }
+                });
 
                 thread.Start();
             }
         }
 
-        private void setLoadingState(Button i_SenderButton, bool i_ToEnable)
+        private void setLoadingState(bool i_ToEnable)
         {
-            toggleOtherButtons(i_SenderButton, i_ToEnable);
+            toggleButtons(i_ToEnable);
             setLoadingLabel(!i_ToEnable);
         }
 
@@ -216,11 +264,11 @@ namespace BasicFacebookFeatures
             m_IsLoadingData = i_ToEnable;
         }
 
-        private void buttonAlbums_Click(object sender, EventArgs e)
+        private void fetchAndDisplayAlbums()
         {
             if (!m_IsLoadingData)
             {
-                setLoadingState(sender as Button, !k_ToEnableButtons);
+                setLoadingState(!k_ToEnableButtons);
                 switchShownContent(k_ContentCategoryAlbums);
                 listBoxContent.DisplayMember = k_DisplayMemberName;
 
@@ -241,7 +289,7 @@ namespace BasicFacebookFeatures
                     }
                     finally
                     {
-                        setLoadingState(sender as Button, k_ToEnableButtons);
+                        setLoadingState(k_ToEnableButtons);
                     }
                 });
 
@@ -249,11 +297,11 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void buttonGroups_Click(object sender, EventArgs e)
+        private void fetchAndDisplayGroups()
         {
             if (!m_IsLoadingData)
             {
-                setLoadingState(sender as Button, !k_ToEnableButtons);
+                setLoadingState(!k_ToEnableButtons);
 
                 switchShownContent(k_ContentCategoryGroups);
                 listBoxContent.DisplayMember = k_DisplayMemberName;
@@ -275,7 +323,7 @@ namespace BasicFacebookFeatures
                     }
                     finally
                     {
-                        setLoadingState(sender as Button, k_ToEnableButtons);
+                        setLoadingState(k_ToEnableButtons);
                     }
                 });
 
@@ -283,11 +331,11 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void buttonEvents_Click(object sender, EventArgs e)
+        private void fetchAndDisplayEvents()
         {
             if (!m_IsLoadingData)
             {
-                setLoadingState(sender as Button, !k_ToEnableButtons);
+                setLoadingState(!k_ToEnableButtons);
 
                 switchShownContent(k_ContentCategoryEvents);
                 listBoxContent.DisplayMember = k_DisplayMemberName;
@@ -309,7 +357,7 @@ namespace BasicFacebookFeatures
                     }
                     finally
                     {
-                        setLoadingState(sender as Button, k_ToEnableButtons);
+                        setLoadingState(k_ToEnableButtons);
                     }
                 });
 
@@ -317,11 +365,11 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void buttonFavoriteTeams_Click(object sender, EventArgs e)
+        private void fetchAndDisplayFavoriteTeams()
         {
             if (!m_IsLoadingData)
             {
-                setLoadingState(sender as Button, !k_ToEnableButtons);
+                setLoadingState(!k_ToEnableButtons);
 
                 switchShownContent(k_ContentCategoryFavoriteTeams);
                 listBoxContent.DisplayMember = k_DisplayMemberName;
@@ -343,7 +391,7 @@ namespace BasicFacebookFeatures
                     }
                     finally
                     {
-                        setLoadingState(sender as Button, k_ToEnableButtons);
+                        setLoadingState(k_ToEnableButtons);
                     }
                 });
 
@@ -351,11 +399,11 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void buttonLikedPages_Click(object sender, EventArgs e)
+        private void fetchAndDisplayLikedPages()
         {
             if (!m_IsLoadingData)
             {
-                setLoadingState(sender as Button, !k_ToEnableButtons);
+                setLoadingState(!k_ToEnableButtons);
 
                 switchShownContent(k_ContentCategoryLikedPages);
                 listBoxContent.DisplayMember = k_DisplayMemberName;
@@ -377,7 +425,7 @@ namespace BasicFacebookFeatures
                     }
                     finally
                     {
-                        setLoadingState(sender as Button, k_ToEnableButtons);
+                        setLoadingState(k_ToEnableButtons);
                     }
                 });
 
@@ -385,11 +433,11 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void buttonFriends_Click(object sender, EventArgs e)
+        private void fetchAndDisplayFriends()
         {
             if (!m_IsLoadingData)
             {
-                setLoadingState(sender as Button, !k_ToEnableButtons);
+                setLoadingState(!k_ToEnableButtons);
 
                 switchShownContent(k_ContentCategoryFriends);
                 listBoxContent.DisplayMember = k_DisplayMemberName;
@@ -411,7 +459,7 @@ namespace BasicFacebookFeatures
                     }
                     finally
                     {
-                        setLoadingState(sender as Button, k_ToEnableButtons);
+                        setLoadingState(k_ToEnableButtons);
                     }
                 });
 
@@ -799,6 +847,76 @@ namespace BasicFacebookFeatures
             {
                 emailTextBox.ForeColor = Color.Red;
                 emailTextBox.Focus();
+            }
+        }
+
+        private class FetchPostsCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayPosts();
+            }
+        }
+
+        private class FetchAlbumsCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayAlbums();
+            }
+        }
+
+        private class FetchEventsCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayEvents();
+            }
+        }
+
+        private class FetchFriendsCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayFriends();
+            }
+        }
+
+        private class FetchLikedPagesCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayLikedPages();
+            }
+        }
+
+        private class FetchFavoriteTeamsCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayFavoriteTeams();
+            }
+        }
+
+        private class FetchGroupsCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayGroups();
             }
         }
     }

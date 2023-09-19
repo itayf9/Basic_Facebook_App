@@ -55,13 +55,6 @@
             this.labelViewTitle = new System.Windows.Forms.Label();
             this.listBoxContent = new System.Windows.Forms.ListBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonPosts = new System.Windows.Forms.Button();
-            this.buttonFriends = new System.Windows.Forms.Button();
-            this.buttonAlbums = new System.Windows.Forms.Button();
-            this.buttonGroups = new System.Windows.Forms.Button();
-            this.buttonEvents = new System.Windows.Forms.Button();
-            this.buttonFavoriteTeams = new System.Windows.Forms.Button();
-            this.buttonLikedPages = new System.Windows.Forms.Button();
             this.tabPageNostalgia = new System.Windows.Forms.TabPage();
             this.labelNostaldiaExplaination = new System.Windows.Forms.Label();
             this.textBoxUploadDate = new System.Windows.Forms.TextBox();
@@ -331,88 +324,11 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.flowLayoutPanel1.Controls.Add(this.buttonPosts);
-            this.flowLayoutPanel1.Controls.Add(this.buttonFriends);
-            this.flowLayoutPanel1.Controls.Add(this.buttonAlbums);
-            this.flowLayoutPanel1.Controls.Add(this.buttonGroups);
-            this.flowLayoutPanel1.Controls.Add(this.buttonEvents);
-            this.flowLayoutPanel1.Controls.Add(this.buttonFavoriteTeams);
-            this.flowLayoutPanel1.Controls.Add(this.buttonLikedPages);
+            | System.Windows.Forms.AnchorStyles.Left)));            
             this.flowLayoutPanel1.Location = new System.Drawing.Point(9, 92);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 408);
             this.flowLayoutPanel1.TabIndex = 58;
-            // 
-            // buttonPosts
-            // 
-            this.buttonPosts.Location = new System.Drawing.Point(3, 3);
-            this.buttonPosts.Name = "buttonPosts";
-            this.buttonPosts.Size = new System.Drawing.Size(197, 48);
-            this.buttonPosts.TabIndex = 5;
-            this.buttonPosts.Text = "Posts";
-            this.buttonPosts.UseVisualStyleBackColor = true;
-            this.buttonPosts.Click += new System.EventHandler(this.buttonPosts_Click);
-            // 
-            // buttonFriends
-            // 
-            this.buttonFriends.Location = new System.Drawing.Point(3, 57);
-            this.buttonFriends.Name = "buttonFriends";
-            this.buttonFriends.Size = new System.Drawing.Size(197, 48);
-            this.buttonFriends.TabIndex = 6;
-            this.buttonFriends.Text = "Friends";
-            this.buttonFriends.UseVisualStyleBackColor = true;
-            this.buttonFriends.Click += new System.EventHandler(this.buttonFriends_Click);
-            // 
-            // buttonAlbums
-            // 
-            this.buttonAlbums.Location = new System.Drawing.Point(3, 111);
-            this.buttonAlbums.Name = "buttonAlbums";
-            this.buttonAlbums.Size = new System.Drawing.Size(197, 48);
-            this.buttonAlbums.TabIndex = 0;
-            this.buttonAlbums.Text = "Albums";
-            this.buttonAlbums.UseVisualStyleBackColor = true;
-            this.buttonAlbums.Click += new System.EventHandler(this.buttonAlbums_Click);
-            // 
-            // buttonGroups
-            // 
-            this.buttonGroups.Location = new System.Drawing.Point(3, 165);
-            this.buttonGroups.Name = "buttonGroups";
-            this.buttonGroups.Size = new System.Drawing.Size(197, 48);
-            this.buttonGroups.TabIndex = 1;
-            this.buttonGroups.Text = "Groups";
-            this.buttonGroups.UseVisualStyleBackColor = true;
-            this.buttonGroups.Click += new System.EventHandler(this.buttonGroups_Click);
-            // 
-            // buttonEvents
-            // 
-            this.buttonEvents.Location = new System.Drawing.Point(3, 219);
-            this.buttonEvents.Name = "buttonEvents";
-            this.buttonEvents.Size = new System.Drawing.Size(197, 48);
-            this.buttonEvents.TabIndex = 2;
-            this.buttonEvents.Text = "Events";
-            this.buttonEvents.UseVisualStyleBackColor = true;
-            this.buttonEvents.Click += new System.EventHandler(this.buttonEvents_Click);
-            // 
-            // buttonFavoriteTeams
-            // 
-            this.buttonFavoriteTeams.Location = new System.Drawing.Point(3, 273);
-            this.buttonFavoriteTeams.Name = "buttonFavoriteTeams";
-            this.buttonFavoriteTeams.Size = new System.Drawing.Size(197, 48);
-            this.buttonFavoriteTeams.TabIndex = 3;
-            this.buttonFavoriteTeams.Text = "Favorite Teams";
-            this.buttonFavoriteTeams.UseVisualStyleBackColor = true;
-            this.buttonFavoriteTeams.Click += new System.EventHandler(this.buttonFavoriteTeams_Click);
-            // 
-            // buttonLikedPages
-            // 
-            this.buttonLikedPages.Location = new System.Drawing.Point(3, 327);
-            this.buttonLikedPages.Name = "buttonLikedPages";
-            this.buttonLikedPages.Size = new System.Drawing.Size(197, 48);
-            this.buttonLikedPages.TabIndex = 4;
-            this.buttonLikedPages.Text = "Liked Pages";
-            this.buttonLikedPages.UseVisualStyleBackColor = true;
-            this.buttonLikedPages.Click += new System.EventHandler(this.buttonLikedPages_Click);
             // 
             // tabPageNostalgia
             // 
