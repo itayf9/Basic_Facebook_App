@@ -95,6 +95,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="commands\CommandButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="commands\ICommand.cs" />
     <Compile Include="enums\eViewerType.cs" />
     <Compile Include="random strategy\IRandomStrategy.cs" />
     <Compile Include="random strategy\PhotoRandomStrategy.cs" />

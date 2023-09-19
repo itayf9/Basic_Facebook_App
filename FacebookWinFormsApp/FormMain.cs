@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using BasicFacebookFeatures.commands;
 using BasicFacebookFeatures.enums;
 using BasicFacebookFeatures.exceptions;
 using BasicFacebookFeatures.random_strategy;
@@ -170,7 +171,7 @@ namespace BasicFacebookFeatures
             this.Close();
         }
 
-        private void buttonPosts_Click(object sender, EventArgs e)
+        private void fetchAndDisplayPosts(object sender, EventArgs e)
         {
             if (!m_IsLoadingData)
             {
@@ -180,25 +181,25 @@ namespace BasicFacebookFeatures
                 listBoxContent.DisplayMember = k_DisplayMemberCreatedTime;
 
                 Thread thread = new Thread(() =>
+                {
+                    try
                     {
-                        try
-                        {
-                            List<Post> fetchedPosts = fetchPostsIntoList();
+                        List<Post> fetchedPosts = fetchPostsIntoList();
 
-                            Invoke(new Action(() =>
-                                {
-                                    listBoxContent.Items.Clear();
-                                    foreach (Post post in fetchedPosts)
-                                    {
-                                        listBoxContent.Items.Add(post);
-                                    }
-                                }));
-                        }
-                        finally
+                        Invoke(new Action(() =>
                         {
-                            setLoadingState(sender as Button, k_ToEnableButtons);
-                        }
-                    });
+                            listBoxContent.Items.Clear();
+                            foreach (Post post in fetchedPosts)
+                            {
+                                listBoxContent.Items.Add(post);
+                            }
+                        }));
+                    }
+                    finally
+                    {
+                        setLoadingState(sender as Button, k_ToEnableButtons);
+                    }
+                });
 
                 thread.Start();
             }
@@ -799,6 +800,16 @@ namespace BasicFacebookFeatures
             {
                 emailTextBox.ForeColor = Color.Red;
                 emailTextBox.Focus();
+            }
+        }
+
+        private class FetchPostsCommand : ICommand
+        {
+            private FormMain m_FormMain;
+
+            public void Execute()
+            {
+                m_FormMain.fetchAndDisplayPosts();
             }
         }
     }
