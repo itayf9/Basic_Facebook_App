@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.enums;
 using BasicFacebookFeatures.exceptions;
+using BasicFacebookFeatures.random_strategy;
 using BasicFacebookFeatures.sessions;
 using BasicFacebookFeatures.utilities;
 using BasicFacebookFeatures.viewers;
@@ -29,11 +30,12 @@ namespace BasicFacebookFeatures
         private const string k_EditProfile = "Edit Profile";
         private const bool k_ToEnableButtons = true;
 
+        private IRandomStrategy m_RandomStrategy;
+        private bool m_IsLoadingData;
         private readonly List<IViewer> r_ProfileViewers;
         private readonly List<IViewer> r_NostalgiaViewers;
         private readonly List<Button> r_FetchButtons;
         private readonly User r_LoggedInUser;
-        private bool m_IsLoadingData;
 
         public FormMain(User i_LoggedInUser)
         {
@@ -58,6 +60,7 @@ namespace BasicFacebookFeatures
             initializeViewers();
             initializeFetchButtons();
             setDefaultMediaType();
+            SetRandomStrategy();
         }
 
         private void setDefaultMediaType()
@@ -694,87 +697,35 @@ namespace BasicFacebookFeatures
 
         private void buttonNostalgia_Click(object sender, EventArgs e)
         {
+            SetRandomStrategy();
+            hideNostalgiaViewers();
+            m_RandomStrategy.ShowRandomContent(r_LoggedInUser);
+        }
+
+        private void hideNostalgiaViewers()
+        {
             const bool v_ToBeVisible = true;
+
             if (comboBoxMediaType.Text == k_ContentCategoryPhotos)
             {
                 r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewer].SetVisibility(!v_ToBeVisible);
-                showNostalgiaPhoto();
             }
             else if (comboBoxMediaType.Text == k_ContentCategoryPosts)
             {
                 r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewer].SetVisibility(!v_ToBeVisible);
-                showNostalgiaPost();
             }
         }
 
-        private void showNostalgiaPhoto()
+        private void SetRandomStrategy()
         {
-            const bool v_ToBeVisible = true;
-            r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewer].SetVisibility(v_ToBeVisible);
-
-            Random randomGenerator = new Random();
-
-            List<Album> fetchedAlbums = fetchAlbumsIntoList();
-            List<Album> filteredNonEmptyAlbums = new List<Album>();
-            foreach (Album album in fetchedAlbums)
+            if (comboBoxMediaType.Text == k_ContentCategoryPhotos)
             {
-                if (album.Count != 0)
-                {
-                    filteredNonEmptyAlbums.Add(album);
-                }
+                m_RandomStrategy = new PhotoRandomStrategy(r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewer] as PhotoViewer, textBoxUploadDate);
             }
-
-            try
+            else if (comboBoxMediaType.Text == k_ContentCategoryPosts)
             {
-                if (filteredNonEmptyAlbums.Count == 0)
-                {
-                    throw new NoDataAvailableException(k_ContentCategoryAlbums);
-                }
-
-                int indexOfRandomAlbum = randomGenerator.Next(filteredNonEmptyAlbums.Count);
-                Album selectedAlbum = filteredNonEmptyAlbums[indexOfRandomAlbum];
-
-                FacebookObjectCollection<Photo> listOfPhotosFromSelectedAlbum = selectedAlbum.Photos;
-
-                if (listOfPhotosFromSelectedAlbum.Count == 0)
-                {
-                    throw new NoDataAvailableException(k_ContentCategoryPhotos);
-                }
-
-                int indexOfSelectedPhoto = randomGenerator.Next(listOfPhotosFromSelectedAlbum.Count);
-                Photo selectedPhoto = listOfPhotosFromSelectedAlbum[indexOfSelectedPhoto];
-
-                textBoxUploadDate.Visible = v_ToBeVisible;
-                textBoxUploadDate.Text = $"Created on {selectedPhoto.CreatedTime}";
-                (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PhotoViewer] as PhotoViewer).LoadRandomPhotoToComponents(selectedPhoto);
+                m_RandomStrategy = new PostRandomStrategy(r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewer] as PostViewer, textBoxUploadDate);
             }
-            catch (NoDataAvailableException noDataAvailableException)
-            {
-                MessageBox.Show(noDataAvailableException.Message);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Messages.k_GeneralErrorMessage);
-            }
-        }
-
-        private void showNostalgiaPost()
-        {
-            const bool v_ToBeVisible = true;
-
-            r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewer].SetVisibility(v_ToBeVisible);
-
-            List<Post> fetchedPosts = fetchPostsIntoList();
-
-            Random randomGenerator = new Random();
-
-            int indexOfRandomPost = randomGenerator.Next(fetchedPosts.Count);
-            Post selectedPost = fetchedPosts[indexOfRandomPost];
-
-            textBoxUploadDate.Visible = v_ToBeVisible;
-            textBoxUploadDate.Text = $"Created on {selectedPost.CreatedTime}";
-
-            (r_NostalgiaViewers[(int)eNostalgiaViewerIndex.PostViewer] as PostViewer).LoadPostDetailsToComponents(selectedPost);
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
