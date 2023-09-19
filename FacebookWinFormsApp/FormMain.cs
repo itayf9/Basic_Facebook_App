@@ -84,6 +84,50 @@ namespace BasicFacebookFeatures
 
         private void initializeFetchButtons()
         {
+            Size fetchButtonsSize = new Size(197, 48);
+            Button buttonAlbums = new CommandButton
+            {
+                Size = fetchButtonsSize,
+                Text = "Albums",
+                FetchCommand = new FetchAlbumsCommand { FormMain = this },
+            };
+            Button buttonEvents = new CommandButton
+            {
+                Size = fetchButtonsSize,
+                Text = "Events",
+                FetchCommand = new FetchEventsCommand { FormMain = this },
+            };
+            Button buttonFriends = new CommandButton
+            {
+                Size = fetchButtonsSize,
+                Text = "Friends",
+                FetchCommand = new FetchFriendsCommand { FormMain = this },
+            };
+            Button buttonGroups = new CommandButton
+            {
+                Size = new Size(197, 48),
+                Text = "Groups",
+                FetchCommand = new FetchGroupsCommand { FormMain = this },
+            };
+            Button buttonPosts = new CommandButton
+            {
+                Size = fetchButtonsSize,
+                Text = "Posts",
+                FetchCommand = new FetchPostsCommand { FormMain = this },
+            };
+            Button buttonFavoriteTeams = new CommandButton
+            {
+                Size = fetchButtonsSize,
+                Text = "Favorite Teams",
+                FetchCommand = new FetchFavoriteTeamsCommand { FormMain = this },
+            };
+            Button buttonLikedPages = new CommandButton
+            {
+                Size = fetchButtonsSize,
+                Text = "Liked Pages",
+                FetchCommand = new FetchLikedPagesCommand { FormMain = this },
+            };
+
             r_FetchButtons.Add(buttonAlbums);
             r_FetchButtons.Add(buttonEvents);
             r_FetchButtons.Add(buttonFriends);
@@ -91,6 +135,11 @@ namespace BasicFacebookFeatures
             r_FetchButtons.Add(buttonPosts);
             r_FetchButtons.Add(buttonFavoriteTeams);
             r_FetchButtons.Add(buttonLikedPages);
+
+            foreach (Button commandButton in r_FetchButtons)
+            {
+                flowLayoutPanelOptionButtons.Controls.Add(commandButton);
+            }
         }
 
         private void initializeViewers()
@@ -217,7 +266,7 @@ namespace BasicFacebookFeatures
             m_IsLoadingData = i_ToEnable;
         }
 
-        private void buttonAlbums_Click(object sender, EventArgs e)
+        private void fetchAndDisplayAlbums(object sender, EventArgs e)
         {
             if (!m_IsLoadingData)
             {
@@ -250,7 +299,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void buttonGroups_Click(object sender, EventArgs e)
+        private void fetchAndDisplayGroups(object sender, EventArgs e)
         {
             if (!m_IsLoadingData)
             {
@@ -284,7 +333,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void buttonEvents_Click(object sender, EventArgs e)
+        private void fetchAndDisplayEvents(object sender, EventArgs e)
         {
             if (!m_IsLoadingData)
             {
@@ -318,7 +367,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void buttonFavoriteTeams_Click(object sender, EventArgs e)
+        private void fetchAndDisplayFavoriteTeams(object sender, EventArgs e)
         {
             if (!m_IsLoadingData)
             {
@@ -352,7 +401,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void buttonLikedPages_Click(object sender, EventArgs e)
+        private void fetchAndDisplayLikedPages(object sender, EventArgs e)
         {
             if (!m_IsLoadingData)
             {
@@ -386,7 +435,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void buttonFriends_Click(object sender, EventArgs e)
+        private void fetchAndDisplayFriends(object sender, EventArgs e)
         {
             if (!m_IsLoadingData)
             {
@@ -805,11 +854,71 @@ namespace BasicFacebookFeatures
 
         private class FetchPostsCommand : ICommand
         {
-            private FormMain m_FormMain;
+            public FormMain FormMain { get; set; }
 
             public void Execute()
             {
-                m_FormMain.fetchAndDisplayPosts();
+                FormMain.fetchAndDisplayPosts();
+            }
+        }
+
+        private class FetchAlbumsCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayAlbums();
+            }
+        }
+
+        private class FetchEventsCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayEvents();
+            }
+        }
+
+        private class FetchFriendsCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayFriends();
+            }
+        }
+
+        private class FetchLikedPagesCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayLikedPages();
+            }
+        }
+
+        private class FetchFavoriteTeamsCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayFavoriteTeams();
+            }
+        }
+
+        private class FetchGroupsCommand : ICommand
+        {
+            public FormMain FormMain { get; set; }
+
+            public void Execute()
+            {
+                FormMain.fetchAndDisplayGroups();
             }
         }
     }

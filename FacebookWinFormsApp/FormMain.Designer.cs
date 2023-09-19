@@ -352,7 +352,6 @@
             this.buttonPosts.TabIndex = 5;
             this.buttonPosts.Text = "Posts";
             this.buttonPosts.UseVisualStyleBackColor = true;
-            this.buttonPosts.Click += new System.EventHandler(this.buttonPosts_Click);
             // 
             // buttonFriends
             // 
@@ -362,7 +361,7 @@
             this.buttonFriends.TabIndex = 6;
             this.buttonFriends.Text = "Friends";
             this.buttonFriends.UseVisualStyleBackColor = true;
-            this.buttonFriends.Click += new System.EventHandler(this.buttonFriends_Click);
+            this.buttonFriends.Click += new System.EventHandler(this.fetchAndDisplayFriends);
             // 
             // buttonAlbums
             // 
@@ -372,7 +371,7 @@
             this.buttonAlbums.TabIndex = 0;
             this.buttonAlbums.Text = "Albums";
             this.buttonAlbums.UseVisualStyleBackColor = true;
-            this.buttonAlbums.Click += new System.EventHandler(this.buttonAlbums_Click);
+            this.buttonAlbums.Click += new System.EventHandler(this.fetchAndDisplayAlbums);
             // 
             // buttonGroups
             // 
@@ -382,7 +381,7 @@
             this.buttonGroups.TabIndex = 1;
             this.buttonGroups.Text = "Groups";
             this.buttonGroups.UseVisualStyleBackColor = true;
-            this.buttonGroups.Click += new System.EventHandler(this.buttonGroups_Click);
+            this.buttonGroups.Click += new System.EventHandler(this.fetchAndDisplayGroups);
             // 
             // buttonEvents
             // 
@@ -392,7 +391,7 @@
             this.buttonEvents.TabIndex = 2;
             this.buttonEvents.Text = "Events";
             this.buttonEvents.UseVisualStyleBackColor = true;
-            this.buttonEvents.Click += new System.EventHandler(this.buttonEvents_Click);
+            this.buttonEvents.Click += new System.EventHandler(this.fetchAndDisplayEvents);
             // 
             // buttonFavoriteTeams
             // 
@@ -402,7 +401,7 @@
             this.buttonFavoriteTeams.TabIndex = 3;
             this.buttonFavoriteTeams.Text = "Favorite Teams";
             this.buttonFavoriteTeams.UseVisualStyleBackColor = true;
-            this.buttonFavoriteTeams.Click += new System.EventHandler(this.buttonFavoriteTeams_Click);
+            this.buttonFavoriteTeams.Click += new System.EventHandler(this.fetchAndDisplayFavoriteTeams);
             // 
             // buttonLikedPages
             // 
@@ -412,7 +411,7 @@
             this.buttonLikedPages.TabIndex = 4;
             this.buttonLikedPages.Text = "Liked Pages";
             this.buttonLikedPages.UseVisualStyleBackColor = true;
-            this.buttonLikedPages.Click += new System.EventHandler(this.buttonLikedPages_Click);
+            this.buttonLikedPages.Click += new System.EventHandler(this.fetchAndDisplayLikedPages);
             // 
             // tabPageNostalgia
             // 
