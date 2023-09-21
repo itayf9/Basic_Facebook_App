@@ -99,6 +99,7 @@
     <Compile Include="random strategy\IRandomStrategy.cs" />
     <Compile Include="random strategy\PhotoRandomStrategy.cs" />
     <Compile Include="random strategy\PostRandomStrategy.cs" />
+    <Compile Include="slideshow\Slideshow.cs" />
     <Compile Include="utilities\DateTimeAdapter.cs" />
     <Compile Include="utilities\IDateFormatAgeCalculator.cs" />
     <Compile Include="utilities\Utility.cs" />

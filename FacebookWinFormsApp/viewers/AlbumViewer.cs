@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using BasicFacebookFeatures.exceptions;
+using BasicFacebookFeatures.slideshow;
 using BasicFacebookFeatures.utilities;
 using FacebookWrapper.ObjectModel;
 
@@ -10,6 +11,7 @@ namespace BasicFacebookFeatures.viewers
     {
         private readonly ListBox r_ListBoxPictures;
         private readonly PictureBox r_PictureBoxSelectedPicture;
+        private Slideshow m_Slideshow;
 
         public AlbumViewer(int i_TopLeftX, int i_TopLeftY)
             : base(i_TopLeftX, i_TopLeftY)
@@ -40,30 +42,20 @@ namespace BasicFacebookFeatures.viewers
             SetVisibility(false);
         }
 
-        public ListBox ListBoxPictures
+        public void LoadSlideshowDetailsToComponents(Slideshow i_SelectedSlideshow)
         {
-            get { return r_ListBoxPictures; }
+            m_Slideshow = i_SelectedSlideshow;
+            LoadPicturesToListBox(m_Slideshow);
         }
 
-        public PictureBox PictureBoxSelectedPicture
-        {
-            get { return r_PictureBoxSelectedPicture; }
-        }
-
-        public void LoadAlbumDetailsToComponents(Album i_SelectedAlbum)
-        {
-            LoadMainPictureAndNameToComponents(i_SelectedAlbum.PictureAlbumURL, i_SelectedAlbum.Name);
-            LoadPicturesToListBox(i_SelectedAlbum);
-        }
-
-        public void LoadPicturesToListBox(Album i_SelectedAlbum)
+        public void LoadPicturesToListBox(Slideshow i_SelectedSlideshow)
         {
             r_ListBoxPictures.Items.Clear();
             r_PictureBoxSelectedPicture.Image = null;
 
             try
             {
-                foreach (Photo photo in i_SelectedAlbum.Photos)
+                foreach (Photo photo in i_SelectedSlideshow)
                 {
                     r_ListBoxPictures.Items.Add(photo);
                 }
@@ -113,7 +105,7 @@ namespace BasicFacebookFeatures.viewers
             ListBox listBoxPictures = sender as ListBox;
             if (listBoxPictures.SelectedItem is Photo)
             {
-                PictureBoxSelectedPicture.Image = (listBoxPictures.SelectedItem as Photo).ImageNormal;
+                r_PictureBoxSelectedPicture.Image = (listBoxPictures.SelectedItem as Photo).ImageNormal;
             }
         }
     }

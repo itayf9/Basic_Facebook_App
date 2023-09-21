@@ -7,6 +7,7 @@ using BasicFacebookFeatures.enums;
 using BasicFacebookFeatures.exceptions;
 using BasicFacebookFeatures.random_strategy;
 using BasicFacebookFeatures.sessions;
+using BasicFacebookFeatures.slideshow;
 using BasicFacebookFeatures.utilities;
 using BasicFacebookFeatures.viewers;
 using FacebookWrapper;
@@ -691,7 +692,8 @@ namespace BasicFacebookFeatures
         {
             bool v_IsLoading = true;
             setLoadingLabel(v_IsLoading);
-            (r_ProfileViewers[(int)eProfileViewerIndex.AlbumViewer] as AlbumViewer).LoadAlbumDetailsToComponents(i_SelectedAlbum);
+            Slideshow slideshow = new Slideshow(i_SelectedAlbum);
+            (r_ProfileViewers[(int)eProfileViewerIndex.AlbumViewer] as AlbumViewer).LoadSlideshowDetailsToComponents(slideshow);
             setLoadingLabel(!v_IsLoading);
         }
 
