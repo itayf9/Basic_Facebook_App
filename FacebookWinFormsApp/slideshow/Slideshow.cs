@@ -14,9 +14,18 @@ namespace BasicFacebookFeatures.slideshow
 
         public Album Album { get; set; }
 
+        public string PictureAlbumURL
+        {
+            get { return Album.PictureAlbumURL; }
+        }
+
+        public string AlbumName
+        {
+            get { return Album.Name; }
+        }
+
         public IEnumerator<Photo> GetEnumerator()
         {
-            // hard-coded filter possible here
             return getFilteredPhotos(Album.Photos, photo => true).GetEnumerator();
         }
 

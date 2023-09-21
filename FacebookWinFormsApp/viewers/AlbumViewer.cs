@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using BasicFacebookFeatures.exceptions;
 using BasicFacebookFeatures.slideshow;
@@ -20,9 +21,9 @@ namespace BasicFacebookFeatures.viewers
             {
                 FormattingEnabled = true,
                 ItemHeight = 26,
-                Location = new System.Drawing.Point(i_TopLeftX, i_TopLeftY + 130),
+                Location = new Point(i_TopLeftX, i_TopLeftY + 130),
                 Name = "listBoxPictures",
-                Size = new System.Drawing.Size(140, 150),
+                Size = new Size(160, 255),
                 TabIndex = 72,
                 HorizontalScrollbar = true,
             };
@@ -45,6 +46,7 @@ namespace BasicFacebookFeatures.viewers
         public void LoadSlideshowDetailsToComponents(Slideshow i_SelectedSlideshow)
         {
             m_Slideshow = i_SelectedSlideshow;
+            LoadMainPictureAndNameToComponents(i_SelectedSlideshow.PictureAlbumURL, i_SelectedSlideshow.AlbumName);
             LoadPicturesToListBox(m_Slideshow);
         }
 
