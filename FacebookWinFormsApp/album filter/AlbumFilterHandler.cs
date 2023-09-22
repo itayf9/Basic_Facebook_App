@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.slideshow
+namespace BasicFacebookFeatures.albumfilter
 {
-    internal class Slideshow : IEnumerable<Photo>
+    internal class AlbumFilterHandler : IEnumerable<Photo>
     {
-        public Slideshow(Album i_Album)
+        public AlbumFilterHandler(Album i_Album)
         {
             Album = i_Album;
         }
