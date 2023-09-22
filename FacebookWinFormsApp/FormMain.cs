@@ -63,7 +63,7 @@ namespace BasicFacebookFeatures
             initializeViewers();
             initializeFetchButtons();
             setDefaultMediaType();
-            SetRandomStrategy();
+            setRandomStrategy();
         }
 
         private void setDefaultMediaType()
@@ -746,7 +746,7 @@ namespace BasicFacebookFeatures
 
         private void buttonNostalgia_Click(object sender, EventArgs e)
         {
-            SetRandomStrategy();
+            setRandomStrategy();
             hideNostalgiaViewers();
             m_RandomStrategy.ShowRandomContent(r_LoggedInUser);
         }
@@ -765,7 +765,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void SetRandomStrategy()
+        private void setRandomStrategy()
         {
             if (comboBoxMediaType.Text == k_ContentCategoryPhotos)
             {
