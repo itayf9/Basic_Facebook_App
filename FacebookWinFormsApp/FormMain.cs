@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using BasicFacebookFeatures.commands;
+using BasicFacebookFeatures.albumfilter;
 using BasicFacebookFeatures.enums;
 using BasicFacebookFeatures.exceptions;
 using BasicFacebookFeatures.random_strategy;
@@ -739,7 +740,7 @@ namespace BasicFacebookFeatures
         {
             bool v_IsLoading = true;
             setLoadingLabel(v_IsLoading);
-            (r_ProfileViewers[(int)eProfileViewerIndex.AlbumViewer] as AlbumViewer).LoadAlbumDetailsToComponents(i_SelectedAlbum);
+            (r_ProfileViewers[(int)eProfileViewerIndex.AlbumViewer] as AlbumViewer).LoadAlbumDetailsToComponents(new AlbumFilterHandler(i_SelectedAlbum));
             setLoadingLabel(!v_IsLoading);
         }
 
