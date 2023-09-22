@@ -7,9 +7,9 @@ namespace BasicFacebookFeatures.slideshow
 {
     internal class Slideshow : IEnumerable<Photo>
     {
-        public Slideshow(Album album)
+        public Slideshow(Album i_Album)
         {
-            Album = album;
+            Album = i_Album;
         }
 
         public Album Album { get; set; }

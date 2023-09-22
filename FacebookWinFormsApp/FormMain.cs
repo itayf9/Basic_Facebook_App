@@ -692,8 +692,7 @@ namespace BasicFacebookFeatures
         {
             bool v_IsLoading = true;
             setLoadingLabel(v_IsLoading);
-            Slideshow slideshow = new Slideshow(i_SelectedAlbum);
-            (r_ProfileViewers[(int)eProfileViewerIndex.AlbumViewer] as AlbumViewer).LoadSlideshowDetailsToComponents(slideshow);
+            (r_ProfileViewers[(int)eProfileViewerIndex.AlbumViewer] as AlbumViewer).LoadSlideshowDetailsToComponents(new Slideshow(i_SelectedAlbum));
             setLoadingLabel(!v_IsLoading);
         }
 
