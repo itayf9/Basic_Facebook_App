@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BasicFacebookFeatures.exceptions;
@@ -57,7 +58,9 @@ namespace BasicFacebookFeatures.viewers
 
             try
             {
-                foreach (Photo photo in i_SelectedSlideshow)
+                DateTime tenYearsAgo = DateTime.Now.AddYears(-10);
+                IEnumerable<Photo> filteredPhotos = i_SelectedSlideshow.GetFilteredPhotos(photo => photo.CreatedTime > tenYearsAgo);
+                foreach (Photo photo in filteredPhotos)
                 {
                     r_ListBoxPictures.Items.Add(photo);
                 }

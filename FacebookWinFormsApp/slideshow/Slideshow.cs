@@ -26,7 +26,7 @@ namespace BasicFacebookFeatures.slideshow
 
         public IEnumerator<Photo> GetEnumerator()
         {
-            return getFilteredPhotos(Album.Photos, photo => true).GetEnumerator();
+            return GetFilteredPhotos(photo => true).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -34,9 +34,9 @@ namespace BasicFacebookFeatures.slideshow
             return GetEnumerator();
         }
 
-        private IEnumerable<Photo> getFilteredPhotos(IEnumerable<Photo> collection, Func<Photo, bool> i_Test)
+        public IEnumerable<Photo> GetFilteredPhotos(Func<Photo, bool> i_Test)
         {
-            foreach (Photo photo in collection)
+            foreach (Photo photo in Album.Photos)
             {
                 if (i_Test(photo))
                 {
