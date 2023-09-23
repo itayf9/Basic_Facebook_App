@@ -50,12 +50,12 @@ namespace BasicFacebookFeatures.viewers
                 TabIndex = 74,
                 Font = new Font("Arial", 9, FontStyle.Regular),
             };
-            r_ButtonTenYearsFilter.Click += new EventHandler(ButtonTenYearsFilter_Click);
+            r_ButtonTenYearsFilter.Click += new EventHandler(buttonTenYearsFilter_Click);
 
             SetVisibility(false);
         }
 
-        private void ButtonTenYearsFilter_Click(object sender, EventArgs e)
+        private void buttonTenYearsFilter_Click(object sender, EventArgs e)
         {
             DateTime tenYearsAgo = DateTime.Now.AddYears(-10);
             LoadPicturesToListBox(m_AlbumFilterHandler, photo => photo.CreatedTime > tenYearsAgo);
