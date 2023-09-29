@@ -11,6 +11,7 @@ namespace BasicFacebookFeatures.viewers
 {
     internal class AlbumViewer : PictureAndNameObjectViewer
     {
+        private const int k_TenYearsAgo = -10;
         private readonly ListBox r_ListBoxPictures;
         private readonly PictureBox r_PictureBoxSelectedPicture;
         private readonly Button r_ButtonTenYearsFilter;
@@ -57,17 +58,20 @@ namespace BasicFacebookFeatures.viewers
 
         private void buttonTenYearsFilter_Click(object sender, EventArgs e)
         {
-            DateTime tenYearsAgo = DateTime.Now.AddYears(-10);
+            const bool v_ToEnable = true;
+            DateTime tenYearsAgo = DateTime.Now.AddYears(k_TenYearsAgo);
             LoadPicturesToListBox(m_AlbumFilterHandler, photo => photo.CreatedTime > tenYearsAgo);
-            r_ButtonTenYearsFilter.Enabled = false;
+            r_ButtonTenYearsFilter.Enabled = !v_ToEnable;
         }
 
         public void LoadAlbumDetailsToComponents(AlbumFilterHandler i_SelectedAlbum)
         {
+            const bool v_ToEnable = true;
+            const bool v_AcceptPhoto = true;
             m_AlbumFilterHandler = i_SelectedAlbum;
-            r_ButtonTenYearsFilter.Enabled = true;
+            r_ButtonTenYearsFilter.Enabled = v_ToEnable;
             LoadMainPictureAndNameToComponents(i_SelectedAlbum.PictureAlbumURL, i_SelectedAlbum.AlbumName);
-            LoadPicturesToListBox(m_AlbumFilterHandler, photo => true);
+            LoadPicturesToListBox(m_AlbumFilterHandler, photo => v_AcceptPhoto);
         }
 
         public void LoadPicturesToListBox(AlbumFilterHandler i_SelectedAlbum, Func<Photo, bool> i_Test)

@@ -26,7 +26,8 @@ namespace BasicFacebookFeatures.albumfilter
 
         public IEnumerator<Photo> GetEnumerator()
         {
-            return GetFilteredPhotos(photo => true).GetEnumerator();
+            const bool v_AcceptPhoto = true;
+            return GetFilteredPhotos(photo => v_AcceptPhoto).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

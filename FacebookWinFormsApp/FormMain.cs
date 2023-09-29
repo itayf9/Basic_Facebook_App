@@ -57,7 +57,7 @@ namespace BasicFacebookFeatures
 
         private void initializeAllFacebookApplication()
         {
-            initCommentGenerator();
+            initializeCommentGenerator();
             setFacebookServiceConfiguration();
             initializeProfileInformation();
             initializeViewers();
@@ -71,7 +71,7 @@ namespace BasicFacebookFeatures
             comboBoxMediaType.SelectedItem = k_ContentCategoryPhotos;
         }
 
-        private void initCommentGenerator()
+        private void initializeCommentGenerator()
         {
             List<Button> listOfInitialAnswerButtons = new List<Button> { buttonAnswer1_1, buttonAnswer1_2 };
             CommentGenerator commentGenerator = CommentGenerator.Instance;
